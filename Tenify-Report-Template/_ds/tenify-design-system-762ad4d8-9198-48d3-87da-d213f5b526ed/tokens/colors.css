@@ -1,0 +1,12 @@
+:root{
+--jade-900:#063D30;--jade-700:#0A7A5D;--jade-600:#0E9F7A;--jade-500:#1BBF95;--jade-400:#22E0AC;--jade-100:#D3F5E9;--jade-50:#EFFBF6;
+--gold-600:#E0A315;--gold-400:#FFC647;--gold-100:#FFF2D6;
+--charcoal:#2A3030;
+--warm-stone:#F6F4F0;--stone-mist:#EFECEA;--true-white:#FFFFFF;
+--neutral-50:#F9FAFA;--neutral-100:#F4F6F6;--neutral-200:#E8ECEC;--neutral-300:#D4DADA;--neutral-400:#B0B8B8;--neutral-600:#6A7070;--neutral-800:#323838;--neutral-900:#1A1C1C;
+--success:#3F7D53;--warning:#B9852A;--error:#C84040;--info:#2B7BE5;
+--surface-page:var(--neutral-100);--surface-card:var(--true-white);--surface-sunken:var(--neutral-50);
+--text-primary:var(--neutral-900);--text-secondary:var(--neutral-600);--text-on-brand:var(--true-white);
+--border-default:var(--neutral-200);--border-emphasis:var(--jade-100);
+--link:var(--jade-700);--link-hover:var(--jade-900);
+}

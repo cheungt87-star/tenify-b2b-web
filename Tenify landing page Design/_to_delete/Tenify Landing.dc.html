@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#0a2e22">
+  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="200" fill="#0a2e22"/>
+    <path d="M100 40l12 24 26 4-19 18 4 27-23-12-23 12 4-27-19-18 26-4z" fill="#9fe870"/>
+  </svg>
+</template>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/tenify-design-system-762ad4d8-9198-48d3-87da-d213f5b526ed/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/tenify-design-system-762ad4d8-9198-48d3-87da-d213f5b526ed/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/tenify-design-system-762ad4d8-9198-48d3-87da-d213f5b526ed/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/tenify-design-system-762ad4d8-9198-48d3-87da-d213f5b526ed/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/tenify-design-system-762ad4d8-9198-48d3-87da-d213f5b526ed/styles.css">
+  <script src="_ds/tenify-design-system-762ad4d8-9198-48d3-87da-d213f5b526ed/_ds_bundle.js"></script>
+  <script src="./image-slot.js"></script>
+  <style>
+    body{margin:0;padding:0;box-sizing:border-box;overflow-x:hidden}
+    *{box-sizing:border-box}
+    a{color:var(--link);text-decoration:none}
+    a:hover{color:var(--link-hover)}
+  </style>
+</helmet>
+
+<div style="font-family:var(--font-sans);color:var(--neutral-900);background:var(--true-white);width:100%">
+
+  <!-- HEADER -->
+  <header style="position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:50;width:calc(100% - 32px);max-width:1100px;background:rgba(255,255,255,.75);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.4);border-radius:var(--radius-full);box-shadow:0 8px 24px rgba(15,31,46,.12)">
+    <div style="padding:8px clamp(16px,3vw,28px);display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative">
+      <img src="assets/tenify-wordmark-navy.png" alt="Tenify" style="height:16px;width:auto;cursor:pointer" />
+
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toggleMobileNav }}" style="background:none;border:none;font-family:var(--font-sans);font-size:14px;font-weight:600;color:var(--neutral-900);cursor:pointer;padding:8px">Menu</button>
+      </sc-if>
+      <sc-if value="{{ !isMobile }}" hint-placeholder-val="{{ true }}">
+        <nav style="display:flex;align-items:center;gap:32px">
+          <a href="#how-it-works" style="color:var(--neutral-800);font-size:14px;font-weight:500">Product</a>
+          <a href="#pricing" style="color:var(--neutral-800);font-size:14px;font-weight:500">Pricing</a>
+          <a href="#faq" style="color:var(--neutral-800);font-size:14px;font-weight:500">FAQ</a>
+          <a href="#" style="color:var(--neutral-600);font-size:14px;font-weight:500">Login</a>
+          <button onClick="{{ scrollToWaitlist }}" style="background:var(--jade-900);color:var(--gold-600);border:none;border-radius:var(--radius-full);padding:11px 20px;font-size:14px;font-weight:600;font-family:var(--font-sans);cursor:pointer" style-hover="background:var(--jade-700)" style-active="transform:scale(0.98)">Join Waitlist</button>
+        </nav>
+      </sc-if>
+
+      <sc-if value="{{ mobileNavOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;top:calc(100% + 8px);left:0;right:0;background:#fff;border:1px solid var(--neutral-200);border-radius:var(--radius-md);box-shadow:var(--shadow-sheet);display:flex;flex-direction:column;padding:8px 20px 20px;gap:4px">
+          <a href="#how-it-works" onClick="{{ toggleMobileNav }}" style="padding:14px 0;color:var(--neutral-800);font-size:16px;font-weight:500;border-bottom:1px solid var(--neutral-100)">Product</a>
+          <a href="#pricing" onClick="{{ toggleMobileNav }}" style="padding:14px 0;color:var(--neutral-800);font-size:16px;font-weight:500;border-bottom:1px solid var(--neutral-100)">Pricing</a>
+          <a href="#faq" onClick="{{ toggleMobileNav }}" style="padding:14px 0;color:var(--neutral-800);font-size:16px;font-weight:500;border-bottom:1px solid var(--neutral-100)">FAQ</a>
+          <a href="#" onClick="{{ toggleMobileNav }}" style="padding:14px 0;color:var(--neutral-400);font-size:16px;font-weight:500;border-bottom:1px solid var(--neutral-100)">Login</a>
+          <button onClick="{{ scrollToWaitlistMobile }}" style="margin-top:12px;background:var(--jade-900);color:var(--gold-600);border:none;border-radius:var(--radius-full);padding:14px;font-size:15px;font-weight:600;font-family:var(--font-sans);cursor:pointer;width:100%">Join Waitlist</button>
+        </div>
+      </sc-if>
+    </div>
+  </header>
+  <div style="height:80px"></div>
+
+  <!-- HERO -->
+  <section id="waitlist" style="position:relative;background:linear-gradient(135deg,var(--true-white) 0%,var(--true-white) 45%,color-mix(in srgb,var(--gold-100) 55%,var(--true-white)) 75%,color-mix(in srgb,var(--jade-100) 45%,var(--true-white)) 100%);overflow:hidden">
+  <div style="position:relative;max-width:1100px;margin:0 auto;padding:clamp(60px,8vw,80px) clamp(20px,5vw,40px);display:flex;flex-direction:column;align-items:center;gap:32px;text-align:center">
+    <div style="position:absolute;top:-120px;right:-100px;width:360px;height:360px;border-radius:50%;background:var(--gold-100);filter:blur(10px);opacity:.7;z-index:0"></div>
+    <div style="position:absolute;bottom:-140px;left:-120px;width:320px;height:320px;border-radius:50%;background:var(--jade-100);filter:blur(10px);opacity:.6;z-index:0"></div>
+    <h1 style="position:relative;margin:0;display:flex;flex-direction:column;gap:10px;align-items:center">
+    <span style="position:relative;font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-600);margin-bottom:-16px">Stand out from your competitors</span>
+    <h1 style="position:relative;margin:0;display:flex;flex-direction:column;gap:2px;align-items:center">
+      <span style="font-size:clamp(32px,5vw,60px);font-weight:800;line-height:1.1;letter-spacing:-0.02em;color:var(--neutral-600);white-space:nowrap">Turn every inspection into</span>
+      <span style="font-size:clamp(32px,5vw,60px);font-weight:800;line-height:1.1;letter-spacing:-0.02em;color:var(--jade-900);white-space:nowrap">why clients stay</span>
+    </h1>
+    <p style="position:relative;margin:0;margin-top:-16px;font-size:clamp(17px,1.6vw,20px);line-height:1.5;color:var(--neutral-600);max-width:560px">Effortlessly complete inspections and turn them into detailed, branded reports landlords trust and tenants remember.</p>
+
+    <div style="position:relative;display:flex;flex-wrap:wrap;align-items:stretch;justify-content:center;gap:12px;width:100%;max-width:480px">
+      <input type="email" value="{{ heroEmail }}" onChange="{{ setHeroEmail }}" placeholder="Work email address" style="flex:1;min-width:180px;padding:14px 18px;border:1px solid var(--neutral-300);border-radius:var(--radius-full);font-size:15px;font-family:var(--font-sans);color:var(--neutral-900);outline:none;background:#fff;text-align:left" />
+      <button style="background:var(--gold-600);color:var(--charcoal);border:none;border-radius:var(--radius-full);padding:14px 32px;font-size:15px;font-weight:600;font-family:var(--font-sans);cursor:pointer;white-space:nowrap" style-hover="opacity:.9" style-active="transform:scale(0.98)">Join the Waitlist</button>
+    </div>
+
+    <div style="position:relative;width:100%;max-width:900px;margin-top:16px">
+      <div style="position:relative;border-radius:var(--radius-lg);overflow:hidden;border:3px solid var(--jade-900);box-shadow:0 24px 56px rgba(26,28,28,.18)">
+        <image-slot id="hero-video" style="width:100%;aspect-ratio:16/9" shape="rect" placeholder="Drop a 2-min explainer video thumbnail or app screenshot"></image-slot>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none">
+          <div style="width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.95);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.2)">
+            <div style="width:0;height:0;border-top:13px solid transparent;border-bottom:13px solid transparent;border-left:21px solid #1A1C1C;margin-left:4px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  
+
+  <!-- PROBLEM -->
+  <section style="background:var(--jade-900);margin-top:-40px;margin-bottom:-40px;border-radius:40px;position:relative;z-index:2">
+    <div style="max-width:1400px;margin:0 auto;padding:clamp(80px,9vw,100px) clamp(20px,5vw,60px) clamp(100px,10vw,120px);display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(24px,4vw,48px);align-items:start">
+      <div style="min-width:280px;display:flex;flex-direction:column;gap:20px">
+        <span style="font-size:14px;font-weight:600;text-transform:uppercase;color:var(--gold-600)">You're already doing handover inspections.</span>
+        <h2 style="margin:0;font-size:clamp(22px,3.4vw,40px);font-weight:800;line-height:1.2;color:#fff;white-space:nowrap">Why not get credit for it?</h2>
+        <p style="margin:0;font-size:16px;line-height:1.6;color:rgba(255,255,255,.75)">Right now it's a checklist. Notes, some photos, done. Nobody sees the work you put in — landlord included.</p>
+        <p style="margin:0;font-size:16px;line-height:1.6;color:rgba(255,255,255,.75)">Turn it into a shareable report with your logo on it. Landlord and tenant both know who to credit.</p>
+      </div>
+      <div style="min-width:280px;padding-top:32px">
+        <image-slot id="problem-visual" style="width:100%;aspect-ratio:4/3" shape="rounded" radius="16" placeholder="Drop a photo of scattered inspection photos/notes — the current manual chaos"></image-slot>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!-- HOW IT WORKS -->
+  <section id="how-it-works" style="background:var(--neutral-50,#fafaf9);position:relative;z-index:1;padding-top:clamp(60px,8vw,80px)">
+  <div style="max-width:1400px;margin:0 auto;padding:0 clamp(20px,5vw,60px) clamp(60px,8vw,80px)">
+    <div style="text-align:left;margin:0 0 12px">
+      <span style="font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-600)">Inspections. Simplified</span>
+    </div>
+    <h2 style="margin:0 0 56px;text-align:left;font-size:clamp(28px,4vw,40px);font-weight:800;line-height:1.2;color:var(--neutral-900)">Inspection to branded report in 4 steps</h2>
+
+    <div style="display:flex;flex-direction:column;gap:64px">
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px);align-items:start">
+        <div style="min-width:280px;display:flex;flex-direction:column;gap:20px">
+          <span style="font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--gold-600)">01 Set up</span>
+          <h3 style="margin:0;font-size:clamp(22px,2.6vw,28px);font-weight:700;color:var(--neutral-900)">Set up in seconds, not from scratch</h3>
+          <ul style="margin:0;padding:0 0 0 20px;list-style:disc;display:flex;flex-direction:column;gap:14px">
+            <li style="font-size:16px;line-height:1.5;color:var(--neutral-600);padding-left:4px"><span style="font-weight:700;color:var(--jade-900)">Quick-Start.</span> Tell us the building you're inspecting and we'll pre-populate what to inspect</li>
+            <li style="font-size:16px;line-height:1.5;color:var(--neutral-600);padding-left:4px"><span style="font-weight:700;color:var(--jade-900)">Flexible.</span> Add or remove anything specific to the property in a couple of taps</li>
+            <li style="font-size:16px;line-height:1.5;color:var(--neutral-600);padding-left:4px"><span style="font-weight:700;color:var(--jade-900)">Mobile.</span> Native iOS app, inspect straight from your iPhone (Android coming soon)</li>
+          </ul>
+        </div>
+        <div style="min-width:280px;display:flex;flex-direction:column;align-items:center;gap:12px">
+          <div style="width:64%;position:relative">
+            <div style="padding:12px;background:linear-gradient(135deg,var(--gold-600),var(--jade-900));border-radius:20px;box-shadow:0 16px 36px rgba(15,31,46,.22)">
+              <div style="position:relative;width:100%;aspect-ratio:9/16;border-radius:14px;overflow:hidden">
+                <sc-for list="{{ stepCarousels.0.slides }}" as="slide" hint-placeholder-count="3">
+                  <div style="position:absolute;inset:0;opacity:{{ slide.opacity }};pointer-events:{{ slide.pointerEvents }};transition:opacity .25s">
+                    <image-slot id="{{ slide.id }}" style="width:100%;height:100%" shape="rect" fit="cover" placeholder="{{ slide.placeholder }}"></image-slot>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <button onClick="{{ stepCarousels.0.prev }}" style="position:absolute;left:-16px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;background:#fff;border:1px solid var(--neutral-200);box-shadow:var(--shadow-card);cursor:pointer;font-size:14px;color:var(--neutral-900)">‹</button>
+            <button onClick="{{ stepCarousels.0.next }}" style="position:absolute;right:-16px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;background:#fff;border:1px solid var(--neutral-200);box-shadow:var(--shadow-card);cursor:pointer;font-size:14px;color:var(--neutral-900)">›</button>
+          </div>
+          <div style="display:flex;gap:6px">
+            <sc-for list="{{ stepCarousels.0.slides }}" as="slide" hint-placeholder-count="3">
+              <button onClick="{{ slide.select }}" style="width:7px;height:7px;padding:0;border:none;border-radius:50%;cursor:pointer;background:{{ slide.dotColor }}"></button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px);align-items:start">
+        <div style="min-width:280px;order:1;display:flex;flex-direction:column;align-items:center;gap:12px">
+          <div style="width:64%;position:relative">
+            <div style="padding:12px;background:linear-gradient(135deg,var(--jade-900),var(--gold-600));border-radius:20px;box-shadow:0 16px 36px rgba(15,31,46,.22)">
+              <div style="position:relative;width:100%;aspect-ratio:9/16;border-radius:14px;overflow:hidden">
+                <sc-for list="{{ stepCarousels.1.slides }}" as="slide" hint-placeholder-count="3">
+                  <div style="position:absolute;inset:0;opacity:{{ slide.opacity }};pointer-events:{{ slide.pointerEvents }};transition:opacity .25s">
+                    <image-slot id="{{ slide.id }}" style="width:100%;height:100%" shape="rect" fit="cover" placeholder="{{ slide.placeholder }}"></image-slot>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <button onClick="{{ stepCarousels.1.prev }}" style="position:absolute;left:-16px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;background:#fff;border:1px solid var(--neutral-200);box-shadow:var(--shadow-card);cursor:pointer;font-size:14px;color:var(--neutral-900)">‹</button>
+            <button onClick="{{ stepCarousels.1.next }}" style="position:absolute;right:-16px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;background:#fff;border:1px solid var(--neutral-200);box-shadow:var(--shadow-card);cursor:pointer;font-size:14px;color:var(--neutral-900)">›</button>
+          </div>
+          <div style="display:flex;gap:6px">
+            <sc-for list="{{ stepCarousels.1.slides }}" as="slide" hint-placeholder-count="3">
+              <button onClick="{{ slide.select }}" style="width:7px;height:7px;padding:0;border:none;border-radius:50%;cursor:pointer;background:{{ slide.dotColor }}"></button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="min-width:280px;display:flex;flex-direction:column;gap:20px;order:2">
+          <span style="font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--gold-600)">02 Inspect</span>
+          <h3 style="margin:0;font-size:clamp(22px,2.6vw,28px);font-weight:700;color:var(--neutral-900)">Guided, consistent inspections</h3>
+          <ul style="margin:0;padding:0 0 0 20px;list-style:disc;display:flex;flex-direction:column;gap:14px">
+            <li style="font-size:16px;line-height:1.5;color:var(--neutral-600);padding-left:4px"><span style="font-weight:700;color:var(--jade-900)">Guided.</span> App tells inspectors exactly what to check and how to rate it, room by room</li>
+            <li style="font-size:16px;line-height:1.5;color:var(--neutral-600);padding-left:4px"><span style="font-weight:700;color:var(--jade-900)">Simple.</span> No training needed, no guesswork</li>
+            <li style="font-size:16px;line-height:1.5;color:var(--neutral-600);padding-left:4px"><span style="font-weight:700;color:var(--jade-900)">Consistent.</span> Same standard every time, regardless of who's inspecting</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px);align-items:start">
+        <div style="min-width:280px;display:flex;flex-direction:column;gap:20px">
+          <span style="font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--gold-600)">03 Report</span>
+          <h3 style="margin:0;font-size:clamp(22px,2.6vw,28px);font-weight:700;color:var(--neutral-900)">Every action captured. Every finding categorized.</h3>
+          <ul style="margin:0;padding:0 0 0 20px;list-style:disc;display:flex;flex-direction:column;gap:14px">
+            <li style="font-size:16px;line-height:1.5;color:var(--neutral-600);padding-left:4px"><span style="font-weight:700;color:var(--jade-900)">Branded.</span> Puts your agency's name in front of landlords and tenants, every time.</li>
+            <li style="font-size:16px;line-height:1.5;color:var(--neutral-600);padding-left:4px"><span style="font-weight:700;color:var(--jade-900)">Clear.</span> Itemized room by room, with a photo for every entry.</li>
+            <li style="font-size:16px;line-height:1.5;color:var(--neutral-600);padding-left:4px"><span style="font-weight:700;color:var(--jade-900)">Categorized.</span> Every finding flagged as action needed, review needed, or no action required.</li>
+          </ul>
+        </div>
+        <div style="min-width:280px;display:flex;flex-direction:column;align-items:center;gap:12px">
+          <div style="width:64%;position:relative">
+            <div style="padding:12px;background:linear-gradient(135deg,var(--success),var(--gold-600));border-radius:20px;box-shadow:0 16px 36px rgba(15,31,46,.22)">
+              <div style="position:relative;width:100%;aspect-ratio:9/16;border-radius:14px;overflow:hidden">
+                <sc-for list="{{ stepCarousels.2.slides }}" as="slide" hint-placeholder-count="3">
+                  <div style="position:absolute;inset:0;opacity:{{ slide.opacity }};pointer-events:{{ slide.pointerEvents }};transition:opacity .25s">
+                    <image-slot id="{{ slide.id }}" style="width:100%;height:100%" shape="rect" fit="cover" placeholder="{{ slide.placeholder }}"></image-slot>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <button onClick="{{ stepCarousels.2.prev }}" style="position:absolute;left:-16px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;background:#fff;border:1px solid var(--neutral-200);box-shadow:var(--shadow-card);cursor:pointer;font-size:14px;color:var(--neutral-900)">‹</button>
+            <button onClick="{{ stepCarousels.2.next }}" style="position:absolute;right:-16px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;background:#fff;border:1px solid var(--neutral-200);box-shadow:var(--shadow-card);cursor:pointer;font-size:14px;color:var(--neutral-900)">›</button>
+          </div>
+          <div style="display:flex;gap:6px">
+            <sc-for list="{{ stepCarousels.2.slides }}" as="slide" hint-placeholder-count="3">
+              <button onClick="{{ slide.select }}" style="width:7px;height:7px;padding:0;border:none;border-radius:50%;cursor:pointer;background:{{ slide.dotColor }}"></button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px);align-items:start">
+        <div style="min-width:280px;order:1;display:flex;flex-direction:column;align-items:center;gap:12px">
+          <div style="width:64%;position:relative">
+            <div style="position:relative;padding:12px;background:linear-gradient(135deg,var(--gold-600),var(--jade-700));border-radius:20px;box-shadow:0 16px 36px rgba(15,31,46,.22)">
+              <div style="position:relative;width:100%;aspect-ratio:9/16;border-radius:14px;overflow:hidden">
+                <sc-for list="{{ stepCarousels.3.slides }}" as="slide" hint-placeholder-count="3">
+                  <div style="position:absolute;inset:0;opacity:{{ slide.opacity }};pointer-events:{{ slide.pointerEvents }};transition:opacity .25s">
+                    <image-slot id="{{ slide.id }}" style="width:100%;height:100%" shape="rect" fit="cover" placeholder="{{ slide.placeholder }}"></image-slot>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="position:absolute;top:22px;left:22px;right:22px;background:rgba(255,255,255,.95);border:2px solid var(--jade-900);border-radius:8px;padding:6px">
+                <image-slot id="agency-logo" style="width:100%;height:36px" shape="rect" placeholder="Agency logo"></image-slot>
+              </div>
+            </div>
+            <button onClick="{{ stepCarousels.3.prev }}" style="position:absolute;left:-16px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;background:#fff;border:1px solid var(--neutral-200);box-shadow:var(--shadow-card);cursor:pointer;font-size:14px;color:var(--neutral-900)">‹</button>
+            <button onClick="{{ stepCarousels.3.next }}" style="position:absolute;right:-16px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;background:#fff;border:1px solid var(--neutral-200);box-shadow:var(--shadow-card);cursor:pointer;font-size:14px;color:var(--neutral-900)">›</button>
+          </div>
+          <div style="display:flex;gap:6px">
+            <sc-for list="{{ stepCarousels.3.slides }}" as="slide" hint-placeholder-count="3">
+              <button onClick="{{ slide.select }}" style="width:7px;height:7px;padding:0;border:none;border-radius:50%;cursor:pointer;background:{{ slide.dotColor }}"></button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="min-width:280px;display:flex;flex-direction:column;gap:20px;order:2">
+          <span style="font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--gold-600)">04 Share</span>
+          <h3 style="margin:0;font-size:clamp(22px,2.6vw,28px);font-weight:700;color:var(--neutral-900)">The hero output: a report that tells the whole story</h3>
+          <ul style="margin:0;padding:0 0 0 20px;list-style:disc;display:flex;flex-direction:column;gap:14px">
+            <li style="font-size:16px;line-height:1.5;color:var(--neutral-600);padding-left:4px"><span style="font-weight:700;color:var(--jade-900)">Branded.</span> Carries your agency's logo, building recognition every time it lands in a landlord or tenant's inbox</li>
+            <li style="font-size:16px;line-height:1.5;color:var(--neutral-600);padding-left:4px"><span style="font-weight:700;color:var(--jade-900)">Transparent.</span> Full clarity on what was inspected, by whom, and how, with photo evidence backing every rating</li>
+            <li style="font-size:16px;line-height:1.5;color:var(--neutral-600);padding-left:4px"><span style="font-weight:700;color:var(--jade-900)">Actionable.</span> Items sorted into action needed, action recommended, and no action needed</li>
+            <li style="font-size:16px;line-height:1.5;color:var(--neutral-600);padding-left:4px"><span style="font-weight:700;color:var(--jade-900)">Clear.</span> Landlords know where to decide, maintenance teams know what to fix, tenants move in with confidence</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </section>
+
+
+  <!-- WHY IT MATTERS -->
+  <section style="background:var(--jade-900);margin-top:-40px;margin-bottom:-40px;border-radius:40px;position:relative;z-index:2">
+    <div style="max-width:1200px;margin:0 auto;padding:clamp(80px,9vw,100px) clamp(20px,5vw,60px) clamp(100px,10vw,120px)">
+      <div style="text-align:left;margin:0 0 12px">
+        <span style="font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-600)">Why use Tenify</span>
+      </div>
+      <h2 style="margin:0 0 32px;text-align:left;font-size:clamp(28px,4vw,40px);font-weight:800;line-height:1.2;color:#fff">Built for everyone in the process.</h2>
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--gold-600)" stroke-width="1.6"><path d="M4 21V7l7-4 7 4v14" stroke-linejoin="round" stroke-linecap="round"/><path d="M9 21v-6h4v6M9 11h1M9 15h1M14 11h1M14 15h1"/></svg>
+          <span style="font-size:18px;font-weight:700;line-height:1.3;color:#fff">For you</span>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px 24px">
+            <div style="display:flex;gap:8px"><span style="color:var(--gold-600);flex-shrink:0">•</span><p style="margin:0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.7)">Enhance and differentiate your value proposition. Stand out against the competition.</p></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--gold-600);flex-shrink:0">•</span><p style="margin:0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.7)">Bring your brand front and centre. Another touchpoint to engage your clients.</p></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--gold-600);flex-shrink:0">•</span><p style="margin:0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.7)">New revenue stream by monetising the service.</p></div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px">
+          <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--gold-600)" stroke-width="1.6"><path d="M7 15a3.2 3.2 0 1 0 0-6.4A3.2 3.2 0 0 0 7 15z"/><path d="M9.3 12.7L19 3m-3 1 2 2m-5 1 2 2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span style="font-size:18px;font-weight:700;line-height:1.3;color:#fff">For your landlords</span>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;gap:8px"><span style="color:var(--gold-600);flex-shrink:0">•</span><p style="margin:0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.7)">Confidence in their investment's exact condition.</p></div>
+              <div style="display:flex;gap:8px"><span style="color:var(--gold-600);flex-shrink:0">•</span><p style="margin:0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.7)">Photo-backed proof of what needs fixing or replacing.</p></div>
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--gold-600)" stroke-width="1.6"><circle cx="12" cy="8" r="3.4"/><path d="M5.2 20c0-4 3-6.4 6.8-6.4s6.8 2.4 6.8 6.4" stroke-linecap="round"/></svg>
+            <span style="font-size:18px;font-weight:700;line-height:1.3;color:#fff">For your tenants</span>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;gap:8px"><span style="color:var(--gold-600);flex-shrink:0">•</span><p style="margin:0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.7)">Moves in knowing exactly what they're getting.</p></div>
+              <div style="display:flex;gap:8px"><span style="color:var(--gold-600);flex-shrink:0">•</span><p style="margin:0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.7)">Reduce nervousness about their deposit at move out.</p></div>
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--gold-600)" stroke-width="1.6"><rect x="5" y="4" width="14" height="17" rx="2" stroke-linejoin="round"/><path d="M9 3.2h6v2.6H9z" stroke-linejoin="round"/><path d="M8.2 11h7.6M8.2 15h5" stroke-linecap="round"/></svg>
+            <span style="font-size:18px;font-weight:700;line-height:1.3;color:#fff">For your inspectors</span>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;gap:8px"><span style="color:var(--gold-600);flex-shrink:0">•</span><p style="margin:0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.7)">No more paper notes or camera-roll write-ups.</p></div>
+              <div style="display:flex;gap:8px"><span style="color:var(--gold-600);flex-shrink:0">•</span><p style="margin:0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.7)">Same professional process, every inspection.</p></div>
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--gold-600)" stroke-width="1.6"><path d="M14.7 6.3a4 4 0 1 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.1 2.1-2.1-.6-.6-2.1z" stroke-linejoin="round" stroke-linecap="round"/></svg>
+            <span style="font-size:18px;font-weight:700;line-height:1.3;color:#fff">For your maintenance team</span>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;gap:8px"><span style="color:var(--gold-600);flex-shrink:0">•</span><p style="margin:0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.7)">Knows exactly what to fix, no guesswork.</p></div>
+              <div style="display:flex;gap:8px"><span style="color:var(--gold-600);flex-shrink:0">•</span><p style="margin:0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.7)">No more "have you checked this?" chasing.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!-- PRICING -->
+  <section id="pricing" style="background:var(--neutral-50,#fafaf9);position:relative;z-index:1;padding-top:clamp(60px,8vw,80px)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,5vw,40px) clamp(60px,8vw,80px)">
+    <div style="text-align:left;max-width:640px;margin:0 0 40px;display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+      <span style="font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-600)">Unlimited reports. No bill shock.</span>
+      <h2 style="margin:0;font-size:clamp(28px,4vw,40px);font-weight:800;line-height:1.2;color:var(--neutral-900)">Simple transparent pricing</h2>
+    </div>
+
+    <div style="display:flex;flex-direction:column;align-items:center;gap:28px">
+      <div style="text-align:center;font-size:14px;font-weight:700;color:var(--neutral-800)">How many users?</div>
+
+      <div style="display:inline-flex;background:var(--neutral-100);border-radius:var(--radius-full);padding:6px;gap:4px">
+        <sc-for list="{{ seatPills }}" as="pill" hint-placeholder-count="4">
+          <button onClick="{{ pill.select }}" style="padding:10px 20px;border:none;border-radius:var(--radius-full);font-size:14px;font-weight:700;font-family:var(--font-sans);cursor:pointer;white-space:nowrap;background:{{ pill.bg }};color:{{ pill.color }}">{{ pill.label }}</button>
+        </sc-for>
+      </div>
+
+      <div style="width:100%;max-width:440px;border:2px solid var(--jade-900);border-radius:var(--radius-lg);padding:36px;display:flex;flex-direction:column;gap:20px;background:#fff">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <div style="font-size:22px;font-weight:800;letter-spacing:-0.01em;text-transform:uppercase;color:var(--neutral-900)">{{ resolvedTier.name }}</div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="font-size:13px;font-weight:700;color:var(--jade-500);white-space:nowrap">{{ resolvedTier.seatLabel }}</div>
+          </div>
+        </div>
+
+        <sc-if value="{{ resolvedTier.isCustom }}" hint-placeholder-val="{{ false }}">
+          <div style="font-size:32px;font-weight:800;letter-spacing:-0.02em;color:var(--neutral-900)">Custom pricing</div>
+        </sc-if>
+        <sc-if value="{{ !resolvedTier.isCustom }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;align-items:baseline;gap:8px">
+            <span style="font-size:48px;font-weight:800;letter-spacing:-0.02em;color:var(--neutral-900)">AED {{ resolvedTier.total }}</span>
+            <span style="font-size:16px;color:var(--neutral-600)">/month</span>
+          </div>
+        </sc-if>
+
+        <p style="margin:0;font-size:15px;line-height:1.6;color:var(--neutral-600)">{{ resolvedTier.description }}</p>
+
+        <div style="display:flex;flex-direction:column;gap:14px;margin-top:4px">
+          <sc-for list="{{ resolvedTier.features }}" as="feature" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:12px">
+              <span style="flex:none;width:22px;height:22px;border-radius:50%;background:var(--success);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">✓</span>
+              <span style="font-size:15px;color:var(--neutral-900)">{{ feature }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <sc-if value="{{ resolvedTier.isCustom }}" hint-placeholder-val="{{ false }}">
+          <button style="margin-top:8px;background:var(--jade-900);color:var(--gold-600);border:none;border-radius:var(--radius-full);padding:16px;font-size:16px;font-weight:700;font-family:var(--font-sans);cursor:pointer" style-hover="background:var(--jade-700)" style-active="transform:scale(0.98)">Contact us</button>
+        </sc-if>
+        <sc-if value="{{ !resolvedTier.isCustom }}" hint-placeholder-val="{{ true }}">
+          <button style="margin-top:8px;background:var(--jade-900);color:var(--gold-600);border:none;border-radius:var(--radius-full);padding:16px;font-size:16px;font-weight:700;font-family:var(--font-sans);cursor:pointer" style-hover="background:var(--jade-700)" style-active="transform:scale(0.98)">Join the Waitlist</button>
+        </sc-if>
+      </div>
+    </div>
+    <p style="margin:32px 0 0;text-align:center;font-size:14px;color:var(--neutral-600)">No long-term contracts. Cancel anytime. Questions? We'll answer them — see below.</p>
+  </div>
+  </section>
+
+  <div style="position:relative;height:40px;background:var(--true-white);overflow:hidden"><div style="position:absolute;inset:0;background:var(--neutral-100);border-radius:32px 32px 0 0"></div></div>
+
+  <!-- FAQ -->
+  <section id="faq" style="background:var(--neutral-100)">
+    <div style="max-width:1000px;margin:0 auto;padding:clamp(60px,8vw,80px) clamp(20px,5vw,40px)">
+      <h2 style="margin:0 0 40px;text-align:center;font-size:clamp(28px,4vw,40px);font-weight:800;line-height:1.2;color:var(--neutral-900)">Frequently asked questions</h2>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <sc-for list="{{ faqItems }}" as="item" hint-placeholder-count="8">
+          <div style="background:#fff;border:1px solid var(--neutral-200);border-radius:var(--radius-md);overflow:hidden">
+            <button onClick="{{ item.toggle }}" style="width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:20px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-family:var(--font-sans)">
+              <span style="font-size:16px;font-weight:600;color:var(--neutral-900)">{{ item.q }}</span>
+              <span style="flex:none;font-size:18px;color:var(--neutral-600);transform:rotate({{ item.chevronDeg }}deg);transition:transform .2s">›</span>
+            </button>
+            <div style="max-height:{{ item.maxHeight }};overflow:hidden;transition:max-height .25s ease">
+              <p style="margin:0;padding:0 20px 20px;font-size:15px;line-height:1.6;color:var(--neutral-600)">{{ item.a }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <div style="position:relative;height:40px;background:var(--neutral-100);overflow:hidden"><div style="position:absolute;inset:-1px;background:var(--true-white);border-radius:32px 32px 0 0"></div></div>
+
+  <!-- FOOTER -->
+  <footer style="background:var(--neutral-100)">
+    <div style="max-width:1200px;margin:0 auto;padding:clamp(48px,6vw,64px) clamp(20px,5vw,40px) 0;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:32px">
+      <div style="display:flex;flex-direction:column;gap:8px;min-width:160px">
+        <img src="assets/tenify-wordmark-only.png" alt="Tenify" style="height:22px;width:auto" />
+        <span style="font-size:13px;color:var(--neutral-600)">Move-in inspections made easy.</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:120px">
+        <span style="font-size:14px;font-weight:600;color:var(--neutral-900)">Product</span>
+        <a href="#how-it-works" style="font-size:13px;color:var(--neutral-600)">How it works</a>
+        <a href="#how-it-works" style="font-size:13px;color:var(--neutral-600)">Features</a>
+        <a href="#pricing" style="font-size:13px;color:var(--neutral-600)">Pricing</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:120px">
+        <span style="font-size:14px;font-weight:600;color:var(--neutral-900)">Company</span>
+        <a href="#" style="font-size:13px;color:var(--neutral-600)">About</a>
+        <a href="#" style="font-size:13px;color:var(--neutral-600)">Blog</a>
+        <a href="#" style="font-size:13px;color:var(--neutral-600)">Contact</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:120px">
+        <span style="font-size:14px;font-weight:600;color:var(--neutral-900)">Legal</span>
+        <a href="#" style="font-size:13px;color:var(--neutral-600)">Terms</a>
+        <a href="#" style="font-size:13px;color:var(--neutral-600)">Privacy</a>
+        <a href="#" style="font-size:13px;color:var(--neutral-600)">Cookie Policy</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:120px">
+        <span style="font-size:14px;font-weight:600;color:var(--neutral-900)">Follow</span>
+        <div style="display:flex;gap:12px">
+          <a href="#" style="color:var(--neutral-600)">LinkedIn</a>
+          <a href="#" style="color:var(--neutral-600)">Twitter</a>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1200px;margin:0 auto;padding:32px clamp(20px,5vw,40px) 32px;margin-top:32px;border-top:1px solid var(--neutral-200);text-align:center">
+      <span style="font-size:12px;color:var(--neutral-400)">Tenify © 2026. All rights reserved.</span>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    isMobile: false,
+    mobileNavOpen: false,
+    openFaqIndex: 0,
+    seatCount: 3,
+    stepIndex: [0, 0, 0, 0],
+    heroEmail: '',
+  };
+
+  componentDidMount() {
+    this.checkWidth = () => this.setState({ isMobile: window.innerWidth <= 860 });
+    this.checkWidth();
+    window.addEventListener('resize', this.checkWidth);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.checkWidth);
+  }
+
+  toggleMobileNav() {
+    this.setState(function(s) { return { mobileNavOpen: !s.mobileNavOpen }; });
+  }
+
+  scrollTo(id) {
+    var el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  renderVals() {
+    const self3 = this;
+    const stepPlaceholders = [
+      ['Property address entry screen', 'Saved template picker', 'Assign inspector screen'],
+      ['Guided inspection checklist screen', 'Functional check yes/no screen', 'Room-by-room progress screen'],
+      ['Item + photo capture screen', 'Faulty fixture flag screen', 'Photo review grid screen'],
+      ['Final branded report screen', 'Report summary screen', 'Action-needed breakdown screen'],
+    ];
+    const stepCarousels = stepPlaceholders.map((placeholders, stepIdx) => {
+      const activeIdx = this.state.stepIndex[stepIdx];
+      const slides = placeholders.map((placeholder, i) => ({
+        id: 'carousel-' + (stepIdx + 1) + '-' + (i + 1),
+        placeholder,
+        opacity: i === activeIdx ? 1 : 0,
+        pointerEvents: i === activeIdx ? 'auto' : 'none',
+        dotColor: i === activeIdx ? 'var(--jade-900)' : 'var(--neutral-300)',
+        select: () => self3.setState(s => { const ns = s.stepIndex.slice(); ns[stepIdx] = i; return { stepIndex: ns }; }),
+      }));
+      return {
+        slides,
+        prev: () => self3.setState(s => { const ns = s.stepIndex.slice(); ns[stepIdx] = (ns[stepIdx] - 1 + placeholders.length) % placeholders.length; return { stepIndex: ns }; }),
+        next: () => self3.setState(s => { const ns = s.stepIndex.slice(); ns[stepIdx] = (ns[stepIdx] + 1) % placeholders.length; return { stepIndex: ns }; }),
+      };
+    });
+
+    const seatCount = this.state.seatCount;
+    const bands = [
+      { key: 'solo', name: 'Solo', maxSeats: 1, pricePerSeat: 500, discount: 0, description: 'For a single inspector covering everything.', newFeatures: ['Unlimited reports', 'Co-branded logo', 'Email support', 'Self-serve set-up'] },
+      { key: 'growth', name: 'Growth', maxSeats: 5, pricePerSeat: 450, discount: 10, description: 'For a small team splitting inspections across properties.', newFeatures: ['Dedicated WhatsApp support', 'Guided onboarding & training'] },
+      { key: 'team', name: 'Team', maxSeats: 10, pricePerSeat: 400, discount: 20, description: 'For agencies running inspections at scale.', newFeatures: ['Dedicated account manager', 'We set it up for you'] },
+    ];
+    let bandIdx = bands.findIndex(b => seatCount <= b.maxSeats);
+    const isCustom = bandIdx === -1;
+    const cumulativeFeatures = isCustom
+      ? bands.flatMap(b => b.newFeatures)
+      : bands.slice(0, bandIdx + 1).flatMap(b => b.newFeatures);
+    const seatLabel = isCustom
+      ? seatCount + (seatCount === 1 ? ' user' : ' users')
+      : (bands[bandIdx].name === 'Solo' ? '1 user' : 'Up to ' + bands[bandIdx].maxSeats + ' users');
+    const resolvedTier = isCustom ? {
+      name: 'Custom',
+      isCustom: true,
+      seatLabel,
+      description: 'Everything in Team, scoped and priced for your portfolio.',
+      features: cumulativeFeatures,
+    } : {
+      name: bands[bandIdx].name,
+      isCustom: false,
+      seatLabel,
+      pricePerSeat: bands[bandIdx].pricePerSeat,
+      total: seatCount * bands[bandIdx].pricePerSeat,
+      description: bands[bandIdx].description,
+      features: cumulativeFeatures,
+    };
+    const self2 = this;
+    const pillDefs = [
+      { label: 'Solo', value: 1 },
+      { label: 'Up to 5', value: 5 },
+      { label: 'Up to 10', value: 10 },
+      { label: '10+', value: 11 },
+    ];
+    const seatPills = pillDefs.map(p => {
+      const active = p.value === 11 ? isCustom : (!isCustom && bands[bandIdx].maxSeats === p.value);
+      return {
+        label: p.label,
+        select: () => self2.setState({ seatCount: p.value }),
+        bg: active ? 'var(--jade-900)' : 'transparent',
+        color: active ? 'var(--gold-600)' : 'var(--neutral-600)',
+      };
+    });
+
+    const faqDefs = [
+      { q: "How long does setup take?", a: "Sign up on the web, invite your team, upload your logo. 15 minutes and you're ready to run your first inspection." },
+      { q: "Does this work with our existing process?", a: "Yes. Tenify replaces the paper checklist and camera roll, not your workflow. Your inspectors still walk the property the same way." },
+      { q: "Can we use our own branding?", a: "Every report carries your agency's logo and name, not Tenify's." },
+      { q: "What if we don't have 5+ inspectors?", a: "Plans start small. Add seats as you grow." },
+      { q: "Is there a contract?", a: "No. Month to month, cancel anytime." },
+      { q: "How is this priced?", a: "Per seat, per month. You know your cost before you commit." },
+      { q: "Do tenants or landlords need an account?", a: "No. They just receive the finished report." },
+      { q: "What happens to our data?", a: "Reports and photos stay tied to your agency account and are available for as long as you're a customer." },
+    ];
+
+    const faqItems = faqDefs.map((f, i) => {
+      const open = this.state.openFaqIndex === i;
+      return {
+        ...f,
+        chevronDeg: open ? 90 : 0,
+        maxHeight: open ? '200px' : '0px',
+        toggle: () => this.setState(s => ({ openFaqIndex: s.openFaqIndex === i ? -1 : i })),
+      };
+    });
+
+    var self = this;
+    return {
+      isMobile: this.state.isMobile,
+      mobileNavOpen: this.state.mobileNavOpen,
+      toggleMobileNav: function() { self.toggleMobileNav(); },
+      scrollToWaitlist: function() { self.scrollTo('waitlist'); },
+      scrollToWaitlistMobile: function() { self.toggleMobileNav(); self.scrollTo('waitlist'); },
+      heroEmail: this.state.heroEmail,
+      setHeroEmail: (e) => this.setState({ heroEmail: e.target.value }),
+      stepCarousels,
+      seatCount,
+      resolvedTier,
+      seatPills,
+      faqItems,
+    };
+  }
+}
+</script>
+</body>
+</html>

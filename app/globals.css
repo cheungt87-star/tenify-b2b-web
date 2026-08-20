@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+:root {
+  --jade-900: #0f1f2e;
+  --jade-700: #1a2f3e;
+  --jade-500: #2a4050;
+  --jade-100: #d9f0c6;
+  --gold-600: #9fe870;
+  --gold-100: #ebf7e0;
+  --charcoal: #0f1f2e;
+  --true-white: #ffffff;
+  --neutral-50: #f9fafa;
+  --neutral-100: #f4f6f6;
+  --neutral-200: #e8ecec;
+  --neutral-300: #d4dada;
+  --neutral-400: #b0b8b8;
+  --neutral-600: #6a7070;
+  --neutral-800: #323838;
+  --neutral-900: #1a1c1c;
+  --success: #3f7d53;
+  --error: #c84040;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  --shadow-card: 0 1px 2px rgba(26, 28, 28, 0.06);
+  --shadow-sheet: 0 -8px 24px rgba(26, 28, 28, 0.12);
+  --background: var(--true-white);
+  --foreground: var(--neutral-900);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-jade-900: var(--jade-900);
+  --color-jade-700: var(--jade-700);
+  --color-jade-500: var(--jade-500);
+  --color-jade-100: var(--jade-100);
+  --color-gold-600: var(--gold-600);
+  --color-gold-100: var(--gold-100);
+  --color-charcoal: var(--charcoal);
+  --color-true-white: var(--true-white);
+  --color-neutral-50: var(--neutral-50);
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-400: var(--neutral-400);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-900: var(--neutral-900);
+  --color-success: var(--success);
+  --color-error: var(--error);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
+  --font-editorial: var(--font-instrument);
+  --radius-md: 12px;
+  --radius-lg: 16px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--true-white);
+  color: var(--neutral-900);
+  font-family: var(--font-inter), Inter, system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+section[id] {
+  scroll-margin-top: calc(6.5rem + env(safe-area-inset-top));
+}
+
+button,
+.btn-navy,
+.btn-lime,
+.btn-ghost {
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@layer components {
+  .btn-navy {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 11px 20px;
+    border-radius: var(--radius-full);
+    background: var(--jade-900);
+    color: var(--gold-600);
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition:
+      background-color 150ms ease,
+      transform 150ms ease;
+  }
+
+  .btn-navy:hover {
+    background: var(--jade-700);
+  }
+
+  .btn-navy:focus-visible {
+    outline: 2px solid var(--gold-600);
+    outline-offset: 3px;
+  }
+
+  .btn-navy:active {
+    transform: scale(0.98);
+  }
+
+  .btn-lime {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 14px 32px;
+    border-radius: var(--radius-full);
+    background: var(--gold-600);
+    color: var(--charcoal);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    white-space: nowrap;
+  }
+
+  .btn-lime:hover {
+    opacity: 0.9;
+  }
+
+  .btn-lime:focus-visible {
+    outline: 2px solid var(--jade-900);
+    outline-offset: 3px;
+  }
+
+  .btn-lime:active {
+    transform: scale(0.98);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 8px 4px;
+    border-radius: var(--radius-md);
+    color: var(--neutral-800);
+    font-weight: 500;
+    font-size: 0.875rem;
+  }
+
+  .btn-ghost:hover {
+    color: var(--jade-700);
+  }
+
+  .btn-ghost:focus-visible {
+    outline: 2px solid var(--gold-600);
+    outline-offset: 3px;
+  }
+
+  .navy-slab {
+    background: var(--jade-900);
+    border-radius: 40px;
+    position: relative;
+    z-index: 2;
+    margin-top: -40px;
+    margin-bottom: -40px;
+  }
+
+  .audience-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: 28px;
+  }
+}
