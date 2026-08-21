@@ -35,10 +35,10 @@ const BANDS = [
 ] as const;
 
 const PILLS = [
-  { label: "Solo", value: 1 },
-  { label: "Up to 5", value: 5 },
-  { label: "Up to 10", value: 10 },
-  { label: "10+", value: 11 },
+  { label: "1", value: 1 },
+  { label: "2 - 5", value: 5 },
+  { label: "6 - 10", value: 10 },
+  { label: "11+", value: 11 },
 ] as const;
 
 export function PricingSelector() {

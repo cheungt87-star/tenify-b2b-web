@@ -255,8 +255,8 @@ export default function Home() {
                   }`}
                 >
                   <div className="flex min-w-0 flex-1 flex-col gap-5 md:max-w-[440px]">
-                    <p className="inline-flex w-fit items-center rounded-full bg-jade-900 px-3 py-1 font-mono text-xs font-bold text-gold-600">
-                      {step.id} {step.title}
+                    <p className="font-mono text-sm font-bold text-jade-900">
+                      {step.id}
                     </p>
                     <h3 className="text-[clamp(22px,2.6vw,28px)] font-bold text-neutral-900">
                       {step.heading}
