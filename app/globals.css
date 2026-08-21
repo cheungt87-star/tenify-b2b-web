@@ -65,11 +65,11 @@ body {
   background: var(--true-white);
   color: var(--neutral-900);
   font-family: var(--font-inter), Inter, system-ui, sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 section[id] {
-  scroll-margin-top: calc(6.5rem + env(safe-area-inset-top));
+  scroll-margin-top: calc(4rem + env(safe-area-inset-top));
 }
 
 button,

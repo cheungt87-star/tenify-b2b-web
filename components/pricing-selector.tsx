@@ -150,7 +150,7 @@ export function PricingSelector() {
             </li>
           ))}
         </ul>
-        <a href="#waitlist" className="btn-navy mt-2 w-full py-4 text-base font-bold">
+        <a href="#faq" className="btn-navy mt-2 w-full py-4 text-base font-bold">
           {resolved.isCustom ? "Contact us" : "Join the Waitlist"}
         </a>
       </article>

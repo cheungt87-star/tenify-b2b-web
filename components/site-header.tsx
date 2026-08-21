@@ -14,12 +14,12 @@ export function SiteHeader() {
 
   return (
     <header
-      className="sticky top-0 z-50 w-full border-b border-neutral-300 bg-neutral-200"
+      className="sticky top-0 z-50 w-full border-b border-neutral-300/30 bg-neutral-200/35 backdrop-blur-xl"
       style={{ paddingTop: "env(safe-area-inset-top)" }}
     >
-      <div className="relative mx-auto flex max-w-[1100px] items-center justify-between gap-3 px-5 py-1.5 sm:gap-4 sm:px-10 sm:py-3.5">
+      <div className="relative mx-auto flex max-w-[1100px] items-center justify-between gap-3 px-5 py-1 sm:gap-4 sm:px-10 sm:py-1.5">
         <a
-          href="#waitlist"
+          href="#top"
           className="inline-flex shrink-0 select-none items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-600 [-webkit-tap-highlight-color:transparent]"
           aria-label="Tenify"
         >
@@ -35,7 +35,7 @@ export function SiteHeader() {
           <a href="#" className="btn-ghost text-neutral-600">
             Login
           </a>
-          <a href="#waitlist" className="btn-navy !min-h-11 !px-5 !py-2.5">
+          <a href="#pricing" className="btn-navy !min-h-9 !px-4 !py-1.5">
             Join Waitlist
           </a>
         </nav>
@@ -54,7 +54,7 @@ export function SiteHeader() {
           <nav
             id="mobile-nav"
             aria-label="Mobile"
-            className="absolute top-full right-0 left-0 flex flex-col border-b border-neutral-300 bg-neutral-200 px-5 py-2 md:hidden"
+            className="absolute top-full right-0 left-0 flex flex-col border-b border-neutral-300/30 bg-neutral-200/35 backdrop-blur-xl px-5 py-2 md:hidden"
           >
             {NAV_LINKS.map((link) => (
               <a
@@ -74,7 +74,7 @@ export function SiteHeader() {
               Login
             </a>
             <a
-              href="#waitlist"
+              href="#pricing"
               className="btn-navy mt-3 mb-2 w-full"
               onClick={() => setOpen(false)}
             >

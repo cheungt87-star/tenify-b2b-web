@@ -5,8 +5,6 @@ import { PricingSelector } from "@/components/pricing-selector";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StepCarousel } from "@/components/step-carousel";
-import { WaitlistForm } from "@/components/waitlist-form";
-
 const STEPS = [
   {
     id: "01",
@@ -171,7 +169,7 @@ function GoldIcon({ children }: { children: ReactNode }) {
 export default function Home() {
   return (
     <div
-      className="flex min-h-full flex-1 flex-col overflow-x-hidden bg-true-white text-neutral-900"
+      className="flex min-h-full flex-1 flex-col overflow-x-clip bg-true-white text-neutral-900"
       style={{
         paddingLeft: "env(safe-area-inset-left)",
         paddingRight: "env(safe-area-inset-right)",
@@ -180,11 +178,8 @@ export default function Home() {
       <SiteHeader />
 
       <main>
-        <section
-          id="waitlist"
-          className="relative overflow-hidden bg-true-white"
-        >
-          <div className="relative mx-auto flex max-w-[1100px] flex-col items-center gap-4 px-5 pt-6 pb-24 text-center sm:px-10 md:pt-8 md:pb-28">
+        <section id="top" className="relative overflow-hidden bg-true-white">
+          <div className="relative mx-auto flex max-w-[1100px] flex-col items-center gap-4 px-5 pt-12 pb-24 text-center sm:px-10 md:pt-16 md:pb-28">
             <div className="relative flex flex-col items-center gap-2">
               <p className="relative text-[13px] font-bold tracking-[0.14em] text-gold-600">
                 Stand out from your competitors
@@ -201,12 +196,24 @@ export default function Home() {
                 Branded, detailed reports landlords trust and tenants remember.
               </p>
             </div>
-            <WaitlistForm />
-            <HeroVideo />
+            <div className="relative flex w-full max-w-[420px] items-stretch justify-center gap-3">
+              <a href="#pricing" className="btn-lime min-w-0 flex-[1.2]">
+                Join now
+              </a>
+              <a
+                href="#how-it-works"
+                className="inline-flex min-h-12 min-w-0 flex-1 items-center justify-center rounded-full border-2 border-jade-900 px-4 py-3.5 text-[0.9375rem] font-semibold text-jade-900 transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-gold-600 active:scale-[0.98]"
+              >
+                Find out more
+              </a>
+            </div>
+            <div className="mt-6 w-full max-w-[900px] md:mt-8">
+              <HeroVideo />
+            </div>
           </div>
         </section>
 
-        <section className="relative z-[2] -my-10 rounded-[40px] bg-gold-600">
+        <section className="relative z-[2] -my-10 rounded-[40px] border border-white/25 bg-gold-600/70 backdrop-blur-xl">
           <blockquote className="px-5 py-16 sm:px-[60px] sm:py-20">
             <div className="mx-auto flex max-w-[1400px] flex-col items-center gap-6 text-center">
               <p className="flex flex-col items-center gap-2">
@@ -222,7 +229,7 @@ export default function Home() {
                 Nobody sees the work you put in.
               </p>
               <cite className="not-italic font-display text-[clamp(20px,2.5vw,28px)] leading-[1.15] tracking-[-0.02em] text-jade-900 uppercase">
-                Tenify changes that.
+                Together with Tenify, we change that!
               </cite>
             </div>
           </blockquote>
@@ -243,11 +250,11 @@ export default function Home() {
               {STEPS.map((step) => (
                 <div
                   key={step.id}
-                  className="grid items-center gap-10 md:grid-cols-2 md:gap-16"
+                  className={`mx-auto flex w-full max-w-[920px] flex-col items-stretch gap-10 md:flex-row md:items-center md:justify-center md:gap-14 ${
+                    step.reverse ? "md:flex-row-reverse" : ""
+                  }`}
                 >
-                  <div
-                    className={`flex min-w-0 flex-col gap-5 ${step.reverse ? "md:order-2" : ""}`}
-                  >
+                  <div className="flex min-w-0 flex-1 flex-col gap-5 md:max-w-[440px]">
                     <p className="inline-flex w-fit items-center rounded-full bg-jade-900 px-3 py-1 font-mono text-xs font-bold text-gold-600">
                       {step.id} {step.title}
                     </p>
@@ -266,7 +273,7 @@ export default function Home() {
                       ))}
                     </ul>
                   </div>
-                  <div className={step.reverse ? "md:order-1" : ""}>
+                  <div className="md:shrink-0">
                     <StepCarousel slides={step.slides} />
                   </div>
                 </div>

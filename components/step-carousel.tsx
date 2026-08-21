@@ -141,7 +141,7 @@ export function StepCarousel({ slides }: StepCarouselProps) {
   return (
     <div ref={rootRef} className="flex w-full flex-col items-center gap-3">
       <div
-        className="relative w-[68%] min-w-[188px] max-w-[292px] touch-pan-y md:max-w-[240px]"
+        className="relative w-[68%] min-w-[188px] max-w-[292px] touch-pan-y md:w-[300px] md:max-w-[300px]"
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
@@ -161,7 +161,7 @@ export function StepCarousel({ slides }: StepCarouselProps) {
                       src={slide.src}
                       alt={slide.label}
                       fill
-                      sizes="(max-width: 768px) 220px, 292px"
+                      sizes="(max-width: 768px) 220px, 300px"
                       className="object-contain"
                       priority={slideIndex === 0}
                       draggable={false}

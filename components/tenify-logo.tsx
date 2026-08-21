@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 type TenifyLogoProps = {
-  /** Compact mark + wordmark for nav; full lockup includes the tagline. */
+  /** Compact lockup for nav; full is the same lockup sized for footer. */
   variant?: "mark" | "full";
   className?: string;
   priority?: boolean;
@@ -10,14 +10,14 @@ type TenifyLogoProps = {
 const VARIANTS = {
   mark: {
     src: "/brand/tenify-logo-mark.png",
-    width: 1849,
-    height: 755,
-    className: "h-6 w-auto sm:h-9",
+    width: 809,
+    height: 258,
+    className: "h-5 w-auto sm:h-7",
   },
   full: {
     src: "/brand/tenify-logo.png",
-    width: 1849,
-    height: 819,
+    width: 809,
+    height: 279,
     className: "h-10 w-auto sm:h-11",
   },
 } as const;
