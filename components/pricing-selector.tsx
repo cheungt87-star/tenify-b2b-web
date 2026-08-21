@@ -102,7 +102,7 @@ export function PricingSelector() {
               aria-selected={active}
               className={`rounded-full px-5 py-2.5 text-sm font-bold whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-600 ${
                 active
-                  ? "bg-jade-900 text-gold-600"
+                  ? "bg-jade-900 text-true-white"
                   : "bg-transparent text-neutral-600"
               }`}
               onClick={() => setSeatCount(pill.value)}
@@ -142,7 +142,7 @@ export function PricingSelector() {
             <li key={feature} className="flex items-center gap-3">
               <span
                 aria-hidden="true"
-                className="flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-jade-900 text-xs font-bold text-gold-600"
+                className="flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-jade-900 text-xs font-bold text-true-white"
               >
                 ✓
               </span>

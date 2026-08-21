@@ -158,7 +158,7 @@ function GoldIcon({ children }: { children: ReactNode }) {
       fill="none"
       stroke="currentColor"
       strokeWidth="1.6"
-      className="text-gold-600"
+      className="text-true-white"
       aria-hidden="true"
     >
       {children}
@@ -202,7 +202,7 @@ export default function Home() {
               </a>
               <a
                 href="#how-it-works"
-                className="inline-flex min-h-12 min-w-0 flex-1 items-center justify-center rounded-full border-2 border-jade-900 px-4 py-3.5 text-[0.9375rem] font-semibold text-jade-900 transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-gold-600 active:scale-[0.98]"
+                className="inline-flex min-h-12 min-w-0 flex-1 items-center justify-center rounded-[var(--radius-md)] border-2 border-jade-900 px-4 py-3.5 text-[0.9375rem] font-semibold text-jade-900 transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-gold-600 active:scale-[0.98]"
               >
                 Find out more
               </a>
@@ -284,7 +284,7 @@ export default function Home() {
 
         <section className="navy-slab">
           <div className="mx-auto max-w-[1200px] px-5 py-20 sm:px-[60px] md:py-24">
-            <p className="mb-3 text-[13px] font-bold tracking-[0.14em] text-gold-600">
+            <p className="mb-3 text-[13px] font-bold tracking-[0.14em] text-true-white">
               Why use Tenify
             </p>
             <h2 className="mb-8 font-display text-[clamp(28px,5vw,60px)] leading-[1.05] tracking-[-0.02em] text-true-white uppercase">
@@ -303,17 +303,17 @@ export default function Home() {
                 <h3 className="text-lg font-bold text-true-white">For you</h3>
                 <ul className="grid gap-2 md:grid-cols-3 md:gap-x-6">
                   <li className="flex gap-2 text-[15px] leading-[1.6] text-white/70">
-                    <span className="shrink-0 text-gold-600">•</span>
+                    <span className="shrink-0 text-true-white">•</span>
                     Enhance and differentiate your value proposition. Stand out
                     against the competition.
                   </li>
                   <li className="flex gap-2 text-[15px] leading-[1.6] text-white/70">
-                    <span className="shrink-0 text-gold-600">•</span>
+                    <span className="shrink-0 text-true-white">•</span>
                     Bring your brand front and centre. Another touchpoint to
                     engage your clients.
                   </li>
                   <li className="flex gap-2 text-[15px] leading-[1.6] text-white/70">
-                    <span className="shrink-0 text-gold-600">•</span>
+                    <span className="shrink-0 text-true-white">•</span>
                     New revenue stream by monetising the service.
                   </li>
                 </ul>
@@ -333,11 +333,11 @@ export default function Home() {
                   </h3>
                   <ul className="flex flex-col gap-2">
                     <li className="flex gap-2 text-[15px] leading-[1.6] text-white/70">
-                      <span className="shrink-0 text-gold-600">•</span>
+                      <span className="shrink-0 text-true-white">•</span>
                       Confidence in their investment&apos;s exact condition.
                     </li>
                     <li className="flex gap-2 text-[15px] leading-[1.6] text-white/70">
-                      <span className="shrink-0 text-gold-600">•</span>
+                      <span className="shrink-0 text-true-white">•</span>
                       Photo-backed proof of what needs fixing or replacing.
                     </li>
                   </ul>
@@ -355,11 +355,11 @@ export default function Home() {
                   </h3>
                   <ul className="flex flex-col gap-2">
                     <li className="flex gap-2 text-[15px] leading-[1.6] text-white/70">
-                      <span className="shrink-0 text-gold-600">•</span>
+                      <span className="shrink-0 text-true-white">•</span>
                       Moves in knowing exactly what they&apos;re getting.
                     </li>
                     <li className="flex gap-2 text-[15px] leading-[1.6] text-white/70">
-                      <span className="shrink-0 text-gold-600">•</span>
+                      <span className="shrink-0 text-true-white">•</span>
                       Reduce nervousness about their deposit at move out.
                     </li>
                   </ul>
@@ -375,11 +375,11 @@ export default function Home() {
                   </h3>
                   <ul className="flex flex-col gap-2">
                     <li className="flex gap-2 text-[15px] leading-[1.6] text-white/70">
-                      <span className="shrink-0 text-gold-600">•</span>
+                      <span className="shrink-0 text-true-white">•</span>
                       No more paper notes or camera-roll write-ups.
                     </li>
                     <li className="flex gap-2 text-[15px] leading-[1.6] text-white/70">
-                      <span className="shrink-0 text-gold-600">•</span>
+                      <span className="shrink-0 text-true-white">•</span>
                       Same professional process, every inspection.
                     </li>
                   </ul>
@@ -397,11 +397,11 @@ export default function Home() {
                   </h3>
                   <ul className="flex flex-col gap-2">
                     <li className="flex gap-2 text-[15px] leading-[1.6] text-white/70">
-                      <span className="shrink-0 text-gold-600">•</span>
+                      <span className="shrink-0 text-true-white">•</span>
                       Knows exactly what to fix, no guesswork.
                     </li>
                     <li className="flex gap-2 text-[15px] leading-[1.6] text-white/70">
-                      <span className="shrink-0 text-gold-600">•</span>
+                      <span className="shrink-0 text-true-white">•</span>
                       No more &quot;have you checked this?&quot; chasing.
                     </li>
                   </ul>

@@ -10,13 +10,13 @@ type TenifyLogoProps = {
 const VARIANTS = {
   mark: {
     src: "/brand/tenify-logo-mark.png",
-    width: 809,
-    height: 258,
+    width: 835,
+    height: 279,
     className: "h-5 w-auto sm:h-7",
   },
   full: {
     src: "/brand/tenify-logo.png",
-    width: 809,
+    width: 835,
     height: 279,
     className: "h-10 w-auto sm:h-11",
   },

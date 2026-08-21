@@ -5,7 +5,7 @@
   --jade-700: #1a2f3e;
   --jade-500: #2a4050;
   --jade-100: #d9f0c6;
-  --gold-600: #9fe870;
+  --gold-600: #077b5c;
   --gold-100: #ebf7e0;
   --charcoal: #0f1f2e;
   --true-white: #ffffff;
@@ -87,9 +87,9 @@ button,
     justify-content: center;
     min-height: 44px;
     padding: 11px 20px;
-    border-radius: var(--radius-full);
+    border-radius: var(--radius-md);
     background: var(--jade-900);
-    color: var(--gold-600);
+    color: var(--true-white);
     font-weight: 600;
     font-size: 0.875rem;
     transition:
@@ -116,9 +116,9 @@ button,
     justify-content: center;
     min-height: 48px;
     padding: 14px 32px;
-    border-radius: var(--radius-full);
+    border-radius: var(--radius-md);
     background: var(--gold-600);
-    color: var(--charcoal);
+    color: var(--true-white);
     font-weight: 600;
     font-size: 0.9375rem;
     white-space: nowrap;
