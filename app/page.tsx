@@ -189,11 +189,11 @@ export default function Home() {
               <p className="relative text-[13px] font-bold tracking-[0.14em] text-gold-600">
                 Stand out from your competitors
               </p>
-              <h1 className="relative flex flex-col items-center gap-0.5">
-                <span className="font-display text-[clamp(28px,5vw,60px)] leading-[1.05] tracking-[-0.02em] text-neutral-900 uppercase">
+              <h1 className="relative flex w-full flex-col items-center gap-0.5">
+                <span className="font-display max-w-full whitespace-nowrap text-[clamp(16px,calc((100vw-2.5rem)/14.7),60px)] leading-[1.05] tracking-[-0.02em] text-neutral-900 uppercase sm:text-[clamp(16px,calc((100vw-5rem)/14.7),60px)]">
                   Turn every handover inspection into
                 </span>
-                <span className="font-display text-[clamp(28px,5vw,60px)] leading-[1.05] tracking-[-0.02em] text-neutral-900 uppercase">
+                <span className="font-display max-w-full whitespace-nowrap text-[clamp(16px,calc((100vw-2.5rem)/14.7),60px)] leading-[1.05] tracking-[-0.02em] text-neutral-900 uppercase sm:text-[clamp(16px,calc((100vw-5rem)/14.7),60px)]">
                   why clients stay
                 </span>
               </h1>
@@ -207,7 +207,7 @@ export default function Home() {
         </section>
 
         <section className="relative z-[2] -my-10 rounded-[40px] bg-gold-600">
-          <blockquote className="px-5 py-28 sm:px-[60px] sm:py-36">
+          <blockquote className="px-5 py-16 sm:px-[60px] sm:py-20">
             <div className="mx-auto flex max-w-[1400px] flex-col items-center gap-6 text-center">
               <p className="flex flex-col items-center gap-2">
                 <span className="font-display text-[clamp(16px,2vw,22px)] leading-[1.2] tracking-[-0.02em] text-jade-900 uppercase">
@@ -237,7 +237,7 @@ export default function Home() {
               Inspections. Simplified
             </p>
             <h2 className="mb-14 font-display text-[clamp(28px,5vw,60px)] leading-[1.05] tracking-[-0.02em] text-neutral-900 uppercase">
-              Inspection to branded report in 4 steps
+              Inspection report in 4 steps
             </h2>
             <div className="flex flex-col gap-12">
               {STEPS.map((step) => (
@@ -281,7 +281,7 @@ export default function Home() {
               Why use Tenify
             </p>
             <h2 className="mb-8 font-display text-[clamp(28px,5vw,60px)] leading-[1.05] tracking-[-0.02em] text-true-white uppercase">
-              Built for everyone in the process.
+              1 report, everyone benefits
             </h2>
             <div className="flex flex-col gap-6">
               <article className="audience-card flex flex-col gap-3.5">

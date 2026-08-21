@@ -129,10 +129,9 @@ export function PricingSelector() {
         ) : (
           <p className="flex items-baseline gap-2 whitespace-nowrap">
             <span className="text-[clamp(2rem,10vw,3rem)] font-extrabold tracking-tight text-neutral-900">
-              AED{"\u00A0"}
               {resolved.total.toLocaleString("en-AE")}
             </span>
-            <span className="text-base text-neutral-600">/month</span>
+            <span className="text-base text-neutral-600">AED per month</span>
           </p>
         )}
         <p className="text-[15px] leading-[1.6] text-neutral-600">
