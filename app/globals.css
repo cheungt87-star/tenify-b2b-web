@@ -52,6 +52,7 @@
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains);
   --font-editorial: var(--font-instrument);
+  --font-display: var(--font-anton);
   --radius-md: 12px;
   --radius-lg: 16px;
 }

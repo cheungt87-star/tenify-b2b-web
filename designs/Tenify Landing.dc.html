@@ -333,7 +333,7 @@
         </sc-for>
       </div>
 
-      <div style="width:100%;max-width:440px;border:2px solid var(--jade-900);border-radius:var(--radius-lg);padding:36px;display:flex;flex-direction:column;gap:20px;background:#fff">
+      <div style="width:100%;max-width:440px;border:2px solid var(--jade-900);border-radius:var(--radius-lg);padding:clamp(24px,5vw,36px);display:flex;flex-direction:column;gap:20px;background:#fff">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
           <div style="font-size:22px;font-weight:800;letter-spacing:-0.01em;text-transform:uppercase;color:var(--neutral-900)">{{ resolvedTier.name }}</div>
           <div style="display:flex;align-items:center;gap:8px">
@@ -342,11 +342,11 @@
         </div>
 
         <sc-if value="{{ resolvedTier.isCustom }}" hint-placeholder-val="{{ false }}">
-          <div style="font-size:32px;font-weight:800;letter-spacing:-0.02em;color:var(--neutral-900)">Custom pricing</div>
+          <div style="font-size:clamp(1.75rem,8vw,2rem);font-weight:800;letter-spacing:-0.02em;color:var(--neutral-900);white-space:nowrap">Custom pricing</div>
         </sc-if>
         <sc-if value="{{ !resolvedTier.isCustom }}" hint-placeholder-val="{{ true }}">
-          <div style="display:flex;align-items:baseline;gap:8px">
-            <span style="font-size:48px;font-weight:800;letter-spacing:-0.02em;color:var(--neutral-900)">AED {{ resolvedTier.total }}</span>
+          <div style="display:flex;align-items:baseline;gap:8px;white-space:nowrap">
+            <span style="font-size:clamp(2rem,10vw,3rem);font-weight:800;letter-spacing:-0.02em;color:var(--neutral-900)">AED&nbsp;{{ resolvedTier.total }}</span>
             <span style="font-size:16px;color:var(--neutral-600)">/month</span>
           </div>
         </sc-if>

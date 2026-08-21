@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 export type CarouselSlide = {
@@ -13,18 +13,94 @@ type StepCarouselProps = {
   slides: readonly CarouselSlide[];
 };
 
+const SWIPE_THRESHOLD_PX = 48;
+
 export function StepCarousel({ slides }: StepCarouselProps) {
   const [index, setIndex] = useState(0);
   const [expanded, setExpanded] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [inViewport, setInViewport] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+  const swipeAxis = useRef<"pending" | "horizontal" | "vertical">("pending");
+  const suppressClick = useRef(false);
   const current = slides[index];
 
   function go(next: number) {
     setIndex((next + slides.length) % slides.length);
   }
 
+  function onTouchStart(event: React.TouchEvent) {
+    if (slides.length < 2) return;
+    const touch = event.touches[0];
+    touchStartX.current = touch.clientX;
+    touchStartY.current = touch.clientY;
+    swipeAxis.current = "pending";
+  }
+
+  function onTouchMove(event: React.TouchEvent) {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    if (swipeAxis.current !== "pending") return;
+
+    const touch = event.touches[0];
+    const dx = touch.clientX - touchStartX.current;
+    const dy = touch.clientY - touchStartY.current;
+
+    if (Math.abs(dx) < 10 && Math.abs(dy) < 10) return;
+
+    // Prefer vertical scroll when the gesture is mostly vertical.
+    swipeAxis.current = Math.abs(dy) > Math.abs(dx) ? "vertical" : "horizontal";
+  }
+
+  function onTouchEnd(event: React.TouchEvent) {
+    if (touchStartX.current === null) return;
+
+    const dx = event.changedTouches[0].clientX - touchStartX.current;
+    const wasHorizontal =
+      swipeAxis.current === "horizontal" ||
+      (swipeAxis.current === "pending" && Math.abs(dx) >= SWIPE_THRESHOLD_PX);
+    touchStartX.current = null;
+    touchStartY.current = null;
+    swipeAxis.current = "pending";
+
+    if (!wasHorizontal || Math.abs(dx) < SWIPE_THRESHOLD_PX) return;
+
+    suppressClick.current = true;
+    if (dx > 0) go(index - 1);
+    else go(index + 1);
+  }
+
+  function onExpandClick() {
+    if (suppressClick.current) {
+      suppressClick.current = false;
+      return;
+    }
+    setExpanded(true);
+  }
+
+  function onLightboxBackdropClick() {
+    if (suppressClick.current) {
+      suppressClick.current = false;
+      return;
+    }
+    setExpanded(false);
+  }
+
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    const node = rootRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setInViewport(entry.isIntersecting),
+      { threshold: 0.45 },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -52,9 +128,24 @@ export function StepCarousel({ slides }: StepCarouselProps) {
     };
   }, [expanded, index, slides.length]);
 
+  useEffect(() => {
+    if (!inViewport || expanded || slides.length < 2) return;
+
+    const id = window.setInterval(() => {
+      setIndex((prev) => (prev + 1) % slides.length);
+    }, 1500);
+
+    return () => window.clearInterval(id);
+  }, [inViewport, expanded, slides.length]);
+
   return (
-    <div className="flex w-full flex-col items-center gap-3">
-      <div className="relative w-[68%] min-w-[188px] max-w-[292px]">
+    <div ref={rootRef} className="flex w-full flex-col items-center gap-3">
+      <div
+        className="relative w-[68%] min-w-[188px] max-w-[292px] touch-pan-y md:max-w-[240px]"
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
         <div className="relative rounded-[2.15rem] bg-[#1c1c1e] p-[6px] shadow-[0_24px_50px_rgba(15,31,46,0.28),inset_0_1px_1px_rgba(255,255,255,0.22),inset_0_-1px_1px_rgba(0,0,0,0.55)]">
           <div className="relative overflow-hidden rounded-[1.7rem] bg-black ring-1 ring-white/10">
             <div className="relative aspect-[473/1024] bg-[#f4f4f5]">
@@ -73,6 +164,7 @@ export function StepCarousel({ slides }: StepCarouselProps) {
                       sizes="(max-width: 768px) 220px, 292px"
                       className="object-contain"
                       priority={slideIndex === 0}
+                      draggable={false}
                     />
                   ) : (
                     <div className="flex h-full flex-col justify-end bg-neutral-50 p-4">
@@ -92,7 +184,7 @@ export function StepCarousel({ slides }: StepCarouselProps) {
                   type="button"
                   aria-label={`Expand ${current.label}`}
                   className="absolute inset-0 z-[15] cursor-zoom-in"
-                  onClick={() => setExpanded(true)}
+                  onClick={onExpandClick}
                 />
               ) : null}
             </div>
@@ -135,36 +227,51 @@ export function StepCarousel({ slides }: StepCarouselProps) {
       {mounted && expanded && current?.src
         ? createPortal(
             <div
-              className="fixed inset-0 z-[80] flex items-center justify-center overflow-y-auto bg-black/70 px-4 py-4"
+              className="fixed inset-0 z-[80] flex flex-col bg-black/85"
               style={{
-                paddingTop: "max(1rem, env(safe-area-inset-top))",
-                paddingBottom: "max(1rem, env(safe-area-inset-bottom))",
+                paddingTop: "env(safe-area-inset-top)",
+                paddingBottom: "env(safe-area-inset-bottom)",
               }}
-              onClick={() => setExpanded(false)}
             >
-              <div
-                role="dialog"
-                aria-modal="true"
-                aria-label={current.label}
-                className="relative flex w-full max-w-[420px] flex-col items-center"
-                onClick={(event) => event.stopPropagation()}
-              >
+              <div className="flex shrink-0 items-center justify-between px-3 py-2">
+                <p className="min-w-0 flex-1 truncate pr-3 text-sm text-white/85">
+                  {current.label}
+                </p>
                 <button
                   type="button"
                   aria-label="Close expanded screenshot"
-                  className="mb-3 ml-auto flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/95 text-xl text-neutral-900"
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/95 text-xl text-neutral-900"
                   onClick={() => setExpanded(false)}
                 >
                   ×
                 </button>
+              </div>
+              <div
+                role="dialog"
+                aria-modal="true"
+                aria-label={current.label}
+                className="relative flex min-h-0 flex-1 touch-pan-y items-center justify-center px-2 pb-3"
+                onClick={onLightboxBackdropClick}
+                onTouchStart={onTouchStart}
+                onTouchMove={onTouchMove}
+                onTouchEnd={onTouchEnd}
+              >
                 <Image
                   src={current.src}
                   alt={current.label}
-                  width={473}
-                  height={1024}
-                  className="h-auto max-h-[calc(100dvh-9rem)] w-auto max-w-full rounded-[1.5rem] object-contain"
+                  width={946}
+                  height={2048}
+                  sizes="100vw"
+                  className="h-auto max-h-full w-auto max-w-full rounded-[1rem] object-contain"
+                  priority
+                  draggable={false}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    if (suppressClick.current) {
+                      suppressClick.current = false;
+                    }
+                  }}
                 />
-                <p className="mt-3 text-center text-sm text-white/85">{current.label}</p>
               </div>
             </div>,
             document.body,

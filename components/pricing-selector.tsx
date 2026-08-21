@@ -100,7 +100,7 @@ export function PricingSelector() {
               type="button"
               role="tab"
               aria-selected={active}
-              className={`rounded-full px-5 py-2.5 text-sm font-bold whitespace-nowrap ${
+              className={`rounded-full px-5 py-2.5 text-sm font-bold whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-600 ${
                 active
                   ? "bg-jade-900 text-gold-600"
                   : "bg-transparent text-neutral-600"
@@ -113,7 +113,7 @@ export function PricingSelector() {
         })}
       </div>
 
-      <article className="flex w-full max-w-[440px] flex-col gap-5 rounded-[var(--radius-lg)] border-2 border-jade-900 bg-true-white p-9">
+      <article className="flex w-full max-w-[440px] flex-col gap-5 rounded-[var(--radius-lg)] border-2 border-jade-900 bg-true-white p-6 sm:p-9">
         <div className="flex items-center justify-between gap-3">
           <h3 className="text-[22px] font-extrabold tracking-tight text-neutral-900 uppercase">
             {resolved.name}
@@ -123,13 +123,14 @@ export function PricingSelector() {
           </p>
         </div>
         {resolved.isCustom ? (
-          <p className="text-[32px] font-extrabold tracking-tight text-neutral-900">
+          <p className="text-[clamp(1.75rem,8vw,2rem)] font-extrabold tracking-tight whitespace-nowrap text-neutral-900">
             Custom pricing
           </p>
         ) : (
-          <p className="flex items-baseline gap-2">
-            <span className="text-5xl font-extrabold tracking-tight text-neutral-900">
-              AED {resolved.total.toLocaleString("en-AE")}
+          <p className="flex items-baseline gap-2 whitespace-nowrap">
+            <span className="text-[clamp(2rem,10vw,3rem)] font-extrabold tracking-tight text-neutral-900">
+              AED{"\u00A0"}
+              {resolved.total.toLocaleString("en-AE")}
             </span>
             <span className="text-base text-neutral-600">/month</span>
           </p>
@@ -142,7 +143,7 @@ export function PricingSelector() {
             <li key={feature} className="flex items-center gap-3">
               <span
                 aria-hidden="true"
-                className="flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-success text-xs font-bold text-true-white"
+                className="flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-jade-900 text-xs font-bold text-gold-600"
               >
                 ✓
               </span>

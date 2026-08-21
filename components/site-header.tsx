@@ -14,13 +14,13 @@ export function SiteHeader() {
 
   return (
     <header
-      className="fixed top-4 left-1/2 z-50 w-[calc(100%-32px)] max-w-[1100px] -translate-x-1/2 rounded-full border border-white/40 bg-white/75 shadow-[0_8px_24px_rgba(15,31,46,0.12)] backdrop-blur-[14px]"
-      style={{ marginTop: "env(safe-area-inset-top)" }}
+      className="sticky top-0 z-50 w-full border-b border-neutral-300 bg-neutral-200"
+      style={{ paddingTop: "env(safe-area-inset-top)" }}
     >
-      <div className="relative flex items-center justify-between gap-4 px-4 py-2 sm:px-7">
+      <div className="relative mx-auto flex max-w-[1100px] items-center justify-between gap-3 px-5 py-1.5 sm:gap-4 sm:px-10 sm:py-3.5">
         <a
           href="#waitlist"
-          className="inline-flex select-none items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-600 [-webkit-tap-highlight-color:transparent]"
+          className="inline-flex shrink-0 select-none items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-600 [-webkit-tap-highlight-color:transparent]"
           aria-label="Tenify"
         >
           <TenifyLogo variant="mark" priority />
@@ -35,14 +35,14 @@ export function SiteHeader() {
           <a href="#" className="btn-ghost text-neutral-600">
             Login
           </a>
-          <a href="#waitlist" className="btn-navy">
+          <a href="#waitlist" className="btn-navy !min-h-11 !px-5 !py-2.5">
             Join Waitlist
           </a>
         </nav>
 
         <button
           type="button"
-          className="btn-ghost font-semibold md:hidden"
+          className="btn-ghost !min-h-10 px-1 text-sm font-semibold md:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((value) => !value)}
@@ -54,13 +54,13 @@ export function SiteHeader() {
           <nav
             id="mobile-nav"
             aria-label="Mobile"
-            className="absolute top-[calc(100%+8px)] right-0 left-0 flex flex-col rounded-[var(--radius-md)] border border-neutral-200 bg-true-white px-5 py-2 shadow-[0_-8px_24px_rgba(26,28,28,0.12)] md:hidden"
+            className="absolute top-full right-0 left-0 flex flex-col border-b border-neutral-300 bg-neutral-200 px-5 py-2 md:hidden"
           >
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="border-b border-neutral-100 py-3.5 text-base font-medium text-neutral-800"
+                className="border-b border-neutral-300/70 py-3 text-base font-medium text-neutral-800"
                 onClick={() => setOpen(false)}
               >
                 {link.label}
@@ -68,7 +68,7 @@ export function SiteHeader() {
             ))}
             <a
               href="#"
-              className="border-b border-neutral-100 py-3.5 text-base font-medium text-neutral-400"
+              className="border-b border-neutral-300/70 py-3 text-base font-medium text-neutral-600"
               onClick={() => setOpen(false)}
             >
               Login
