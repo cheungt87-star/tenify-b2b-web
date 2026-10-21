@@ -22,7 +22,7 @@ export default function AboutPage() {
       <SiteHeader />
 
       <main className="flex-1">
-        <section className="bg-canvas">
+        <section className="bg-true-white">
           <div className={`${container} flex flex-col gap-6 py-20 md:py-28`}>
             <p className="eyebrow">About Tenify</p>
             <h1 className="h2-display text-balance">

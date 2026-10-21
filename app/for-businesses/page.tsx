@@ -297,7 +297,7 @@ export default function ForBusinessesPage() {
 
         <section
           id="how-it-works"
-          className="bg-neutral-50 pt-20 pb-16 md:pt-24 md:pb-20"
+          className="bg-true-white pt-20 pb-16 md:pt-24 md:pb-20"
         >
           <div className="mx-auto max-w-[1400px] px-5 sm:px-[60px]">
             <div className="mb-14 flex flex-col gap-3">
@@ -401,7 +401,7 @@ export default function ForBusinessesPage() {
           </div>
         </section>
 
-        <section id="pricing" className="bg-neutral-50 py-16 md:py-20">
+        <section id="pricing" className="bg-true-white py-16 md:py-20">
           <div className="mx-auto max-w-[1200px] px-5 sm:px-10">
             <div className="mx-auto mb-10 flex max-w-[640px] flex-col items-center gap-3 text-center">
               <h2 className="font-display text-[clamp(28px,4vw,48px)] leading-[1.08] tracking-[-0.02em] text-navy-900">
@@ -419,7 +419,7 @@ export default function ForBusinessesPage() {
           </div>
         </section>
 
-        <section id="faq" className="bg-neutral-100">
+        <section id="faq" className="bg-true-white">
           <div className="mx-auto max-w-[1000px] px-5 py-16 sm:px-10 md:py-20">
             <h2 className="mb-10 text-center font-display text-[clamp(28px,4vw,48px)] leading-[1.08] tracking-[-0.02em] text-navy-900">
               Frequently asked questions

@@ -7,7 +7,7 @@ import heroPhoto from "@/public/landing/hero-yellow.jpg";
 /** Fallback hero (HERO_VARIANT=split) for photos that can't carry the full-bleed treatment. */
 export function HeroSplit() {
   return (
-    <section id="top" className="relative overflow-hidden bg-canvas">
+    <section id="top" className="relative overflow-hidden bg-true-white">
       <div className="grid min-[900px]:min-h-[min(780px,calc(100vh-4rem))] min-[900px]:grid-cols-[1.1fr_1fr]">
         <div className="hero-rise flex flex-col justify-center px-5 pt-10 pb-12 sm:px-10 min-[900px]:py-16 min-[900px]:pr-6 min-[900px]:pl-[max(40px,calc((100vw-1200px)/2+40px))]">
           <p className="eyebrow mb-5">Professional property condition reports</p>

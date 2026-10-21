@@ -89,7 +89,7 @@ export default function Home() {
     >
       <SiteHeader
         variant={HERO_VARIANT === "split" ? "default" : "overlay"}
-        topSurface="bg-canvas"
+        topSurface="bg-true-white"
         cta={
           <DownloadButton
             className="btn-primary btn-primary-sm !min-h-11"
@@ -112,7 +112,7 @@ export default function Home() {
         <ProblemSection />
 
         {/* 3. How it works · canvas */}
-        <section id="how-it-works" className="bg-canvas">
+        <section id="how-it-works" className="bg-true-white">
           <div className={`${container} py-16 md:py-24`}>
             <HowItWorks />
           </div>

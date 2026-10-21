@@ -102,7 +102,7 @@ export function LegalPage({ title, markdown }: { title: string; markdown: string
       <SiteHeader />
 
       <main className="flex-1">
-        <section className="bg-canvas">
+        <section className="bg-true-white">
           <div className={`${container} flex flex-col gap-4 py-16 md:py-24`}>
             <p className="eyebrow">Legal</p>
             <h1 className="h2-display text-balance">{title}</h1>
