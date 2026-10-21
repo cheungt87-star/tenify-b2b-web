@@ -21,7 +21,7 @@ export function HomeFaq() {
         return (
           <div
             key={item.question}
-            className="overflow-hidden rounded-[var(--radius-md)] border border-neutral-200 bg-true-white"
+            className="overflow-hidden rounded-[24px] bg-panel-grey"
           >
             <h3>
               <button
@@ -29,7 +29,7 @@ export function HomeFaq() {
                 id={buttonId}
                 aria-expanded={open}
                 aria-controls={panelId}
-                className="flex w-full items-center justify-between gap-4 p-5 text-left text-base font-semibold text-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left text-[17px] font-extrabold text-navy-900 md:text-[18px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
                 onClick={() => setOpenIndex(open ? -1 : index)}
               >
                 <span>{item.question}</span>
@@ -54,7 +54,7 @@ export function HomeFaq() {
               role="region"
               aria-labelledby={buttonId}
               hidden={!open}
-              className="px-5 pb-5 text-[15px] leading-[1.6] text-label-2"
+              className="px-6 pb-6 text-[15px] leading-[1.6] text-label-2"
             >
               <FaqAnswer answer={item.answer} />
             </div>
@@ -64,7 +64,7 @@ export function HomeFaq() {
 
       <Link
         href="/help"
-        className="mx-auto mt-4 inline-flex min-h-11 items-center justify-center rounded-[var(--radius-md)] border-2 border-navy-900 px-5 text-[0.9375rem] font-semibold text-navy-900 no-underline transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-brand"
+        className="mt-4 inline-flex min-h-11 items-center justify-center self-start rounded-full border-2 border-navy-900 px-6 text-[0.9375rem] font-semibold text-navy-900 no-underline transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-brand"
       >
         See more questions
       </Link>
