@@ -25,12 +25,12 @@ export async function HeroDemo() {
     <HeroDemoClient
       primaryCta={
         <DownloadButton
-          className="btn-primary"
+          className="btn-primary bg-true-white text-navy-900 hover:bg-true-white/90 active:bg-true-white/90"
           label="Download for iPhone"
         />
       }
       secondaryCta={
-        <SampleReportDialog className="btn-notch-outline btn-notch-outline-brand">
+        <SampleReportDialog className="btn-notch-outline">
           See a sample report
           <HeroArrowIcon />
         </SampleReportDialog>

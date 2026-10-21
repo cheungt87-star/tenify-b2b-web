@@ -1,93 +1,92 @@
 /* Responsive hero layout — shared 1360px frame with overlay header.
  * Phone stays 248×512 internally and scales via --panel-h (no viewport JS). */
 
+/* Monzo-style hero: full-bleed photo in an inset rounded panel, dark wash on the left,
+ * white copy bottom-left. The animated phone is no longer rendered here. */
+
 .hero {
   --navy: #0f1f2e;
-  --green: #077b5c;
-  --mint: #7ff0c4;
-  --cream: #f3efe9;
-  --hero-h: max(640px, min(100vh, 860px));
-  --panel-h: min(680px, calc(var(--hero-h) - 240px));
+  --mint: #5fd8ae;
 
   position: relative;
-  /* Inset rounded panel under the fixed header (72px desktop, 60px mobile). */
+  /* Sits under the fixed header (72px desktop, 60px mobile). */
   margin: calc(72px + env(safe-area-inset-top)) var(--panel-gutter) 0;
-  height: calc(var(--hero-h) - 72px - var(--panel-gutter));
+  min-height: 680px;
+  height: calc(max(720px, min(100vh, 860px)) - 72px - var(--panel-gutter));
   border-radius: clamp(36px, 5vw, 64px);
   overflow: hidden;
-  background: var(--cream);
-  color: var(--navy);
+  background: var(--navy);
+  color: #fff;
+}
+
+.photoImg {
+  object-fit: cover;
+  object-position: 75% 40%;
+}
+
+.wash {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(15, 31, 46, 0.82) 0%,
+    rgba(15, 31, 46, 0.55) 42%,
+    rgba(15, 31, 46, 0) 70%
+  );
+  pointer-events: none;
 }
 
 .frame {
+  position: relative;
   box-sizing: border-box;
-  max-width: 1360px;
   width: 100%;
   height: 100%;
-  margin: 0 auto;
-  padding: 56px 56px 56px;
-  display: grid;
-  grid-template-columns: minmax(0, 0.4fr) minmax(0, 0.6fr);
-  column-gap: 64px;
-  align-items: center;
+  display: flex;
+  align-items: flex-end;
+  padding: 72px;
 }
 
 .copy {
-  position: relative;
-  z-index: 4;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  /* Keep ≥56px clear of phone left edge (gap 64 − overhang 40 = 24 to column;
-     reserve 32px so copy ends 56px before the phone). */
-  max-width: calc(100% - 32px);
+  gap: 22px;
+  max-width: 640px;
   min-width: 0;
 }
 
 .eyebrow {
-  font-family: var(--font-space-mono), "Space Mono", monospace;
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 700;
   margin: 0;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mint);
 }
 
 .headline {
+  margin: 0;
   font-weight: 900;
-  font-size: clamp(48px, 5.6vw, 80px);
-  line-height: 0.98;
-  margin: 18px 0 0;
-  letter-spacing: -0.02em;
-}
-
-.headlineLead,
-.headlineAccent {
-  display: block;
-}
-
-.headlineLead {
-  white-space: nowrap;
-}
-
-.headlineAccent {
-  color: var(--green);
+  font-size: clamp(48px, 5.4vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: #fff;
 }
 
 .sub {
-  margin: 24px 0 0;
-  font-size: 19px;
-  line-height: 1.55;
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.4;
   font-weight: 600;
-  max-width: 440px;
+  color: rgba(255, 255, 255, 0.9);
   text-wrap: pretty;
 }
 
 .cta {
   display: flex;
-  gap: 14px;
-  margin-top: 32px;
   flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 6px;
 }
 
 .ctaItem {
@@ -100,31 +99,6 @@
   height: 56px;
   box-sizing: border-box;
   width: auto;
-}
-
-.panel {
-  position: relative;
-  height: var(--panel-h);
-  min-width: 0;
-  /* Phone overhangs left; keep overflow visible on desktop. */
-}
-
-.photo {
-  position: absolute;
-  inset: 0;
-  border-radius: 32px;
-  overflow: hidden;
-  box-shadow: 0 30px 70px rgba(15, 31, 46, 0.18);
-  isolation: isolate;
-}
-
-.photoImg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 60% 40%;
 }
 
 /* Desktop: clip wrapper is a positioning shell; clip-path only on mobile. */
@@ -1140,46 +1114,49 @@
 
 @media (max-width: 980px) {
   .hero {
-    height: auto;
-    min-height: 0;
     margin-top: calc(60px + env(safe-area-inset-top));
-    overflow: hidden;
-    padding-bottom: 160px;
+    min-height: 600px;
+    height: calc(100svh - 60px - var(--panel-gutter) - env(safe-area-inset-top));
+    max-height: 720px;
+  }
+
+  .photoImg {
+    object-position: 78% 30%;
+  }
+
+  .wash {
+    background: linear-gradient(
+      0deg,
+      rgba(15, 31, 46, 0.92) 0%,
+      rgba(15, 31, 46, 0.6) 45%,
+      rgba(15, 31, 46, 0) 75%
+    );
   }
 
   .frame {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    height: auto;
-    padding: 28px 20px 0;
-    gap: 0;
+    padding: 28px 24px;
   }
 
   .copy {
     max-width: none;
     width: 100%;
+    gap: 14px;
   }
 
   .eyebrow {
-    margin-top: 0;
-    font-size: 11px;
+    font-size: 12px;
   }
 
   .headline {
-    font-size: 48px;
-    margin-top: 14px;
+    font-size: 44px;
+    line-height: 1.03;
   }
 
   .sub {
-    margin-top: 18px;
-    font-size: 16.5px;
-    line-height: 1.5;
-    max-width: none;
+    font-size: 16px;
   }
 
   .cta {
-    margin-top: 22px;
     flex-direction: column;
     gap: 10px;
   }
@@ -1190,81 +1167,10 @@
 
   .ctaItem :global(a),
   .ctaItem :global(button) {
-    text-align: center;
+    justify-content: center;
     width: 100%;
     min-height: 52px;
     height: 52px;
-  }
-
-  .panel {
-    position: relative;
-    width: 100%;
-    height: 540px;
-    margin-top: 28px;
-    --panel-h: 380px;
-  }
-
-  .photo {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: auto;
-    height: 380px;
-    border-radius: 26px;
-    box-shadow: 0 24px 50px rgba(15, 31, 46, 0.16);
-  }
-
-  .photoImg {
-    object-position: 72% 30%;
-  }
-
-  .phoneClip {
-    left: 50%;
-    top: 250px;
-    right: auto;
-    display: flex;
-    justify-content: center;
-    width: 214px;
-    height: 440px;
-    margin-left: -107px;
-    transform: none;
-    clip-path: inset(-60px -60px -160px -60px);
-  }
-
-  .phone {
-    flex: none;
-    width: 248px;
-    height: 512px;
-    transform: scale(0.86);
-    transform-origin: top center;
-    box-shadow: 0 24px 50px rgba(15, 31, 46, 0.35);
-  }
-
-  .notifs {
-    top: 12px;
-    right: 12px;
-    width: 250px;
-  }
-
-  .notif {
-    padding: 9px 11px;
-    border-radius: 16px;
-  }
-
-  .notifIc {
-    width: 32px;
-    height: 32px;
-    font-size: 13px;
-    border-radius: 9px;
-  }
-
-  .notif b {
-    font-size: 12.5px;
-  }
-
-  .notif span {
-    font-size: 11.5px;
   }
 }
 
