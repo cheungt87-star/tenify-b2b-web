@@ -2,37 +2,26 @@
 
 import { useState } from "react";
 import { TenifyLogo } from "@/components/tenify-logo";
+import { PRIVACY_URL, SUPPORT_EMAIL, TERMS_URL } from "@/lib/site-config";
 
 const FOOTER_SECTIONS = [
   {
     title: "Product",
     links: [
-      { href: "#how-it-works", label: "How it works" },
-      { href: "#how-it-works", label: "Features" },
-      { href: "#pricing", label: "Pricing" },
+      { href: "/for-businesses#how-it-works", label: "How it works" },
+      { href: "/for-businesses#pricing", label: "Pricing" },
+      { href: "/for-businesses#faq", label: "FAQ" },
     ],
   },
   {
     title: "Company",
-    links: [
-      { href: "#", label: "About" },
-      { href: "#", label: "Blog" },
-      { href: "#", label: "Contact" },
-    ],
+    links: [{ href: `mailto:${SUPPORT_EMAIL}`, label: "Contact" }],
   },
   {
     title: "Legal",
     links: [
-      { href: "#", label: "Terms" },
-      { href: "#", label: "Privacy" },
-      { href: "#", label: "Cookie Policy" },
-    ],
-  },
-  {
-    title: "Follow",
-    links: [
-      { href: "#", label: "LinkedIn" },
-      { href: "#", label: "Twitter" },
+      { href: TERMS_URL, label: "Terms" },
+      { href: PRIVACY_URL, label: "Privacy" },
     ],
   },
 ] as const;
@@ -49,31 +38,16 @@ function FooterLinkColumns({
       {FOOTER_SECTIONS.map((section) => (
         <div key={section.title} className="flex flex-col gap-3">
           <p className="text-sm font-semibold text-neutral-900">{section.title}</p>
-          {section.title === "Follow" ? (
-            <div className="flex gap-3">
-              {section.links.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="text-[13px] text-neutral-600 hover:text-jade-700"
-                  onClick={onNavigate}
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          ) : (
-            section.links.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-[13px] text-neutral-600 hover:text-jade-700"
-                onClick={onNavigate}
-              >
-                {link.label}
-              </a>
-            ))
-          )}
+          {section.links.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="text-sm text-neutral-600 hover:text-navy-900"
+              onClick={onNavigate}
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
       ))}
     </div>
@@ -89,7 +63,7 @@ export function SiteFooter() {
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
       {/* Desktop */}
-      <div className="mx-auto hidden max-w-[1200px] grid-cols-5 gap-8 px-5 pt-12 pb-0 sm:px-10 md:grid">
+      <div className="mx-auto hidden max-w-[1200px] grid-cols-4 gap-8 px-5 pt-12 pb-0 sm:px-10 md:grid">
         <div className="flex min-w-[160px] flex-col gap-3">
           <TenifyLogo variant="full" className="h-11 w-auto" />
         </div>
@@ -155,7 +129,7 @@ export function SiteFooter() {
         ) : null}
       </div>
 
-      <p className="mx-auto mt-8 max-w-[1200px] border-t border-neutral-200 px-5 py-8 text-center text-xs text-neutral-400 sm:px-10">
+      <p className="mx-auto mt-8 max-w-[1200px] border-t border-neutral-200 px-5 py-8 text-center text-xs text-neutral-600 sm:px-10">
         Tenify © 2026. All rights reserved.
       </p>
     </footer>

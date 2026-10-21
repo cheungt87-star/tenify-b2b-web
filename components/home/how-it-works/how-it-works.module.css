@@ -1,0 +1,536 @@
+/* ---------- Header ---------- */
+
+.header {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  max-width: 760px;
+  margin-top: 12px;
+  font-size: 28px;
+  text-wrap: balance;
+}
+
+.lede {
+  display: none;
+  max-width: 700px;
+  margin-top: 16px;
+}
+
+/* ---------- Accessibility helpers ---------- */
+
+.live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- Steps: mobile carousel (below lg) ---------- */
+
+.carouselWrap {
+  position: relative;
+  margin-top: 24px;
+}
+
+.steps {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  list-style: none;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.steps::-webkit-scrollbar {
+  display: none;
+}
+
+.steps:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 3px;
+  border-radius: var(--radius-sheet);
+}
+
+.step {
+  display: flex;
+  flex: 0 0 100%;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--radius-sheet);
+  background: var(--color-navy-900);
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+/* ---------- Colour panel + cropped phone ---------- */
+
+.panel {
+  --phone-scale: 0.58;
+  --phone-top: 20px;
+  position: relative;
+  flex: none;
+  height: 264px;
+  overflow: hidden;
+}
+
+.panelSoft {
+  background: var(--color-brand-soft);
+}
+
+.panelBrand {
+  background: var(--color-brand);
+}
+
+.panelNavy {
+  background: var(--color-navy-900);
+}
+
+.panelWarm {
+  background: var(--color-caution-soft);
+}
+
+.phoneBox {
+  position: absolute;
+  top: var(--phone-top);
+  left: 50%;
+  width: calc(310px * var(--phone-scale));
+  height: calc(640px * var(--phone-scale));
+  margin-left: calc(-155px * var(--phone-scale));
+}
+
+.phone {
+  position: relative;
+  width: 310px;
+  height: 640px;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 50px;
+  background: var(--color-navy-900);
+  box-shadow: var(--shadow-floating);
+  transform: scale(var(--phone-scale));
+  transform-origin: top left;
+}
+
+/* Frame mask on top of the glass — same treatment as the hero phone. */
+.phone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  border-radius: inherit;
+  padding: 6px;
+  background: var(--color-navy-900);
+  pointer-events: none;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.glass {
+  position: absolute;
+  inset: 6px;
+  overflow: hidden;
+  isolation: isolate;
+  contain: paint;
+  border-radius: 44px;
+  clip-path: inset(0 round 44px);
+  background: var(--color-true-white);
+}
+
+.statusBar {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 4;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+/* Real screenshots and videos carry their own status bar. */
+.glass[data-status="hidden"] .statusBar,
+.glass[data-status="hidden"] .island {
+  opacity: 0;
+}
+
+.time {
+  position: absolute;
+  top: 14px;
+  left: 26px;
+  color: var(--color-navy-900);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.signal {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+}
+
+.signal i {
+  display: block;
+  width: 3px;
+  border-radius: 1px;
+  background: var(--color-navy-900);
+}
+
+.island {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  z-index: 4;
+  width: 84px;
+  height: 22px;
+  border-radius: 99px;
+  background: var(--color-navy-900);
+  transform: translateX(-50%);
+  transition: opacity 0.3s;
+}
+
+.media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--color-true-white);
+}
+
+.shot {
+  object-fit: cover;
+  object-position: top;
+}
+
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  background: var(--color-true-white);
+}
+
+/* ---------- Step text ---------- */
+
+.stepText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 22px 22px 26px;
+  color: var(--color-true-white);
+}
+
+.stepLabel {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-mint);
+}
+
+.stepTitle {
+  margin-top: 8px;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bullet {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 15.5px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.checkBadge {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  border-radius: 50%;
+  background: var(--color-mint);
+  color: var(--color-navy-900);
+}
+
+.checkBadge svg {
+  width: 11px;
+  height: 11px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.stepCta {
+  margin-top: 20px;
+}
+
+.stepCta > * {
+  border: 2px solid var(--color-true-white);
+  background: transparent;
+  color: var(--color-true-white);
+}
+
+.stepCta > *:hover,
+.stepCta > *:active {
+  background: rgb(255 255 255 / 0.12);
+}
+
+/* ---------- Carousel arrows, dots, counter (mobile) ---------- */
+
+.arrow {
+  position: absolute;
+  top: 132px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.55);
+  color: var(--color-navy-900);
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  transform: translateY(-50%);
+  transition: opacity 0.2s;
+}
+
+/* 44px minimum touch target without enlarging the visual button. */
+.arrow::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+}
+
+.arrow svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.arrowPrev {
+  left: 8px;
+}
+
+.arrowNext {
+  right: 8px;
+}
+
+.arrow[data-hidden] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.arrow:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+}
+
+.dot {
+  display: grid;
+  place-items: center;
+  height: 32px;
+  padding: 0 4px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.dot span {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 99px;
+  background: var(--color-neutral-400);
+  transition:
+    width 0.3s,
+    background-color 0.3s;
+}
+
+.dot[aria-current] span {
+  width: 24px;
+  background: var(--color-brand);
+}
+
+.dot:focus-visible {
+  border-radius: 8px;
+  outline: 2px solid var(--color-brand);
+  outline-offset: -2px;
+}
+
+.counter {
+  color: var(--color-label-2);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.counter b {
+  color: var(--color-navy-900);
+}
+
+/* ---------- Desktop: plain scroll, alternating rows (lg and up) ---------- */
+
+@media (min-width: 1024px) {
+  .title {
+    font-size: clamp(32px, 4.4vw, 52px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+
+  .lede {
+    display: block;
+  }
+
+  .carouselWrap {
+    margin-top: 8px;
+  }
+
+  .steps {
+    flex-direction: column;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
+    gap: 80px;
+    align-items: center;
+    padding: 36px 0;
+    overflow: visible;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  /* Alternate sides: odd steps text left / panel right, even steps flipped.
+     Explicit columns keep the panel at full width on both sides. */
+  .stepText {
+    grid-column: 1;
+    grid-row: 1;
+    max-width: 480px;
+    padding: 0;
+    color: var(--color-navy-900);
+  }
+
+  .panel {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .step:nth-child(even) {
+    grid-template-columns: minmax(0, 560px) minmax(0, 1fr);
+  }
+
+  .step:nth-child(even) .stepText {
+    grid-column: 2;
+  }
+
+  .step:nth-child(even) .panel {
+    grid-column: 1;
+  }
+
+  .panel {
+    --phone-scale: 0.88;
+    --phone-top: 70px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-sheet);
+  }
+
+  .stepLabel {
+    color: var(--color-brand);
+  }
+
+  .stepTitle {
+    font-size: clamp(38px, 3.8vw, 50px);
+    line-height: 1.03;
+    letter-spacing: -0.03em;
+  }
+
+  .bullets {
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .bullet {
+    color: var(--color-label-2);
+    font-size: 17px;
+  }
+
+  .checkBadge {
+    width: 20px;
+    height: 20px;
+    background: var(--color-brand-soft);
+    color: var(--color-brand);
+  }
+
+  .checkBadge svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .stepCta,
+  .arrow,
+  .controls {
+    display: none;
+  }
+}
+
+/* ---------- Reduced motion: final frames, no smooth scroll ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .glass * {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    transition-duration: 0s !important;
+  }
+
+  .statusBar,
+  .island,
+  .dot span {
+    transition: none;
+  }
+}

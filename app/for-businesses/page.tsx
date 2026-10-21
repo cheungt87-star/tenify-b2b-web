@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { HeroVideo } from "@/components/hero-video";
@@ -5,6 +6,13 @@ import { PricingSelector } from "@/components/pricing-selector";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StepCarousel } from "@/components/step-carousel";
+
+export const metadata: Metadata = {
+  title: "Tenify B2B — Branded move-in inspections for agencies",
+  description:
+    "Effortlessly complete inspections and turn them into detailed, branded reports landlords trust and tenants remember.",
+};
+
 const STEPS = [
   {
     id: "01",
@@ -149,16 +157,73 @@ const STEPS = [
   },
 ] as const;
 
-function GoldIcon({ children }: { children: ReactNode }) {
+const AUDIENCES: { title: string; icon: ReactNode; points: string[] }[] = [
+  {
+    title: "For your landlords",
+    icon: (
+      <>
+        <path d="M7 15a3.2 3.2 0 1 0 0-6.4A3.2 3.2 0 0 0 7 15z" />
+        <path d="M9.3 12.7L19 3m-3 1 2 2m-5 1 2 2" />
+      </>
+    ),
+    points: [
+      "Confidence in their investment\u2019s exact condition.",
+      "Photo-backed proof of what needs fixing or replacing.",
+    ],
+  },
+  {
+    title: "For your tenants",
+    icon: (
+      <>
+        <circle cx="12" cy="8" r="3.4" />
+        <path d="M5.2 20c0-4 3-6.4 6.8-6.4s6.8 2.4 6.8 6.4" />
+      </>
+    ),
+    points: [
+      "Moves in knowing exactly what they\u2019re getting.",
+      "Reduce nervousness about their deposit at move out.",
+    ],
+  },
+  {
+    title: "For your inspectors",
+    icon: (
+      <>
+        <rect x="5" y="4" width="14" height="17" rx="2" />
+        <path d="M9 3.2h6v2.6H9z" />
+        <path d="M8.2 11h7.6M8.2 15h5" />
+      </>
+    ),
+    points: [
+      "No more paper notes or camera-roll write-ups.",
+      "Same professional process, every inspection.",
+    ],
+  },
+  {
+    title: "For your maintenance team",
+    icon: (
+      <path d="M14.7 6.3a4 4 0 1 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.1 2.1-2.1-.6-.6-2.1z" />
+    ),
+    points: [
+      "Knows exactly what to fix, no guesswork.",
+      "No more \u201chave you checked this?\u201d chasing.",
+    ],
+  },
+];
+
+const audiencePoint = "pl-1 text-[15px] leading-[1.6] text-white/75";
+
+function AudienceIcon({ children }: { children: ReactNode }) {
   return (
     <svg
-      width="32"
-      height="32"
+      width="24"
+      height="24"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.6"
-      className="text-true-white"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="shrink-0 text-true-white"
       aria-hidden="true"
     >
       {children}
@@ -166,7 +231,7 @@ function GoldIcon({ children }: { children: ReactNode }) {
   );
 }
 
-export default function Home() {
+export default function ForBusinessesPage() {
   return (
     <div
       className="flex min-h-full flex-1 flex-col overflow-x-clip bg-true-white text-neutral-900"
@@ -179,30 +244,27 @@ export default function Home() {
 
       <main>
         <section id="top" className="relative overflow-hidden bg-true-white">
-          <div className="relative mx-auto flex max-w-[1100px] flex-col items-center gap-4 px-5 pt-12 pb-24 text-center sm:px-10 md:pt-16 md:pb-28">
-            <div className="relative flex flex-col items-center gap-2">
-              <p className="relative text-[13px] font-bold tracking-[0.14em] text-gold-600">
-                Stand out from your competitors
-              </p>
-              <h1 className="relative flex w-full flex-col items-center gap-0.5">
-                <span className="font-display max-w-full whitespace-nowrap text-[clamp(16px,calc((100vw-2.5rem)/14.7),60px)] leading-[1.05] tracking-[-0.02em] text-neutral-900 uppercase sm:text-[clamp(16px,calc((100vw-5rem)/14.7),60px)]">
-                  Turn every handover inspection into
+          <div className="relative mx-auto flex max-w-[1100px] flex-col items-center gap-6 px-5 pt-12 pb-20 text-center sm:px-10 md:pt-16 md:pb-24">
+            <div className="flex flex-col items-center gap-4">
+              <h1 className="flex flex-col items-center gap-4">
+                <span className="text-base font-semibold text-navy-900">
+                  Stand out from your competitors
                 </span>
-                <span className="font-display max-w-full whitespace-nowrap text-[clamp(16px,calc((100vw-2.5rem)/14.7),60px)] leading-[1.05] tracking-[-0.02em] text-neutral-900 uppercase sm:text-[clamp(16px,calc((100vw-5rem)/14.7),60px)]">
-                  why clients stay
+                <span className="font-display max-w-[20ch] text-[clamp(32px,6vw,56px)] leading-[1.05] tracking-[-0.02em] text-balance text-navy-900">
+                  Turn every handover inspection into why clients stay
                 </span>
               </h1>
-              <p className="relative max-w-[560px] text-[clamp(17px,1.6vw,20px)] leading-[1.5] text-neutral-600">
+              <p className="max-w-[560px] text-[clamp(17px,1.6vw,20px)] leading-[1.5] text-neutral-600">
                 Branded, detailed reports landlords trust and tenants remember.
               </p>
             </div>
-            <div className="relative flex w-full max-w-[420px] items-stretch justify-center gap-3">
+            <div className="flex w-full max-w-[420px] items-stretch justify-center gap-3">
               <a href="#pricing" className="btn-lime min-w-0 flex-[1.2]">
                 Join now
               </a>
               <a
                 href="#how-it-works"
-                className="inline-flex min-h-12 min-w-0 flex-1 items-center justify-center rounded-[var(--radius-md)] border-2 border-jade-900 px-4 py-3.5 text-[0.9375rem] font-semibold text-jade-900 transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-gold-600 active:scale-[0.98]"
+                className="inline-flex min-h-12 min-w-0 flex-1 items-center justify-center rounded-[var(--radius-md)] border-2 border-navy-900 px-4 py-3.5 text-[0.9375rem] font-semibold text-navy-900 transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-brand active:scale-[0.98]"
               >
                 Find out more
               </a>
@@ -213,39 +275,39 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="relative z-[2] -my-10 rounded-[40px] border border-white/25 bg-gold-600/70 backdrop-blur-xl">
-          <blockquote className="px-5 py-16 sm:px-[60px] sm:py-20">
-            <div className="mx-auto flex max-w-[1400px] flex-col items-center gap-6 text-center">
-              <p className="flex flex-col items-center gap-2">
-                <span className="font-display text-[clamp(16px,2vw,22px)] leading-[1.2] tracking-[-0.02em] text-jade-900 uppercase">
-                  You&apos;re already doing inspections.
-                </span>
-                <span className="font-editorial text-[clamp(36px,7vw,80px)] italic leading-[1.05] tracking-[-0.02em] text-jade-700">
-                  Why not get seen for it?
-                </span>
-              </p>
-              <p className="max-w-[640px] text-base leading-[1.55] text-jade-900/70 sm:text-lg">
-                Right now it&apos;s a checklist. Notes, some photos, done.
-                Nobody sees the work you put in.
-              </p>
-              <cite className="not-italic font-display text-[clamp(20px,2.5vw,28px)] leading-[1.15] tracking-[-0.02em] text-jade-900 uppercase">
-                Together with Tenify, we change that!
-              </cite>
-            </div>
-          </blockquote>
+        <section className="bg-brand">
+          <div className="mx-auto flex max-w-[1000px] flex-col items-center gap-6 px-5 py-16 text-center sm:px-10 md:py-20">
+            <h2 className="flex flex-col items-center gap-3">
+              <span className="text-[clamp(18px,2vw,22px)] font-bold leading-[1.3] text-true-white">
+                You&apos;re already doing inspections.
+              </span>
+              <span className="font-display text-[clamp(36px,6vw,64px)] leading-[1.05] tracking-[-0.02em] text-balance text-true-white">
+                Why not get seen for it?
+              </span>
+            </h2>
+            <p className="max-w-[640px] text-base leading-[1.55] text-true-white sm:text-lg">
+              Right now it&apos;s a checklist. Notes, some photos, done.
+              Nobody sees the work you put in.
+            </p>
+            <p className="text-[clamp(20px,2.5vw,28px)] font-extrabold leading-[1.2] tracking-[-0.01em] text-true-white">
+              Together with Tenify, we change that!
+            </p>
+          </div>
         </section>
 
         <section
           id="how-it-works"
-          className="relative z-[1] bg-neutral-50 pt-20 pb-16 md:pt-24 md:pb-20"
+          className="bg-neutral-50 pt-20 pb-16 md:pt-24 md:pb-20"
         >
           <div className="mx-auto max-w-[1400px] px-5 sm:px-[60px]">
-            <p className="mb-3 text-[13px] font-bold tracking-[0.14em] text-gold-600">
-              Inspections. Simplified
-            </p>
-            <h2 className="mb-14 font-display text-[clamp(28px,5vw,60px)] leading-[1.05] tracking-[-0.02em] text-neutral-900 uppercase">
-              Inspection report in 4 steps
-            </h2>
+            <div className="mb-14 flex flex-col gap-3">
+              <h2 className="font-display text-[clamp(28px,4vw,48px)] leading-[1.08] tracking-[-0.02em] text-navy-900">
+                Inspection report in 4 steps
+              </h2>
+              <p className="text-[clamp(17px,1.6vw,20px)] leading-[1.5] text-neutral-600">
+                Inspections. Simplified.
+              </p>
+            </div>
             <div className="flex flex-col gap-12">
               {STEPS.map((step) => (
                 <div
@@ -255,10 +317,10 @@ export default function Home() {
                   }`}
                 >
                   <div className="flex min-w-0 flex-1 flex-col gap-5 md:max-w-[440px]">
-                    <p className="font-mono text-sm font-bold text-jade-900">
+                    <p className="font-mono text-sm font-bold text-brand">
                       {step.id}
                     </p>
-                    <h3 className="text-[clamp(22px,2.6vw,28px)] font-bold text-neutral-900">
+                    <h3 className="text-[clamp(22px,2.6vw,28px)] font-extrabold leading-[1.25] text-navy-900">
                       {step.heading}
                     </h3>
                     <ul className="flex list-disc flex-col gap-3.5 pl-5">
@@ -267,7 +329,7 @@ export default function Home() {
                           key={lead}
                           className="pl-1 text-base leading-[1.5] text-neutral-600"
                         >
-                          <span className="font-bold text-jade-900">{lead}</span>{" "}
+                          <span className="font-bold text-navy-900">{lead}</span>{" "}
                           {rest}
                         </li>
                       ))}
@@ -284,145 +346,70 @@ export default function Home() {
 
         <section className="navy-slab">
           <div className="mx-auto max-w-[1200px] px-5 py-20 sm:px-[60px] md:py-24">
-            <p className="mb-3 text-[13px] font-bold tracking-[0.14em] text-true-white">
-              Why use Tenify
-            </p>
-            <h2 className="mb-8 font-display text-[clamp(28px,5vw,60px)] leading-[1.05] tracking-[-0.02em] text-true-white uppercase">
-              1 report, everyone benefits
-            </h2>
-            <div className="flex flex-col gap-6">
-              <article className="audience-card flex flex-col gap-3.5">
-                <GoldIcon>
-                  <path
-                    d="M4 21V7l7-4 7 4v14"
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                  />
-                  <path d="M9 21v-6h4v6M9 11h1M9 15h1M14 11h1M14 15h1" />
-                </GoldIcon>
-                <h3 className="text-lg font-bold text-true-white">For you</h3>
-                <ul className="grid gap-2 md:grid-cols-3 md:gap-x-6">
-                  <li className="flex gap-2 text-[15px] leading-[1.6] text-white/70">
-                    <span className="shrink-0 text-true-white">•</span>
+            <div className="mb-12 flex flex-col gap-3">
+              <h2 className="font-display text-[clamp(28px,4vw,48px)] leading-[1.08] tracking-[-0.02em] text-true-white">
+                1 report, everyone benefits
+              </h2>
+              <p className="text-[clamp(17px,1.6vw,20px)] leading-[1.5] text-white/75">
+                Why use Tenify
+              </p>
+            </div>
+            <div className="flex flex-col gap-10">
+              <article className="audience-card flex flex-col gap-4">
+                <h3 className="flex items-center gap-3 text-lg font-bold text-true-white">
+                  <AudienceIcon>
+                    <path d="M4 21V7l7-4 7 4v14" />
+                    <path d="M9 21v-6h4v6M9 11h1M9 15h1M14 11h1M14 15h1" />
+                  </AudienceIcon>
+                  For you
+                </h3>
+                <ul className="grid list-disc gap-2 pl-5 marker:text-white/50 md:grid-cols-3 md:gap-x-10">
+                  <li className={audiencePoint}>
                     Enhance and differentiate your value proposition. Stand out
                     against the competition.
                   </li>
-                  <li className="flex gap-2 text-[15px] leading-[1.6] text-white/70">
-                    <span className="shrink-0 text-true-white">•</span>
+                  <li className={audiencePoint}>
                     Bring your brand front and centre. Another touchpoint to
                     engage your clients.
                   </li>
-                  <li className="flex gap-2 text-[15px] leading-[1.6] text-white/70">
-                    <span className="shrink-0 text-true-white">•</span>
+                  <li className={audiencePoint}>
                     New revenue stream by monetising the service.
                   </li>
                 </ul>
               </article>
-              <div className="grid gap-6 md:grid-cols-2">
-                <article className="audience-card flex flex-col gap-3.5">
-                  <GoldIcon>
-                    <path d="M7 15a3.2 3.2 0 1 0 0-6.4A3.2 3.2 0 0 0 7 15z" />
-                    <path
-                      d="M9.3 12.7L19 3m-3 1 2 2m-5 1 2 2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </GoldIcon>
-                  <h3 className="text-lg font-bold text-true-white">
-                    For your landlords
-                  </h3>
-                  <ul className="flex flex-col gap-2">
-                    <li className="flex gap-2 text-[15px] leading-[1.6] text-white/70">
-                      <span className="shrink-0 text-true-white">•</span>
-                      Confidence in their investment&apos;s exact condition.
-                    </li>
-                    <li className="flex gap-2 text-[15px] leading-[1.6] text-white/70">
-                      <span className="shrink-0 text-true-white">•</span>
-                      Photo-backed proof of what needs fixing or replacing.
-                    </li>
-                  </ul>
-                </article>
-                <article className="audience-card flex flex-col gap-3.5">
-                  <GoldIcon>
-                    <circle cx="12" cy="8" r="3.4" />
-                    <path
-                      d="M5.2 20c0-4 3-6.4 6.8-6.4s6.8 2.4 6.8 6.4"
-                      strokeLinecap="round"
-                    />
-                  </GoldIcon>
-                  <h3 className="text-lg font-bold text-true-white">
-                    For your tenants
-                  </h3>
-                  <ul className="flex flex-col gap-2">
-                    <li className="flex gap-2 text-[15px] leading-[1.6] text-white/70">
-                      <span className="shrink-0 text-true-white">•</span>
-                      Moves in knowing exactly what they&apos;re getting.
-                    </li>
-                    <li className="flex gap-2 text-[15px] leading-[1.6] text-white/70">
-                      <span className="shrink-0 text-true-white">•</span>
-                      Reduce nervousness about their deposit at move out.
-                    </li>
-                  </ul>
-                </article>
-                <article className="audience-card flex flex-col gap-3.5">
-                  <GoldIcon>
-                    <rect x="5" y="4" width="14" height="17" rx="2" strokeLinejoin="round" />
-                    <path d="M9 3.2h6v2.6H9z" strokeLinejoin="round" />
-                    <path d="M8.2 11h7.6M8.2 15h5" strokeLinecap="round" />
-                  </GoldIcon>
-                  <h3 className="text-lg font-bold text-true-white">
-                    For your inspectors
-                  </h3>
-                  <ul className="flex flex-col gap-2">
-                    <li className="flex gap-2 text-[15px] leading-[1.6] text-white/70">
-                      <span className="shrink-0 text-true-white">•</span>
-                      No more paper notes or camera-roll write-ups.
-                    </li>
-                    <li className="flex gap-2 text-[15px] leading-[1.6] text-white/70">
-                      <span className="shrink-0 text-true-white">•</span>
-                      Same professional process, every inspection.
-                    </li>
-                  </ul>
-                </article>
-                <article className="audience-card flex flex-col gap-3.5">
-                  <GoldIcon>
-                    <path
-                      d="M14.7 6.3a4 4 0 1 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.1 2.1-2.1-.6-.6-2.1z"
-                      strokeLinejoin="round"
-                      strokeLinecap="round"
-                    />
-                  </GoldIcon>
-                  <h3 className="text-lg font-bold text-true-white">
-                    For your maintenance team
-                  </h3>
-                  <ul className="flex flex-col gap-2">
-                    <li className="flex gap-2 text-[15px] leading-[1.6] text-white/70">
-                      <span className="shrink-0 text-true-white">•</span>
-                      Knows exactly what to fix, no guesswork.
-                    </li>
-                    <li className="flex gap-2 text-[15px] leading-[1.6] text-white/70">
-                      <span className="shrink-0 text-true-white">•</span>
-                      No more &quot;have you checked this?&quot; chasing.
-                    </li>
-                  </ul>
-                </article>
+              <div className="grid gap-10 md:grid-cols-2 md:gap-x-10">
+                {AUDIENCES.map((audience) => (
+                  <article
+                    key={audience.title}
+                    className="audience-card flex flex-col gap-4"
+                  >
+                    <h3 className="flex items-center gap-3 text-lg font-bold text-true-white">
+                      <AudienceIcon>{audience.icon}</AudienceIcon>
+                      {audience.title}
+                    </h3>
+                    <ul className="flex list-disc flex-col gap-2 pl-5 marker:text-white/50">
+                      {audience.points.map((point) => (
+                        <li key={point} className={audiencePoint}>
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-        <section
-          id="pricing"
-          className="relative z-[1] bg-neutral-50 pt-16 pb-16 md:pt-20 md:pb-20"
-        >
+        <section id="pricing" className="bg-neutral-50 py-16 md:py-20">
           <div className="mx-auto max-w-[1200px] px-5 sm:px-10">
-            <div className="mb-10 flex max-w-[640px] flex-col items-start gap-3">
-              <p className="text-[13px] font-bold tracking-[0.14em] text-gold-600">
-                Unlimited reports. No bill shock.
-              </p>
-              <h2 className="font-display text-[clamp(28px,5vw,60px)] leading-[1.05] tracking-[-0.02em] text-neutral-900 uppercase">
+            <div className="mx-auto mb-10 flex max-w-[640px] flex-col items-center gap-3 text-center">
+              <h2 className="font-display text-[clamp(28px,4vw,48px)] leading-[1.08] tracking-[-0.02em] text-navy-900">
                 Simple transparent pricing
               </h2>
+              <p className="text-[clamp(17px,1.6vw,20px)] leading-[1.5] text-neutral-600">
+                Unlimited reports. No bill shock.
+              </p>
             </div>
             <PricingSelector />
             <p className="mt-8 text-center text-sm text-neutral-600">
@@ -432,13 +419,9 @@ export default function Home() {
           </div>
         </section>
 
-        <div className="relative h-10 overflow-hidden bg-true-white">
-          <div className="absolute inset-0 rounded-t-[32px] bg-neutral-100" />
-        </div>
-
         <section id="faq" className="bg-neutral-100">
           <div className="mx-auto max-w-[1000px] px-5 py-16 sm:px-10 md:py-20">
-            <h2 className="mb-10 text-center font-display text-[clamp(28px,5vw,60px)] leading-[1.05] tracking-[-0.02em] text-neutral-900 uppercase">
+            <h2 className="mb-10 text-center font-display text-[clamp(28px,4vw,48px)] leading-[1.08] tracking-[-0.02em] text-navy-900">
               Frequently asked questions
             </h2>
             <FaqAccordion />

@@ -151,8 +151,20 @@ async function main() {
   assert.equal(resumed, "play", "gesture-driven retry must succeed");
   assert.equal(video6.paused, false);
 
+  // Case 7: user pressed pause → stays paused, never auto-resumed
+  const video7 = createMockVideo({ initiallyPaused: false });
+  const userPausedIntent = { inView: true, pageVisible: true, userPaused: true };
+  assert.equal(shouldBePlaying(userPausedIntent), false);
+  assert.equal(await syncVideoPlayback(video7, userPausedIntent), "pause");
+  assert.equal(video7.paused, true);
+  assert.equal(
+    await syncVideoPlayback(video7, userPausedIntent),
+    "noop",
+    "must not resume while the user has paused",
+  );
+
   console.log(
-    "PASS: hero video resume, muted prep, blocked autoplay, and gesture retry",
+    "PASS: hero video resume, muted prep, blocked autoplay, gesture retry, and user pause",
   );
 }
 

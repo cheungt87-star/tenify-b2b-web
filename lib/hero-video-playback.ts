@@ -15,10 +15,11 @@ export type VideoPlaybackTarget = {
 export type PlaybackIntent = {
   inView: boolean;
   pageVisible: boolean;
+  userPaused?: boolean;
 };
 
 export function shouldBePlaying(intent: PlaybackIntent): boolean {
-  return intent.inView && intent.pageVisible;
+  return intent.inView && intent.pageVisible && !intent.userPaused;
 }
 
 /** iOS often rejects play() unless muted/playsInline are set as DOM properties. */
@@ -63,6 +64,8 @@ export type AttachHeroVideoPlaybackOptions = {
   onPlaying?: () => void;
   /** Element that receives the gesture fallback (defaults to video). */
   gestureTarget?: HTMLElement;
+  /** Read on every sync; while true, the video is never auto-resumed. */
+  isUserPaused?: () => boolean;
 };
 
 /**
@@ -75,10 +78,12 @@ export function attachHeroVideoPlayback({
   onAutoplayBlocked,
   onPlaying,
   gestureTarget,
+  isUserPaused,
 }: AttachHeroVideoPlaybackOptions): () => void {
   const intent: PlaybackIntent = {
     inView: true,
     pageVisible: document.visibilityState === "visible",
+    userPaused: isUserPaused?.() ?? false,
   };
 
   let syncing = false;
@@ -86,7 +91,12 @@ export function attachHeroVideoPlayback({
 
   prepareMutedInlinePlayback(video);
 
+  const refreshUserPaused = () => {
+    intent.userPaused = isUserPaused?.() ?? false;
+  };
+
   const sync = () => {
+    refreshUserPaused();
     if (syncing) return;
     syncing = true;
     void syncVideoPlayback(video, intent)
@@ -108,6 +118,7 @@ export function attachHeroVideoPlayback({
   };
 
   const onPause = () => {
+    refreshUserPaused();
     // OS/browser may pause while we still intend to play — resume.
     if (shouldBePlaying(intent)) {
       sync();
@@ -124,6 +135,7 @@ export function attachHeroVideoPlayback({
   };
 
   const onGesture = () => {
+    refreshUserPaused();
     if (!shouldBePlaying(intent) || !video.paused) return;
     prepareMutedInlinePlayback(video);
     void video

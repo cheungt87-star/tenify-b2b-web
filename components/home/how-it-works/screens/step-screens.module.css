@@ -1,0 +1,503 @@
+/* Sequenced state changes for the placeholder screens. Every animation only
+   runs under `.is-playing` (added while the step is in view) and fills
+   forwards, so leaving view resets the sequence and reduced motion — which
+   collapses durations in the section stylesheet — lands on the final state. */
+
+/* ---------- Shared ---------- */
+
+.rowCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---------- Step 1: set up ---------- */
+
+.chipsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.typeChip {
+  padding: 6px 11px;
+  border-radius: 99px;
+  background: var(--color-neutral-100);
+  color: var(--color-navy-900);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+:global(.is-playing) .typeChipSelected {
+  animation: chipSelect 0.3s 0.7s both;
+}
+
+@keyframes chipSelect {
+  to {
+    background: var(--color-navy-900);
+    color: var(--color-true-white);
+  }
+}
+
+.stepper {
+  display: inline-grid;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.stepper b {
+  grid-area: 1 / 1;
+  text-align: center;
+}
+
+:global(.is-playing) .stepperFirst {
+  animation: fadeOut 0.2s 1.5s both;
+}
+
+.stepperSecond {
+  opacity: 0;
+}
+
+:global(.is-playing) .stepperSecond {
+  animation: fadeIn 0.2s 1.5s both;
+}
+
+.toggle {
+  position: relative;
+  flex: none;
+  width: 42px;
+  height: 24px;
+  border-radius: 99px;
+  background: var(--color-neutral-300);
+}
+
+.toggle i {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 99px;
+  background: var(--color-true-white);
+}
+
+:global(.is-playing) .toggle {
+  animation: toggleOn 0.3s 2.3s both;
+}
+
+:global(.is-playing) .toggle i {
+  animation: knobOn 0.3s 2.3s both;
+}
+
+@keyframes toggleOn {
+  to {
+    background: var(--color-brand);
+  }
+}
+
+@keyframes knobOn {
+  to {
+    left: 21px;
+  }
+}
+
+.summaryCard {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--color-brand-soft);
+  font-size: 13px;
+}
+
+.summaryCard span {
+  color: var(--color-label-2);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ---------- Step 2: inspect ---------- */
+
+.progressFill {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 9px;
+  background: var(--color-brand);
+}
+
+:global(.is-playing) .progressFill {
+  animation: fillBar 5.5s 0.3s linear both;
+}
+
+@keyframes fillBar {
+  to {
+    width: 100%;
+  }
+}
+
+.typing {
+  display: inline-block;
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+
+:global(.is-playing) .typing {
+  animation: typing 1.2s 0.6s steps(24) both;
+}
+
+@keyframes typing {
+  to {
+    width: 100%;
+  }
+}
+
+.caret {
+  display: inline-block;
+  width: 1.5px;
+  height: 13px;
+  margin-left: 1px;
+  background: var(--color-navy-900);
+  vertical-align: middle;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.photoRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-label-2);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.photoThumb {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  flex: none;
+  border-radius: 10px;
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+  box-shadow: 0 0 0 2px var(--color-brand);
+}
+
+.photoThumb svg {
+  width: 20px;
+  height: 20px;
+}
+
+.roomList {
+  display: flex;
+  flex-direction: column;
+}
+
+.roomRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--color-neutral-200);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.roomCheck {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  flex: none;
+  border-radius: 99px;
+  background: var(--color-neutral-200);
+  color: var(--color-true-white);
+}
+
+.roomCheck svg {
+  width: 11px;
+  height: 11px;
+  opacity: 0;
+}
+
+:global(.is-playing) .roomCheck {
+  animation: checkOn 0.25s var(--t, 0s) both;
+}
+
+:global(.is-playing) .roomCheck svg {
+  animation: fadeIn 0.2s var(--t, 0s) both;
+}
+
+@keyframes checkOn {
+  to {
+    background: var(--color-brand);
+  }
+}
+
+/* ---------- Step 3: generate ---------- */
+
+.reviewRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 10px 11px 12px;
+  border: 1px solid var(--color-neutral-200);
+  border-radius: 12px;
+  font-size: 13.5px;
+  font-weight: 800;
+}
+
+.reviewRow .rating {
+  margin-left: auto;
+  color: var(--color-brand);
+  font-size: 12px;
+  font-weight: 800;
+  text-align: right;
+}
+
+.swap {
+  display: inline-grid;
+}
+
+.swap b {
+  grid-area: 1 / 1;
+  text-align: right;
+}
+
+:global(.is-playing) .swapGood {
+  animation: fadeOut 0.3s 2.6s both;
+}
+
+.swapExcellent {
+  opacity: 0;
+}
+
+:global(.is-playing) .swapExcellent {
+  animation: fadeIn 0.3s 2.6s both;
+}
+
+.editedTag {
+  padding: 2px 7px;
+  border-radius: 99px;
+  background: var(--color-brand-soft);
+  color: var(--color-brand-pressed);
+  font-size: 9px;
+  font-weight: 800;
+  opacity: 0;
+}
+
+:global(.is-playing) .editedTag {
+  animation: fadeIn 0.3s 2.7s both;
+}
+
+/* Entrance (same timing as the shared `.enter` for --i: 3) plus the later
+   highlight pulse, combined so they do not override each other. */
+:global(.is-playing) .kitchenRow {
+  animation:
+    riseIn 0.45s 0.94s both,
+    highlight 1.4s 2.3s both;
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes highlight {
+  0%,
+  100% {
+    box-shadow: none;
+  }
+  30%,
+  70% {
+    box-shadow: 0 0 0 2px var(--color-brand);
+    background: var(--color-brand-soft);
+  }
+}
+
+.reviewButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--color-navy-900);
+  color: var(--color-true-white);
+  font-size: 15px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.reviewButton svg {
+  width: 15px;
+  height: 15px;
+}
+
+:global(.is-playing) .reviewButton {
+  animation: turnBrand 0.3s 4.2s both;
+}
+
+@keyframes turnBrand {
+  to {
+    background: var(--color-brand);
+  }
+}
+
+/* ---------- Step 4: share ---------- */
+
+.readyCard {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 12px;
+  border-radius: 12px;
+  background: var(--color-brand);
+  color: var(--color-true-white);
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.readyTick {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-true-white);
+}
+
+.readyTick svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--color-brand);
+  stroke-width: 3.2;
+}
+
+.pdfMeta {
+  display: block;
+  margin-top: 3px;
+  color: var(--color-label-2);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.downloadSwap {
+  position: relative;
+  height: 48px;
+}
+
+.downloadSwap span {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 99px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.downloadSwap svg {
+  width: 15px;
+  height: 15px;
+}
+
+.downloadFirst {
+  background: var(--color-navy-900);
+  color: var(--color-true-white);
+}
+
+:global(.is-playing) .downloadFirst {
+  animation: fadeOut 0.3s 1.6s both;
+}
+
+.downloadSaved {
+  background: var(--color-brand-soft);
+  color: var(--color-brand-pressed);
+  opacity: 0;
+}
+
+:global(.is-playing) .downloadSaved {
+  animation: fadeIn 0.3s 1.6s both;
+}
+
+.waBox {
+  padding: 10px;
+  border-radius: 14px;
+  background: var(--color-brand-soft);
+}
+
+.waBubble {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--color-true-white);
+  font-size: 12px;
+}
+
+.waBubble span {
+  display: block;
+  margin-top: 2px;
+  color: var(--color-label-2);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.delivered {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3px;
+  margin-top: 6px;
+  color: var(--color-brand);
+  font-size: 11px;
+  font-weight: 700;
+  opacity: 0;
+}
+
+.delivered svg {
+  width: 12px;
+  height: 12px;
+  stroke-width: 3;
+}
+
+:global(.is-playing) .delivered {
+  animation: fadeIn 0.3s 3.4s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .caret {
+    display: none;
+  }
+}

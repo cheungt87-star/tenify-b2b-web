@@ -1,36 +1,15 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
-import { SUPPORT_EMAIL } from "@/lib/site-config";
+import Link from "next/link";
+import { useState } from "react";
+import { FaqAnswer } from "@/components/faq-answer";
 import { getHomepageFAQs } from "@/lib/faq-data";
 
 const VISIBLE_COUNT = 5;
 
-const inlineLink =
-  "font-bold text-brand underline underline-offset-4 hover:underline-offset-[6px]";
-
-// Format answer text, converting support email references to links
-function formatAnswer(answer: string): ReactNode {
-  // Handle the support email case
-  if (answer.includes("hello@tenify.ae")) {
-    return (
-      <>
-        Email{" "}
-        <a href={`mailto:${SUPPORT_EMAIL}`} className={inlineLink}>
-          {SUPPORT_EMAIL}
-        </a>
-        . We reply within 24 hours.
-      </>
-    );
-  }
-  return answer;
-}
-
 export function HomeFaq() {
-  const allFAQs = getHomepageFAQs(10);
+  const items = getHomepageFAQs(VISIBLE_COUNT);
   const [openIndex, setOpenIndex] = useState(0);
-  const [showAll, setShowAll] = useState(false);
-  const items = showAll ? allFAQs : allFAQs.slice(0, VISIBLE_COUNT);
 
   return (
     <div className="flex flex-col gap-3">
@@ -77,23 +56,18 @@ export function HomeFaq() {
               hidden={!open}
               className="px-5 pb-5 text-[15px] leading-[1.6] text-label-2"
             >
-              {formatAnswer(item.answer)}
+              <FaqAnswer answer={item.answer} />
             </div>
           </div>
         );
       })}
 
-      <button
-        type="button"
-        aria-expanded={showAll}
-        className="mx-auto mt-4 inline-flex min-h-11 items-center justify-center rounded-[var(--radius-md)] border-2 border-navy-900 px-5 text-[0.9375rem] font-semibold text-navy-900 transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-brand"
-        onClick={() => {
-          if (showAll && openIndex >= VISIBLE_COUNT) setOpenIndex(-1);
-          setShowAll((value) => !value);
-        }}
+      <Link
+        href="/help"
+        className="mx-auto mt-4 inline-flex min-h-11 items-center justify-center rounded-[var(--radius-md)] border-2 border-navy-900 px-5 text-[0.9375rem] font-semibold text-navy-900 no-underline transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-brand"
       >
-        {showAll ? "Show fewer questions" : "See more questions"}
-      </button>
+        See more questions
+      </Link>
     </div>
   );
 }
