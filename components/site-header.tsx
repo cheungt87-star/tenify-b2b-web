@@ -94,12 +94,12 @@ export function SiteHeader({
           </Link>
 
           <div className="ml-auto hidden items-center gap-8 min-[981px]:flex">
-            <nav aria-label="Primary" className="flex items-center gap-6">
+            <nav aria-label="Primary" className="flex items-center gap-1 rounded-full bg-panel-grey p-1.5">
               {links.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-[15px] font-semibold tracking-[-0.01em] text-navy-900/80 transition-colors hover:text-navy-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                  className="rounded-full px-4 py-2 text-[15px] font-bold tracking-[-0.01em] text-navy-900/80 transition-colors hover:bg-true-white hover:text-navy-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
                 >
                   {link.label}
                 </a>

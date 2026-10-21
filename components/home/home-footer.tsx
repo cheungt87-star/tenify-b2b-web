@@ -54,13 +54,13 @@ function ChevronIcon() {
 export function HomeFooter() {
   return (
     <footer
-      className="on-dark relative z-10 bg-navy-900"
+      className="on-dark panel-lg panel-inset relative z-10 mb-3 bg-navy-900 md:mb-6"
       style={{
         color: TEXT,
         paddingBottom: "env(safe-area-inset-bottom)",
       }}
     >
-      <div className="mx-auto max-w-[1200px] px-5 pt-8 pb-5 sm:px-8 min-[700px]:px-8 min-[700px]:pt-10 min-[700px]:pb-6">
+      <div className="mx-auto max-w-[1200px] px-6 pt-10 pb-6 sm:px-10 min-[700px]:pt-14 min-[700px]:pb-8">
         <div className="flex flex-col justify-between gap-7 min-[700px]:flex-row min-[700px]:gap-12">
           <div className="flex flex-col items-start">
             {/* eslint-disable-next-line @next/next/no-img-element -- static brand asset; fixed height, auto width */}

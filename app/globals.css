@@ -18,6 +18,17 @@
 
 :root {
   --notch-size: 14px;
+  /* Monzo-style surfaces: big flat rounded panels on a white page. */
+  --radius-panel: 32px;
+  --radius-panel-lg: 64px;
+  --panel-gutter: 12px;
+  --color-panel-grey: #f3f6f5;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --panel-gutter: 24px;
+  }
 }
 
 @theme inline {
@@ -151,6 +162,25 @@ button,
   .btn-ghost:focus-visible {
     outline: 2px solid var(--color-brand);
     outline-offset: 3px;
+  }
+
+  /* Flat rounded panel. No shadow, no border. Colour comes from the fill. */
+  .panel {
+    border-radius: var(--radius-panel);
+    overflow: hidden;
+  }
+
+  .panel-lg {
+    border-radius: clamp(36px, 5vw, var(--radius-panel-lg));
+    overflow: hidden;
+  }
+
+  .panel-inset {
+    margin-inline: var(--panel-gutter);
+  }
+
+  .bg-panel-grey {
+    background: var(--color-panel-grey);
   }
 
   .notch {
