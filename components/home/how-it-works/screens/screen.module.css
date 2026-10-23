@@ -1,0 +1,176 @@
+/* Primitives shared by the placeholder app screens. Sized for the 288x618 phone glass. */
+
+.root {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  padding: 50px 18px 20px;
+  background: var(--color-true-white);
+  color: var(--color-navy-900);
+  font-family: var(--font-nunito), Nunito, system-ui, sans-serif;
+  text-align: left;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.nav svg {
+  width: 18px;
+  height: 18px;
+}
+
+.heading {
+  font-size: 21px;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.sub {
+  margin-top: -4px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--color-label-2);
+}
+
+.label {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-label-2);
+}
+
+.field {
+  padding: 10px 12px;
+  border: 1px solid var(--color-neutral-200);
+  border-radius: 12px;
+  background: #f4f4f2;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.field .label {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border: 1px solid var(--color-neutral-200);
+  border-radius: 12px;
+  background: #f4f4f2;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.tip {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--color-brand-soft);
+  color: #0b4e3b;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.tip b {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 99px;
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+  font-size: 10px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.button {
+  margin-top: auto;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--color-brand);
+  color: var(--color-true-white);
+  font-size: 15px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.tick {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-brand);
+}
+
+.tick svg {
+  width: 12px;
+  height: 12px;
+  stroke: var(--color-true-white);
+  stroke-width: 3.2;
+}
+
+.progress {
+  height: 6px;
+  overflow: hidden;
+  border-radius: 9px;
+  background: var(--color-neutral-200);
+}
+
+.progress i {
+  display: block;
+  height: 100%;
+  border-radius: 9px;
+  background: var(--color-brand);
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--color-label-2);
+}
+
+/* Staggered entrance: elements start hidden and play in sequence
+   (delay from --i) each time the screen becomes active. */
+.enter {
+  opacity: 0;
+}
+
+:global(.is-playing) .enter {
+  animation: screen-enter 0.45s calc(0.1s + var(--i, 0) * 0.28s) both;
+}
+
+@keyframes screen-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

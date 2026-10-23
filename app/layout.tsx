@@ -1,25 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Anton, Instrument_Serif, Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Nunito, Space_Mono } from "next/font/google";
+import { DownloadButton } from "@/components/home/download-button";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 
-const inter = Inter({
+const nunito = Nunito({
   subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const anton = Anton({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-anton",
-  display: "swap",
-});
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-instrument",
+  variable: "--font-nunito",
   display: "swap",
 });
 
@@ -30,10 +18,23 @@ const jetbrains = JetBrains_Mono({
   display: "swap",
 });
 
+const spaceMono = Space_Mono({
+  subsets: ["latin"],
+  variable: "--font-space-mono",
+  weight: ["400", "700"],
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Tenify B2B — Branded move-in inspections for agencies",
-  description:
-    "Effortlessly complete inspections and turn them into detailed, branded reports landlords trust and tenants remember.",
+  title: "Tenify",
+  description: "Tenify — property inspections made simple.",
 };
 
 export const viewport: Viewport = {
@@ -42,13 +43,42 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${anton.variable} ${instrumentSerif.variable} ${jetbrains.variable} h-full antialiased`}
+      className={`${nunito.variable} ${jetbrains.variable} ${spaceMono.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        {/* Persistent shell: header + footer live here, in the root layout,
+            so the exact same chrome renders on every page and stays mounted
+            across client-side navigation. Pages render only their <main>.
+            Exception: SiteFooter hides itself on /for-businesses. */}
+        <div
+          className="flex min-h-full flex-1 flex-col overflow-x-clip bg-true-white text-neutral-900"
+          style={{
+            paddingLeft: "env(safe-area-inset-left)",
+            paddingRight: "env(safe-area-inset-right)",
+          }}
+        >
+          <SiteHeader
+            cta={
+              <DownloadButton
+                className="btn-primary btn-primary-sm !min-h-11"
+                label="Download for iPhone"
+              />
+            }
+            mobileCta={
+              <DownloadButton
+                className="btn-primary btn-primary-sm !min-h-11"
+                label="Download"
+              />
+            }
+          />
+          {children}
+          <SiteFooter />
+        </div>
+      </body>
     </html>
   );
 }

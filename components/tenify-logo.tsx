@@ -1,8 +1,8 @@
 import Image from "next/image";
 
 type TenifyLogoProps = {
-  /** Compact lockup for nav; full is the same lockup sized for footer. */
-  variant?: "mark" | "full";
+  /** Compact lockup for nav; full is the same lockup sized for footer; white is the nav lockup for dark surfaces. */
+  variant?: "mark" | "full" | "white";
   className?: string;
   priority?: boolean;
 };
@@ -19,6 +19,12 @@ const VARIANTS = {
     width: 835,
     height: 279,
     className: "h-10 w-auto sm:h-11",
+  },
+  white: {
+    src: "/brand/tenify-logo-white.png",
+    width: 835,
+    height: 279,
+    className: "h-5 w-auto sm:h-7",
   },
 } as const;
 

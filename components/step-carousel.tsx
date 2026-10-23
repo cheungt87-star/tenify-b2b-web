@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { useIsClient, usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 
 export type CarouselSlide = {
   label: string;
@@ -14,20 +15,48 @@ type StepCarouselProps = {
 };
 
 const SWIPE_THRESHOLD_PX = 48;
+const AUTOPLAY_INTERVAL_MS = 4000;
+
+const carouselArrow =
+  "flex size-11 items-center justify-center rounded-full text-neutral-600 transition-colors hover:text-navy-900 focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-brand";
+
+function ChevronIcon({ direction }: { direction: "left" | "right" }) {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d={direction === "left" ? "m15 6-6 6 6 6" : "m9 6 6 6-6 6"} />
+    </svg>
+  );
+}
 
 export function StepCarousel({ slides }: StepCarouselProps) {
   const [index, setIndex] = useState(0);
   const [expanded, setExpanded] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const [inViewport, setInViewport] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const [userTookOver, setUserTookOver] = useState(false);
+  const reducedMotion = usePrefersReducedMotion();
+  const isClient = useIsClient();
   const rootRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
   const swipeAxis = useRef<"pending" | "horizontal" | "vertical">("pending");
   const suppressClick = useRef(false);
   const current = slides[index];
+  const lightboxOpen = expanded && Boolean(current?.src);
 
   function go(next: number) {
+    setUserTookOver(true);
     setIndex((next + slides.length) % slides.length);
   }
 
@@ -88,10 +117,6 @@ export function StepCarousel({ slides }: StepCarouselProps) {
   }
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
     const node = rootRef.current;
     if (!node) return;
 
@@ -104,21 +129,17 @@ export function StepCarousel({ slides }: StepCarouselProps) {
   }, []);
 
   useEffect(() => {
-    if (expanded && !current?.src) {
-      setExpanded(false);
-    }
-  }, [current, expanded]);
-
-  useEffect(() => {
-    if (!expanded) return;
+    if (!lightboxOpen) return;
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     function onKey(event: KeyboardEvent) {
       if (event.key === "Escape") setExpanded(false);
-      if (event.key === "ArrowLeft") go(index - 1);
-      if (event.key === "ArrowRight") go(index + 1);
+      const step = event.key === "ArrowLeft" ? -1 : event.key === "ArrowRight" ? 1 : 0;
+      if (!step) return;
+      setUserTookOver(true);
+      setIndex((prev) => (prev + step + slides.length) % slides.length);
     }
 
     window.addEventListener("keydown", onKey);
@@ -126,29 +147,51 @@ export function StepCarousel({ slides }: StepCarouselProps) {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKey);
     };
-  }, [expanded, index, slides.length]);
+  }, [lightboxOpen, slides.length]);
+
+  const autoplay =
+    inViewport &&
+    !lightboxOpen &&
+    !hovered &&
+    !focused &&
+    !userTookOver &&
+    !reducedMotion &&
+    slides.length > 1;
 
   useEffect(() => {
-    if (!inViewport || expanded || slides.length < 2) return;
+    if (!autoplay) return;
 
     const id = window.setInterval(() => {
       setIndex((prev) => (prev + 1) % slides.length);
-    }, 1500);
+    }, AUTOPLAY_INTERVAL_MS);
 
     return () => window.clearInterval(id);
-  }, [inViewport, expanded, slides.length]);
+  }, [autoplay, slides.length]);
 
   return (
-    <div ref={rootRef} className="flex w-full flex-col items-center gap-3">
+    <div
+      ref={rootRef}
+      className="flex w-full flex-col items-center gap-3"
+      onPointerEnter={(event) => {
+        if (event.pointerType === "mouse") setHovered(true);
+      }}
+      onPointerLeave={() => setHovered(false)}
+      onFocus={() => setFocused(true)}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+          setFocused(false);
+        }
+      }}
+    >
       <div
         className="relative w-[68%] min-w-[188px] max-w-[292px] touch-pan-y md:w-[300px] md:max-w-[300px]"
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
-        <div className="relative rounded-[2.15rem] bg-[#1c1c1e] p-[6px] shadow-[0_24px_50px_rgba(15,31,46,0.28),inset_0_1px_1px_rgba(255,255,255,0.22),inset_0_-1px_1px_rgba(0,0,0,0.55)]">
+        <div className="relative rounded-[2.15rem] bg-neutral-900 p-[6px] shadow-[0_24px_50px_rgba(0,0,0,0.25),inset_0_1px_1px_rgba(255,255,255,0.22),inset_0_-1px_1px_rgba(0,0,0,0.55)]">
           <div className="relative overflow-hidden rounded-[1.7rem] bg-black ring-1 ring-white/10">
-            <div className="relative aspect-[473/1024] bg-[#f4f4f5]">
+            <div className="relative aspect-[473/1024] bg-neutral-100">
               {slides.map((slide, slideIndex) => (
                 <div
                   key={slide.src ?? slide.label}
@@ -163,7 +206,6 @@ export function StepCarousel({ slides }: StepCarouselProps) {
                       fill
                       sizes="(max-width: 768px) 220px, 300px"
                       className="object-contain"
-                      priority={slideIndex === 0}
                       draggable={false}
                     />
                   ) : (
@@ -191,40 +233,45 @@ export function StepCarousel({ slides }: StepCarouselProps) {
           </div>
         </div>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1">
         <button
           type="button"
           aria-label="Previous screenshot"
-          className="flex h-11 w-11 items-center justify-center text-lg text-neutral-400"
+          className={carouselArrow}
           onClick={() => go(index - 1)}
         >
-          ‹
+          <ChevronIcon direction="left" />
         </button>
-        <div className="flex gap-1.5" role="tablist" aria-label="Step screenshots">
+        <div className="flex" aria-label="Step screenshots" role="group">
           {slides.map((slide, slideIndex) => (
             <button
               key={slide.src ?? slide.label}
               type="button"
-              role="tab"
-              aria-selected={slideIndex === index}
-              aria-label={slide.label}
-              className={`h-[7px] w-[7px] rounded-full ${
-                slideIndex === index ? "bg-jade-900" : "bg-neutral-300"
-              }`}
-              onClick={() => setIndex(slideIndex)}
-            />
+              aria-current={slideIndex === index ? "true" : undefined}
+              aria-label={`Show ${slide.label}`}
+              className="group flex size-6 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-brand"
+              onClick={() => go(slideIndex)}
+            >
+              <span
+                className={`size-[7px] rounded-full transition-colors ${
+                  slideIndex === index
+                    ? "bg-navy-900"
+                    : "bg-neutral-300 group-hover:bg-neutral-600"
+                }`}
+              />
+            </button>
           ))}
         </div>
         <button
           type="button"
           aria-label="Next screenshot"
-          className="flex h-11 w-11 items-center justify-center text-lg text-neutral-400"
+          className={carouselArrow}
           onClick={() => go(index + 1)}
         >
-          ›
+          <ChevronIcon direction="right" />
         </button>
       </div>
-      {mounted && expanded && current?.src
+      {isClient && lightboxOpen && current?.src
         ? createPortal(
             <div
               className="fixed inset-0 z-[80] flex flex-col bg-black/85"
@@ -240,10 +287,21 @@ export function StepCarousel({ slides }: StepCarouselProps) {
                 <button
                   type="button"
                   aria-label="Close expanded screenshot"
-                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/95 text-xl text-neutral-900"
+                  className="flex size-11 shrink-0 items-center justify-center rounded-full bg-true-white text-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-true-white"
                   onClick={() => setExpanded(false)}
                 >
-                  ×
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M6 6l12 12M18 6L6 18" />
+                  </svg>
                 </button>
               </div>
               <div
@@ -263,7 +321,7 @@ export function StepCarousel({ slides }: StepCarouselProps) {
                   height={2048}
                   sizes="100vw"
                   className="h-auto max-h-full w-auto max-w-full rounded-[1rem] object-contain"
-                  priority
+                  loading="eager"
                   draggable={false}
                   onClick={(event) => {
                     event.stopPropagation();

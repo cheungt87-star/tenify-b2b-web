@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import { DirhamSign } from "@/components/home/dirham-sign";
 
 const BANDS = [
   {
@@ -43,6 +44,8 @@ const PILLS = [
 
 export function PricingSelector() {
   const [seatCount, setSeatCount] = useState(3);
+  const labelId = useId();
+  const pillRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const resolved = useMemo(() => {
     const bandIdx = BANDS.findIndex((band) => seatCount <= band.maxSeats);
@@ -77,33 +80,54 @@ export function PricingSelector() {
     };
   }, [seatCount]);
 
+  const activePill = PILLS.findIndex((pill) =>
+    pill.value === 11
+      ? resolved.isCustom
+      : !resolved.isCustom &&
+        BANDS.find((band) => seatCount <= band.maxSeats)?.maxSeats === pill.value,
+  );
+
+  function onGroupKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    const step =
+      event.key === "ArrowRight" || event.key === "ArrowDown"
+        ? 1
+        : event.key === "ArrowLeft" || event.key === "ArrowUp"
+          ? -1
+          : 0;
+    if (!step) return;
+    event.preventDefault();
+    const next = (activePill + step + PILLS.length) % PILLS.length;
+    setSeatCount(PILLS[next].value);
+    pillRefs.current[next]?.focus();
+  }
+
   return (
     <div className="flex flex-col items-center gap-7">
-      <p className="text-center text-sm font-bold text-neutral-800">
+      <p id={labelId} className="text-center text-sm font-bold text-neutral-800">
         How many users?
       </p>
       <div
         className="inline-flex gap-1 rounded-full bg-neutral-100 p-1.5"
-        role="tablist"
-        aria-label="Seat bands"
+        role="radiogroup"
+        aria-labelledby={labelId}
+        onKeyDown={onGroupKeyDown}
       >
-        {PILLS.map((pill) => {
-          const active =
-            pill.value === 11
-              ? resolved.isCustom
-              : !resolved.isCustom &&
-                BANDS.find((band) => seatCount <= band.maxSeats)?.maxSeats ===
-                  pill.value;
+        {PILLS.map((pill, pillIndex) => {
+          const active = pillIndex === activePill;
           return (
             <button
               key={pill.label}
+              ref={(node) => {
+                pillRefs.current[pillIndex] = node;
+              }}
               type="button"
-              role="tab"
-              aria-selected={active}
-              className={`rounded-full px-5 py-2.5 text-sm font-bold whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-600 ${
+              role="radio"
+              aria-checked={active}
+              tabIndex={active ? 0 : -1}
+              className={`min-h-11 rounded-full px-5 text-sm font-bold whitespace-nowrap transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${
                 active
-                  ? "bg-jade-900 text-true-white"
-                  : "bg-transparent text-neutral-600"
+                  ? "bg-navy-900 text-true-white"
+                  : "bg-transparent text-neutral-600 hover:text-navy-900"
               }`}
               onClick={() => setSeatCount(pill.value)}
             >
@@ -113,12 +137,15 @@ export function PricingSelector() {
         })}
       </div>
 
-      <article className="flex w-full max-w-[440px] flex-col gap-5 rounded-[var(--radius-lg)] border-2 border-jade-900 bg-true-white p-6 sm:p-9">
+      <article
+        className="flex w-full max-w-[440px] flex-col gap-5 rounded-[var(--radius-lg)] border-2 border-navy-900 bg-true-white p-6 sm:p-9"
+        aria-live="polite"
+      >
         <div className="flex items-center justify-between gap-3">
-          <h3 className="text-[22px] font-extrabold tracking-tight text-neutral-900 uppercase">
+          <h3 className="text-[22px] font-extrabold tracking-tight text-navy-900">
             {resolved.name}
           </h3>
-          <p className="text-[13px] font-bold whitespace-nowrap text-jade-500">
+          <p className="text-sm font-bold whitespace-nowrap text-navy-500">
             {resolved.seatLabel}
           </p>
         </div>
@@ -129,9 +156,10 @@ export function PricingSelector() {
         ) : (
           <p className="flex items-baseline gap-2 whitespace-nowrap">
             <span className="text-[clamp(2rem,10vw,3rem)] font-extrabold tracking-tight text-neutral-900">
+              <DirhamSign className="mr-[0.15em]" />
               {resolved.total.toLocaleString("en-AE")}
             </span>
-            <span className="text-base text-neutral-600">AED per month</span>
+            <span className="text-base text-neutral-600">per month</span>
           </p>
         )}
         <p className="text-[15px] leading-[1.6] text-neutral-600">
@@ -140,12 +168,20 @@ export function PricingSelector() {
         <ul className="mt-1 flex flex-col gap-3.5">
           {resolved.features.map((feature) => (
             <li key={feature} className="flex items-center gap-3">
-              <span
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 aria-hidden="true"
-                className="flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-jade-900 text-xs font-bold text-true-white"
+                className="shrink-0 text-brand"
               >
-                ✓
-              </span>
+                <path d="m5 12.5 4.5 4.5L19 7.5" />
+              </svg>
               <span className="text-[15px] text-neutral-900">{feature}</span>
             </li>
           ))}
