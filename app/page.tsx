@@ -136,12 +136,12 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="relative flex min-h-[700px] flex-col overflow-hidden rounded-[28px] bg-brand text-true-white md:rounded-[40px] lg:min-h-0">
+              <div className="relative flex min-h-0 flex-col overflow-hidden rounded-[28px] bg-brand text-true-white md:rounded-[40px] lg:min-h-full">
                 <div
                   aria-hidden="true"
                   className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_300px_300px_at_72%_62%,rgba(120,235,185,0.5),rgba(120,235,185,0)_100%),radial-gradient(ellipse_380px_300px_at_40%_38%,#1E8A68_0%,var(--color-brand)_100%)]"
                 />
-                <div className="relative z-10 flex flex-col items-stretch gap-2 px-6 pt-7 sm:items-start sm:px-9 sm:pt-9">
+                <div className="relative z-10 flex flex-col items-stretch gap-2 px-6 pt-6 sm:items-start sm:px-9 sm:pt-9">
                   <h3 className="text-[clamp(22px,2vw,30px)] leading-[1.2] font-bold tracking-[-0.01em]">
                     See one for yourself
                   </h3>
@@ -155,7 +155,7 @@ export default function Home() {
                     Free sample. Takes a few seconds.
                   </span>
                 </div>
-                <div className="relative z-[1] mt-auto w-full px-2 pb-0 pt-4 sm:px-4 lg:pt-6">
+                <div className="relative z-[1] w-full px-2 pb-0 pt-4 sm:px-4 lg:mt-auto lg:pt-6">
                   <GatedReportPreview />
                 </div>
               </div>
