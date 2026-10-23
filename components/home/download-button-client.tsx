@@ -1,78 +1,37 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useId, useRef, useState } from "react";
 import { Modal } from "@/components/home/modal";
-
-const DESKTOP_QUERY = "(pointer: fine) and (min-width: 768px)";
+import { AppWaitlistForm } from "@/components/home/app-waitlist-form";
 
 type DownloadButtonClientProps = {
-  href: string;
-  qrSvg: string;
   className: string;
   label: string;
 };
 
 export function DownloadButtonClient({
-  href,
-  qrSvg,
   className,
   label,
 }: DownloadButtonClientProps) {
   const [open, setOpen] = useState(false);
   const titleId = useId();
+  const nameInputRef = useRef<HTMLInputElement>(null);
 
   return (
     <>
-      <a
-        href={href}
-        className={className}
-        onClick={(event) => {
-          if (window.matchMedia(DESKTOP_QUERY).matches) {
-            event.preventDefault();
-            setOpen(true);
-          }
-        }}
-      >
+      <button type="button" className={className} onClick={() => setOpen(true)}>
         <AppleIcon />
         {label}
-      </a>
-      <Modal open={open} onClose={() => setOpen(false)} labelledBy={titleId}>
-        <AppLinkContent titleId={titleId} href={href} qrSvg={qrSvg} />
+      </button>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        labelledBy={titleId}
+        initialFocusRef={nameInputRef}
+      >
+        <AppWaitlistForm nameInputRef={nameInputRef} titleId={titleId} />
       </Modal>
     </>
-  );
-}
-
-function AppLinkContent({
-  titleId,
-  href,
-  qrSvg,
-}: {
-  titleId: string;
-  href: string;
-  qrSvg: string;
-}) {
-  return (
-    <div className="flex flex-col items-center text-center">
-      <h2 id={titleId} className="font-display text-2xl leading-tight text-neutral-900">
-        Download Tenify for iPhone
-      </h2>
-      <p className="mt-2 max-w-[32ch] text-[15px] leading-[1.5] text-neutral-600">
-        Scan the code with your iPhone camera to open the App Store.
-      </p>
-      <a
-        href={href}
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Open Tenify on the App Store"
-        className="mt-6 block size-44 rounded-[16px] border border-neutral-200 bg-true-white p-3 [&>svg]:size-full"
-        dangerouslySetInnerHTML={{ __html: qrSvg }}
-      />
-
-      <p className="mt-6 text-xs text-neutral-600">
-        iPhone only for now. Android is planned.
-      </p>
-    </div>
   );
 }
 

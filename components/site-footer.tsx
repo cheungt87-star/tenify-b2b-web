@@ -1,137 +1,114 @@
 "use client";
 
-import { useState } from "react";
-import { TenifyLogo } from "@/components/tenify-logo";
-import { PRIVACY_URL, SUPPORT_EMAIL, TERMS_URL } from "@/lib/site-config";
+import { usePathname } from "next/navigation";
+import { FooterMobileMenu } from "@/components/footer-mobile-menu";
+import {
+  PRIVACY_URL,
+  SUPPORT_EMAIL,
+  TERMS_URL,
+} from "@/lib/site-config";
 
-const FOOTER_SECTIONS = [
+const DIVIDER = "#2a3646";
+const TEXT = "#e8edf3";
+const MUTED = "#9aa6b5";
+
+const SECTIONS = [
   {
-    title: "Product",
+    title: "Explore",
     links: [
-      { href: "/for-businesses#how-it-works", label: "How it works" },
-      { href: "/for-businesses#pricing", label: "Pricing" },
-      { href: "/for-businesses#faq", label: "FAQ" },
+      { href: "/#how-it-works", label: "How it works" },
+      { href: "/#faq", label: "FAQ" },
     ],
-  },
-  {
-    title: "Company",
-    links: [{ href: `mailto:${SUPPORT_EMAIL}`, label: "Contact" }],
   },
   {
     title: "Legal",
     links: [
-      { href: TERMS_URL, label: "Terms" },
       { href: PRIVACY_URL, label: "Privacy" },
+      { href: TERMS_URL, label: "Terms" },
+    ],
+  },
+  {
+    title: "Contact",
+    links: [
+      { href: `mailto:${SUPPORT_EMAIL}`, label: SUPPORT_EMAIL },
     ],
   },
 ] as const;
 
-function FooterLinkColumns({
-  onNavigate,
-  className,
-}: {
-  onNavigate?: () => void;
-  className?: string;
-}) {
-  return (
-    <div className={className}>
-      {FOOTER_SECTIONS.map((section) => (
-        <div key={section.title} className="flex flex-col gap-3">
-          <p className="text-sm font-semibold text-neutral-900">{section.title}</p>
-          {section.links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-sm text-neutral-600 hover:text-navy-900"
-              onClick={onNavigate}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      ))}
-    </div>
-  );
-}
-
+/**
+ * The one site footer, rendered once from the root layout so the same
+ * navy footer closes every page — except `/for-businesses`, a standalone
+ * landing page with no footer.
+ */
 export function SiteFooter() {
-  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  if (pathname === "/for-businesses" || pathname.startsWith("/for-businesses/")) {
+    return null;
+  }
+
+  const allLinks = SECTIONS.flatMap((section) => [...section.links]);
 
   return (
     <footer
-      className="relative z-10 bg-neutral-100"
-      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+      className="on-dark relative z-10 bg-navy-900"
+      style={{
+        color: TEXT,
+        paddingBottom: "env(safe-area-inset-bottom)",
+      }}
     >
-      {/* Desktop */}
-      <div className="mx-auto hidden max-w-[1200px] grid-cols-4 gap-8 px-5 pt-12 pb-0 sm:px-10 md:grid">
-        <div className="flex min-w-[160px] flex-col gap-3">
-          <TenifyLogo variant="full" className="h-11 w-auto" />
-        </div>
-        <FooterLinkColumns className="contents" />
-      </div>
+      <div className="mx-auto max-w-[1200px] px-6 pt-8 pb-5 sm:px-10 min-[700px]:pt-10">
+        <div className="flex flex-wrap items-center justify-between min-[700px]:flex-nowrap min-[700px]:items-start min-[700px]:gap-12">
+          {/* eslint-disable-next-line @next/next/no-img-element -- static brand asset; fixed height, auto width */}
+          <img
+            src="/assets/tenify-logo-footer.png"
+            alt="Tenify"
+            height={32}
+            className="block h-8 w-auto"
+          />
 
-      {/* Mobile */}
-      <div className="mx-auto max-w-[1200px] px-5 pt-8 sm:px-10 md:hidden">
-        <div className="relative flex items-start justify-between gap-4">
-          <div className="flex min-w-0 flex-col gap-3">
-            <TenifyLogo variant="full" className="h-10 w-auto" />
+          <div className="contents min-[700px]:hidden">
+            <FooterMobileMenu links={allLinks} />
           </div>
 
-          <button
-            type="button"
-            className="inline-flex min-h-[44px] min-w-[44px] shrink-0 select-none items-center justify-center rounded-[var(--radius-md)] text-neutral-800 [-webkit-tap-highlight-color:transparent] hover:bg-neutral-200/70"
-            aria-expanded={open}
-            aria-controls="footer-mobile-nav"
-            aria-label={open ? "Close footer menu" : "Open footer menu"}
-            onClick={() => setOpen((value) => !value)}
+          <nav
+            aria-label="Footer"
+            className="hidden gap-14 min-[700px]:flex"
           >
-            {open ? (
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                aria-hidden="true"
-              >
-                <path d="M6 6l12 12M18 6L6 18" />
-              </svg>
-            ) : (
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                aria-hidden="true"
-              >
-                <path d="M4 7h16M4 12h16M4 17h16" />
-              </svg>
-            )}
-          </button>
+            {SECTIONS.map((section) => (
+              <div key={section.title}>
+                <h4
+                  className="mb-3 text-xs font-bold uppercase tracking-[0.1em]"
+                  style={{ color: MUTED }}
+                >
+                  {section.title}
+                </h4>
+                <ul className="flex flex-col gap-2">
+                  {section.links.map((link) => (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        className="block text-sm no-underline transition-colors hover:text-true-white hover:underline"
+                        style={{ color: TEXT }}
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </nav>
         </div>
 
-        {open ? (
-          <nav
-            id="footer-mobile-nav"
-            aria-label="Footer"
-            className="mt-6 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-neutral-200 pt-6"
-          >
-            <FooterLinkColumns
-              className="contents"
-              onNavigate={() => setOpen(false)}
-            />
-          </nav>
-        ) : null}
+        <div
+          className="mt-6 border-t pt-4"
+          style={{ borderColor: DIVIDER }}
+        >
+          <p className="text-[12.5px] leading-[1.6]" style={{ color: MUTED }}>
+            © 2026 Tenify
+          </p>
+        </div>
       </div>
-
-      <p className="mx-auto mt-8 max-w-[1200px] border-t border-neutral-200 px-5 py-8 text-center text-xs text-neutral-600 sm:px-10">
-        Tenify © 2026. All rights reserved.
-      </p>
     </footer>
   );
 }

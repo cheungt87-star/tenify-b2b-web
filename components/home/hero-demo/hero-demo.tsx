@@ -25,7 +25,7 @@ export async function HeroDemo() {
     <HeroDemoClient
       primaryCta={
         <DownloadButton
-          className="btn-primary bg-true-white text-navy-900 hover:bg-true-white/90 active:bg-true-white/90"
+          className="btn-primary"
           label="Download for iPhone"
         />
       }

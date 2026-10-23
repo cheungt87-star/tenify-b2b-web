@@ -8,11 +8,7 @@ import {
   type FormEvent,
   type RefObject,
 } from "react";
-import {
-  APP_STORE_URL,
-  PRIVACY_URL,
-  SAMPLE_REPORT_PDF,
-} from "@/lib/site-config";
+import { PRIVACY_URL, SAMPLE_REPORT_PDF } from "@/lib/site-config";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const MARKETING_COPY_VERSION = "stay-in-the-loop-v1";
@@ -300,14 +296,6 @@ function SampleReportModalForm({
           className="mt-5 flex min-h-[52px] items-center justify-center rounded-[var(--radius-control)] bg-brand text-[17px] font-bold text-true-white no-underline transition-colors hover:bg-brand-pressed"
         >
           Download sample report
-        </a>
-        <a
-          href={APP_STORE_URL}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-2.5 flex min-h-[52px] items-center justify-center rounded-[var(--radius-control)] bg-neutral-100 text-[17px] font-bold text-navy-900 no-underline transition-colors hover:bg-neutral-200"
-        >
-          Get the app for iPhone
         </a>
       </div>
     );

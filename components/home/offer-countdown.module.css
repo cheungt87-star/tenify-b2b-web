@@ -1,0 +1,125 @@
+/* Offer countdown panel. Flat navy panel, white flip tiles, one diagonal slab for depth. */
+
+.section {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Diagonal slab. Web-only tone, slightly lighter than navy-900. */
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 0 auto;
+  z-index: -1;
+  width: 46%;
+  background: #13283a;
+  clip-path: polygon(38% 0, 100% 0, 100% 100%, 0 100%);
+  pointer-events: none;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--color-brand-bright);
+  animation: blink 1.6s ease-in-out infinite;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(8px, 1.6vw, 20px);
+  width: 100%;
+  max-width: 880px;
+  margin: 36px 0 28px;
+}
+
+/* Flip tile: split line, shaded lower half, notches at the sides. */
+.cell {
+  position: relative;
+  overflow: hidden;
+  border-radius: clamp(20px, 3vw, 32px);
+  padding: clamp(18px, 3.2vw, 40px) 4px clamp(14px, 2.4vw, 28px);
+  color: var(--color-navy-900);
+  background: linear-gradient(
+    var(--color-true-white) 0 calc(50% - 1.5px),
+    var(--color-navy-900) calc(50% - 1.5px) calc(50% + 1.5px),
+    #eaefee calc(50% + 1.5px) 100%
+  );
+}
+
+.cell::before,
+.cell::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--color-navy-900);
+  transform: translateY(-50%);
+}
+.cell::before {
+  left: -5px;
+}
+.cell::after {
+  right: -5px;
+}
+
+.num {
+  position: relative;
+  display: block;
+  font-size: clamp(40px, 10vw, 120px);
+  line-height: 0.95;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.unit {
+  position: relative;
+  display: block;
+  margin-top: clamp(8px, 1.4vw, 16px);
+  font-size: clamp(10px, 1.3vw, 14px);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-label-2);
+}
+
+/* Reels blur while spinning, then settle with a small tick. */
+.spin {
+  filter: blur(1.2px);
+  opacity: 0.85;
+}
+.tick {
+  animation: tick 0.35s ease-out;
+}
+
+@keyframes tick {
+  0% {
+    transform: translateY(-14%);
+    opacity: 0.2;
+  }
+  100% {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot,
+  .tick {
+    animation: none;
+  }
+  .spin {
+    filter: none;
+    opacity: 1;
+  }
+}

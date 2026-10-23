@@ -2,6 +2,11 @@ import { getSupabaseServer } from "@/lib/supabase-server";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const ROLES = new Set(["tenant", "landlord", "other"]);
+const ALLOWED_SOURCES = new Set([
+  "sample_report_modal",
+  "sample_report_inline",
+  "download_cta",
+]);
 
 type SampleReportBody = {
   name?: unknown;
@@ -23,7 +28,8 @@ export async function POST(request: Request) {
   if (!body || typeof body !== "object") return bad("invalid_json");
 
   const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
-  const source = typeof body.source === "string" ? body.source.slice(0, 60) : "";
+  const rawSource = typeof body.source === "string" ? body.source.slice(0, 60) : "";
+  const source = ALLOWED_SOURCES.has(rawSource) ? rawSource : "";
 
   if (!EMAIL_PATTERN.test(email) || email.length > 254) return bad("invalid_email");
 

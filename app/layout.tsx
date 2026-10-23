@@ -1,5 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono, Nunito, Space_Mono } from "next/font/google";
+import { DownloadButton } from "@/components/home/download-button";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 
 const nunito = Nunito({
@@ -40,13 +43,42 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
       className={`${nunito.variable} ${jetbrains.variable} ${spaceMono.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        {/* Persistent shell: header + footer live here, in the root layout,
+            so the exact same chrome renders on every page and stays mounted
+            across client-side navigation. Pages render only their <main>.
+            Exception: SiteFooter hides itself on /for-businesses. */}
+        <div
+          className="flex min-h-full flex-1 flex-col overflow-x-clip bg-true-white text-neutral-900"
+          style={{
+            paddingLeft: "env(safe-area-inset-left)",
+            paddingRight: "env(safe-area-inset-right)",
+          }}
+        >
+          <SiteHeader
+            cta={
+              <DownloadButton
+                className="btn-primary btn-primary-sm !min-h-11"
+                label="Download for iPhone"
+              />
+            }
+            mobileCta={
+              <DownloadButton
+                className="btn-primary btn-primary-sm !min-h-11"
+                label="Download"
+              />
+            }
+          />
+          {children}
+          <SiteFooter />
+        </div>
+      </body>
     </html>
   );
 }

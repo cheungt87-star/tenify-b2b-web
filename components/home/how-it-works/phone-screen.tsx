@@ -17,6 +17,8 @@ type PhoneScreenProps = {
   active: boolean;
   /** Increments each time the step becomes active, so GIFs can restart. */
   cycle: number;
+  /** Restart the placeholder animation on this cycle while it stays in view. */
+  loopMs?: number;
 };
 
 function prefersReducedMotion(): boolean {
@@ -29,7 +31,7 @@ function prefersReducedMotion(): boolean {
  * missing/fails to load. Media fills the screen (`object-fit: cover`,
  * top-aligned) so aspect differences crop from the bottom.
  */
-export function PhoneScreen({ media, placeholder: Placeholder, active, cycle }: PhoneScreenProps) {
+export function PhoneScreen({ media, placeholder: Placeholder, active, cycle, loopMs }: PhoneScreenProps) {
   const ref = useRef<HTMLDivElement>(null);
   // Remember which asset failed; a different src/type retries automatically.
   const mediaKey = `${media.type}:${media.src}`;
@@ -52,6 +54,21 @@ export function PhoneScreen({ media, placeholder: Placeholder, active, cycle }: 
     void node.offsetWidth;
     node.classList.add("is-playing");
   }, [active, cycle, usePlaceholder]);
+
+  // Loop consistently while the step stays in view: every `loopMs`
+  // (animation duration + hold on the final frame) restart the sequence.
+  // Reduced motion never loops — it rests on the final frame.
+  useEffect(() => {
+    const node = ref.current;
+    if (!node || !usePlaceholder || !active || !loopMs) return;
+    if (prefersReducedMotion()) return;
+    const id = setInterval(() => {
+      node.classList.remove("is-playing");
+      void node.offsetWidth;
+      node.classList.add("is-playing");
+    }, loopMs);
+    return () => clearInterval(id);
+  }, [active, loopMs, usePlaceholder]);
 
   let content;
   if (usePlaceholder) {

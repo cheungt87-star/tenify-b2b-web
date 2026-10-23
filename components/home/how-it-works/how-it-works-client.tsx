@@ -131,11 +131,11 @@ export function HowItWorksClient({ stepFourCta }: { stepFourCta: ReactNode }) {
       <Reveal className={styles.header}>
         <p className="eyebrow">How it works</p>
         <h2 className={`h2-display ${styles.title}`}>
-          From inspection to completed report in 4 simple steps.
+          From inspection to report in{" "}
+          <span className={styles.accent}>4 simple steps.</span>
         </h2>
         <p className={`body-lg ${styles.lede}`}>
-          Tenify guides you through what to inspect, room by room, then turns it into a
-          ready-to-share professional report. Simple.
+          Tenify guides you room by room, then builds a professional report ready to share.
         </p>
       </Reveal>
 

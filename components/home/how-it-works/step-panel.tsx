@@ -60,6 +60,7 @@ export function StepPanel({
           placeholder={step.placeholder}
           active={active}
           cycle={cycle}
+          loopMs={step.loopMs}
         />
       </PhoneFrame>
     </div>

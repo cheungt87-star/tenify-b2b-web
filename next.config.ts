@@ -9,6 +9,8 @@ const nextConfig: NextConfig = {
   },
   images: {
     formats: ["image/avif", "image/webp"],
+    // 85 is reserved for the full-bleed hero photo; everything else stays at the 75 default.
+    qualities: [75, 85],
   },
 };
 

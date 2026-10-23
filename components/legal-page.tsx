@@ -1,6 +1,4 @@
 import type { ReactNode } from "react";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
 
 const container = "mx-auto max-w-[860px] px-5 sm:px-10";
 
@@ -92,15 +90,6 @@ export function LegalPage({ title, markdown }: { title: string; markdown: string
   const { blocks, updated } = parse(markdown);
 
   return (
-    <div
-      className="flex min-h-full flex-1 flex-col overflow-x-clip bg-true-white text-neutral-900"
-      style={{
-        paddingLeft: "env(safe-area-inset-left)",
-        paddingRight: "env(safe-area-inset-right)",
-      }}
-    >
-      <SiteHeader />
-
       <main className="flex-1">
         <section className="bg-true-white">
           <div className={`${container} flex flex-col gap-4 py-16 md:py-24`}>
@@ -138,8 +127,5 @@ export function LegalPage({ title, markdown }: { title: string; markdown: string
           </div>
         </section>
       </main>
-
-      <SiteFooter />
-    </div>
   );
 }

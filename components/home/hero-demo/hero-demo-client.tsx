@@ -18,6 +18,7 @@ export function HeroDemoClient({ primaryCta, secondaryCta }: Props) {
         alt="Woman celebrating on a sofa in her new rented home"
         fill
         sizes="100vw"
+        quality={85}
         priority
         placeholder="blur"
         className={styles.photoImg}

@@ -34,10 +34,11 @@ export function HeroSplit() {
             alt=""
             fill
             sizes="(min-width: 900px) 48vw, 100vw"
+            quality={85}
             fetchPriority="high"
             loading="eager"
             placeholder="blur"
-            className="object-cover object-[12%_22%]"
+            className="object-cover object-[12%_22%] brightness-[1.06] contrast-[1.05] saturate-[1.16]"
           />
         </div>
       </div>

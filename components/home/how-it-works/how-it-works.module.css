@@ -5,11 +5,19 @@
   flex-direction: column;
 }
 
+/* Matches the problem section headline (H1 treatment). */
 .title {
-  max-width: 760px;
+  max-width: 860px;
   margin-top: 12px;
-  font-size: 28px;
+  font-size: clamp(34px, 4.6vw, 56px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
   text-wrap: balance;
+}
+
+.accent {
+  color: var(--color-brand);
 }
 
 .lede {
@@ -79,7 +87,7 @@
 }
 
 .panelSoft {
-  background: var(--color-brand-soft);
+  background: var(--color-brand-bright);
 }
 
 .panelBrand {
@@ -91,7 +99,7 @@
 }
 
 .panelWarm {
-  background: var(--color-caution-soft);
+  background: var(--color-brand-bright);
 }
 
 .phoneBox {
@@ -414,12 +422,6 @@
 /* ---------- Desktop: plain scroll, alternating rows (lg and up) ---------- */
 
 @media (min-width: 1024px) {
-  .title {
-    font-size: clamp(32px, 4.4vw, 52px);
-    line-height: 1.08;
-    letter-spacing: -0.02em;
-  }
-
   .lede {
     display: block;
   }

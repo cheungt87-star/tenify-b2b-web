@@ -32,6 +32,9 @@ export type HowStep = {
   media: StepMedia;
   /** Animated placeholder, also the fallback when real media fails to load. */
   placeholder: ComponentType;
+  /** Full animation duration plus a hold on the final frame, in ms.
+   *  While the step stays in view the sequence restarts on this cycle. */
+  loopMs: number;
 };
 
 export const HOW_STEPS: readonly HowStep[] = [
@@ -52,6 +55,7 @@ export const HOW_STEPS: readonly HowStep[] = [
       alt: "Tenify app: setting up a new inspection for a property",
     },
     placeholder: StepOneScreen,
+    loopMs: 11200,
   },
   {
     id: "inspect",
@@ -69,6 +73,7 @@ export const HOW_STEPS: readonly HowStep[] = [
       alt: "Tenify app: inspecting a living room, adding notes and a photo",
     },
     placeholder: StepTwoScreen,
+    loopMs: 13700,
   },
   {
     id: "generate",
@@ -80,11 +85,12 @@ export const HOW_STEPS: readonly HowStep[] = [
     ],
     panel: "navy",
     media: {
-      type: "component",
-      src: "/how-it-works/step-3.png",
+      type: "video",
+      src: "/how-it-works/step-3.mp4",
       alt: "Tenify app: reviewing a report before generating it",
     },
     placeholder: StepThreeScreen,
+    loopMs: 6500,
   },
   {
     id: "share",
@@ -98,10 +104,11 @@ export const HOW_STEPS: readonly HowStep[] = [
     ],
     panel: "warm",
     media: {
-      type: "component",
-      src: "/how-it-works/step-4.png",
+      type: "video",
+      src: "/how-it-works/step-4.mp4",
       alt: "Tenify app: a finished report ready to download and share",
     },
     placeholder: StepFourScreen,
+    loopMs: 5700,
   },
 ];

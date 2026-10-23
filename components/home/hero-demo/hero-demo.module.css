@@ -12,7 +12,7 @@
   /* Sits under the fixed header (72px desktop, 60px mobile). */
   margin: calc(72px + env(safe-area-inset-top)) var(--panel-gutter) 0;
   min-height: 680px;
-  height: calc(max(720px, min(100vh, 860px)) - 72px - var(--panel-gutter));
+  height: calc(max(720px, min(100vh, 980px)) - 72px - var(--panel-gutter));
   border-radius: clamp(36px, 5vw, 64px);
   overflow: hidden;
   background: var(--navy);
@@ -22,17 +22,24 @@
 .photoImg {
   object-fit: cover;
   object-position: 75% 40%;
+  /* The source photo is bright but hazy; this is where the "pop" comes from. */
+  filter: brightness(1.06) contrast(1.05) saturate(1.16);
 }
 
 .wash {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(15, 31, 46, 0.82) 0%,
-    rgba(15, 31, 46, 0.55) 42%,
-    rgba(15, 31, 46, 0) 70%
-  );
+  /* Two layers: a lighter left-to-right navy for mood, plus a bottom rise
+     that concentrates protection behind the bottom-left copy block — so
+     the rest of the photo can stay bright without losing text contrast. */
+  background:
+    linear-gradient(0deg, rgba(15, 31, 46, 0.52) 0%, rgba(15, 31, 46, 0) 52%),
+    linear-gradient(
+      90deg,
+      rgba(15, 31, 46, 0.7) 0%,
+      rgba(15, 31, 46, 0.38) 42%,
+      rgba(15, 31, 46, 0) 68%
+    );
   pointer-events: none;
 }
 
@@ -1121,15 +1128,20 @@
   }
 
   .photoImg {
-    object-position: 78% 30%;
+    /* Wider source than the old tight crop: pull the crop window left
+       so the woman sits right of the copy instead of behind it.
+       Less brightness than desktop: with no side wash here, the full
+       1.06 blows out the near-white wall at the top of the frame. */
+    object-position: 52% 30%;
+    filter: brightness(1.02) contrast(1.05) saturate(1.16);
   }
 
   .wash {
     background: linear-gradient(
       0deg,
-      rgba(15, 31, 46, 0.92) 0%,
-      rgba(15, 31, 46, 0.6) 45%,
-      rgba(15, 31, 46, 0) 75%
+      rgba(15, 31, 46, 0.88) 0%,
+      rgba(15, 31, 46, 0.52) 45%,
+      rgba(15, 31, 46, 0) 72%
     );
   }
 

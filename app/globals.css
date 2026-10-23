@@ -14,6 +14,11 @@
   /* Consumer hero (opt2 v5) — distinct from global mint above. */
   --color-cream: #f3efe9;
   --color-hero-mint: #7ff0c4;
+  /* Palette v2: brand = green + navy. Bright green is for large fills (navy text on top).
+     Action yellow is reserved for primary buttons. */
+  --color-brand-bright: #3fd9a6;
+  --color-action: #ffd23f;
+  --color-action-pressed: #f2c200;
 }
 
 :root {
@@ -208,8 +213,8 @@ button,
     gap: 0.5rem;
     min-height: 58px;
     padding: 0 28px;
-    background: var(--color-brand);
-    color: var(--color-true-white);
+    background: var(--color-action);
+    color: var(--color-navy-900);
     font-weight: 700;
     font-size: 1rem;
     white-space: nowrap;
@@ -220,7 +225,7 @@ button,
 
   .btn-primary:hover,
   .btn-primary:active {
-    background: var(--color-brand-pressed);
+    background: var(--color-action-pressed);
   }
 
   .btn-primary:active {
@@ -495,11 +500,6 @@ button,
 
   .navy-slab {
     background: var(--color-navy-900);
-  }
-
-  /* Consumer footer mobile accordions */
-  footer details[open] .footer-acc-chevron {
-    transform: rotate(180deg);
   }
 
   .audience-card {
