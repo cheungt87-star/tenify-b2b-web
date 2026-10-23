@@ -1,0 +1,9 @@
+/* Temporary aliases so tenify-b2b-web keeps compiling during migration.
+   Old names were wrong: "gold-600" is the brand green; "jade-*" are navy. Remove once the site uses v5 names. */
+@theme inline {
+  --color-gold-600: var(--color-brand);
+  --color-jade-900: var(--color-navy-900);
+  --color-jade-700: var(--color-navy-700);
+  --color-jade-500: var(--color-navy-500);
+  --color-charcoal: var(--color-navy-900);
+}
