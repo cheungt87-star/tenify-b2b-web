@@ -7,7 +7,9 @@ export const PRIVACY_URL = "/privacy";
 export const TERMS_URL = "/terms";
 
 /** Canonical origin. All schema `@id` and `url` values derive from this. */
-export const SITE_URL = "https://www.tenify.ae";
+export const SITE_URL = "https://tenify.ae";
+/** Hostname of the canonical origin. Anything else (www, vercel.app, previews) is noindex. */
+export const SITE_HOST = "tenify.ae";
 export const SITE_NAME = "Tenify";
 export const LOGO_URL = `${SITE_URL}/brand/tenify-logo-schema.png`;
 

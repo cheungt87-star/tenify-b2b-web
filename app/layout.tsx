@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono, Nunito, Space_Mono } from "next/font/google";
 import { DownloadButton } from "@/components/home/download-button";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { SITE_NAME, SITE_URL } from "@/lib/site-config";
 import "./globals.css";
 
 const nunito = Nunito({
@@ -33,7 +34,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Tenify",
+  metadataBase: new URL(SITE_URL),
+  title: SITE_NAME,
   description: "Tenify — property inspections made simple.",
 };
 

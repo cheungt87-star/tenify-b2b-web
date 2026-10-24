@@ -7,7 +7,7 @@ Last updated: 20 October 2026.
 
 These Terms of Use ("Terms") cover your use of the Tenify app and website (the "Service"), run by Tenify ("we", "us", "our"). By creating an account or using the Service, you agree to these Terms. If you do not agree, do not use the Service.
 
-Read these Terms with the [Privacy Policy](https://www.tenify.ae/privacy).
+Read these Terms with the [Privacy Policy](https://tenify.ae/privacy).
 
 ## 2. What Tenify is
 

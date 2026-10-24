@@ -3,11 +3,13 @@ import { JsonLd } from "@/components/JsonLd";
 import { LegalPage } from "@/components/legal-page";
 import { termsOfUse } from "@/lib/legal/terms-of-use";
 import { breadcrumbList, graph } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/terms",
   title: "Terms of Use | Tenify",
   description: "The terms that apply when you use the Tenify app and website.",
-};
+});
 
 export default function TermsPage() {
   const termsSchema = graph(
