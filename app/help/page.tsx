@@ -3,13 +3,15 @@ import { HelpFaq } from "@/components/help/help-faq";
 import { JsonLd } from "@/components/JsonLd";
 import { getAllFAQs } from "@/lib/faq-data";
 import { breadcrumbList, faqPage, graph } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo";
 import { SUPPORT_EMAIL } from "@/lib/site-config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/help",
   title: "Help & Support | Tenify",
   description:
     "Answers to common questions about Tenify, and how to contact our support team.",
-};
+});
 
 const shell = "mx-auto max-w-[1200px] px-5 sm:px-10";
 

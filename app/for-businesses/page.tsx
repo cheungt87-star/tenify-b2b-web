@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { WaitlistForm } from "@/components/for-businesses/waitlist-form";
 import { DirhamSign } from "@/components/home/dirham-sign";
+import { pageMetadata } from "@/lib/seo";
 import keysPhoto from "@/public/landing/b2b-keys.jpg";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/for-businesses",
   title: "Tenify for business: coming soon",
   description:
     "Turn property inspections into reasons clients come back. Branded, unlimited reports for your team. Join the waitlist.",
-};
+});
 
 const POINTS = [
   "1 fixed price for your team",

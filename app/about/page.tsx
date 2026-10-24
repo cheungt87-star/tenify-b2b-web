@@ -6,15 +6,17 @@ import { SampleReportDialog } from "@/components/home/sample-report-dialog";
 import { Reveal } from "@/components/home/reveal";
 import { JsonLd } from "@/components/JsonLd";
 import { aboutPage, breadcrumbList, graph } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo";
 import { SUPPORT_EMAIL } from "@/lib/site-config";
 import sofaPhoto from "@/public/landing/about-sofa.jpg";
 import yellowPhoto from "@/public/landing/hero-yellow.jpg";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/about",
   title: "About | Tenify",
   description:
     "Tenify was founded with one mission in mind: to let tenants move into a new property with confidence. A note from the Tenify team.",
-};
+});
 
 const shell = "mx-auto max-w-[1200px] px-5 sm:px-10";
 

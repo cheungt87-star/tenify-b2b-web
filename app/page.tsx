@@ -18,13 +18,15 @@ import {
   softwareApplication,
   webSite,
 } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo";
 import { HERO_VARIANT } from "@/lib/site-config";
 
-export const metadata: Metadata = {
-  title: "Tenify | Professional property condition reports",
+export const metadata: Metadata = pageMetadata({
+  path: "/",
+  title: "Tenify | Property condition reports for Dubai rentals",
   description:
-    "Document the exact condition of your rental at move-in. Room by room, with photos, in one report you can share. Free until the end of 2026.",
-};
+    "Document the exact condition of your rental at move-in. Room by room, with photos, in one report you can share. Free until the end of 2026. Download the app.",
+});
 
 const REPORT_INSIDE = [
   {
