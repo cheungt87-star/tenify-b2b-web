@@ -1,0 +1,84 @@
+/* @tenify/tokens: Tenify Design System v5. Single source of truth.
+   Import after `@import "tailwindcss";`
+   Rules: green (brand) is the only primary action colour. Navy is for text and avatars, never a button fill.
+   Values are copied from tenify-app src/index.css (the live app). Change them here, not in consumers. */
+@theme {
+  /* Brand */
+  --color-brand: #077b5c;
+  --color-brand-pressed: #05664c;
+  --color-brand-soft: #e3f3ec;
+  --color-brand-disabled: #cfe4dc;
+
+  /* Navy: text and avatars only */
+  --color-navy-900: #0f1f2e;
+  --color-navy-700: #1a2f3e;
+  --color-navy-500: #2a4050;
+
+  /* Tailwind's default teal is off-brand */
+  --color-teal-*: initial;
+
+  --color-true-white: #ffffff;
+
+  /* Neutrals */
+  --color-neutral-50: #f9fafa;
+  --color-neutral-100: #f4f6f6;
+  --color-neutral-200: #e8ecec;
+  --color-neutral-400: #b0b8b8;
+  --color-neutral-800: #323838;
+  --color-neutral-900: #1a1c1c;
+
+  /* Semantic: restrained, never doubles as brand or decoration */
+  --color-success: #3f7d53;
+  --color-warning: #b9852a;
+  --color-error: #c84040;
+  --color-info: #2b7be5;
+
+  /* Surfaces and supporting */
+  --color-canvas: #f2f1ee;
+  --color-danger: #d23a3a;
+  --color-danger-soft: #fbe7e7;
+  --color-danger-strong: #b42b2b;
+  --color-caution: #c98a1b; /* fills and icons only, ~2.9:1 on white */
+  --color-caution-soft: #fbf0da;
+  --color-caution-strong: #85570a;
+  --color-label-2: #666c6c; /* darkest secondary grey keeping 4.5:1 on canvas, white, neutral-100 */
+  --color-label-3: #a3aaaa; /* disabled, placeholder, decorative only */
+  --color-tab-inactive: #8a9292; /* icon colour only */
+  --color-separator: rgb(60 60 67 / 0.14);
+
+  /* Type: Nunito everywhere. Self-host it: app imports @fontsource-variable/nunito ("Nunito Variable"),
+     web uses next/font and overrides --font-sans with its own variable. */
+  --font-sans: "Nunito Variable", "Nunito", -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+
+  --text-large-title: 34px;
+  --text-large-title--line-height: 41px;
+  --text-large-title--letter-spacing: -0.02em;
+  --text-large-title--font-weight: 700;
+  --text-title: 24px;
+  --text-title--line-height: 30px;
+  --text-title--letter-spacing: -0.01em;
+  --text-title--font-weight: 700;
+  --text-headline: 17px;
+  --text-headline--line-height: 22px;
+  --text-headline--font-weight: 600;
+  --text-body: 17px;
+  --text-body--line-height: 22px;
+  --text-subhead: 15px;
+  --text-subhead--line-height: 20px;
+  --text-caption: 13px;
+  --text-caption--line-height: 18px;
+  --text-micro: 11px;
+  --text-micro--line-height: 14px;
+  --text-micro--font-weight: 600;
+
+  /* Radii */
+  --radius-group: 16px;
+  --radius-card: 20px;
+  --radius-control: 12px;
+  --radius-sheet: 28px;
+
+  /* Shadows */
+  --shadow-card: 0 1px 2px rgba(15, 31, 46, 0.05), 0 4px 14px rgba(15, 31, 46, 0.05);
+  --shadow-sheet: 0 -8px 30px rgb(0 0 0 / 0.2);
+  --shadow-floating: 0 8px 20px rgb(7 123 92 / 0.35), 0 2px 4px rgb(15 31 46 / 0.12);
+}

@@ -6,11 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:schema": "node --import ./scripts/register-ts-ext.mjs --experimental-strip-types --test lib/schema.test.mjs schema-parity.test.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.118.0",
-    "@tenify/tokens": "file:../tenify-design-system/packages/tokens",
+    "@tenify/tokens": "file:./packages/tokens",
     "next": "16.3.1",
     "qrcode": "^1.5.4",
     "react": "19.2.8",

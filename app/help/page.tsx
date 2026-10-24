@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { HelpFaq } from "@/components/help/help-faq";
+import { JsonLd } from "@/components/JsonLd";
+import { getAllFAQs } from "@/lib/faq-data";
+import { breadcrumbList, faqPage, graph } from "@/lib/schema";
 import { SUPPORT_EMAIL } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -11,8 +14,17 @@ export const metadata: Metadata = {
 const shell = "mx-auto max-w-[1200px] px-5 sm:px-10";
 
 export default function HelpPage() {
+  const helpSchema = graph(
+    faqPage(getAllFAQs()),
+    breadcrumbList([
+      { name: "Home", path: "/" },
+      { name: "Help", path: "/help" },
+    ]),
+  );
+
   return (
     <main className="flex-1 bg-true-white">
+      <JsonLd data={helpSchema} />
       <section className={`${shell} pt-14 pb-12 md:pt-24 md:pb-20`}>
         <p className="eyebrow">Help &amp; Support</p>
         <h1 className="mt-4 text-[clamp(46px,7vw,88px)] leading-none font-black tracking-[-0.035em] text-navy-900">

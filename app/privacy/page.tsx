@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/JsonLd";
 import { LegalPage } from "@/components/legal-page";
 import { privacyPolicy } from "@/lib/legal/privacy-policy";
+import { breadcrumbList, graph } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Tenify",
@@ -9,5 +11,17 @@ export const metadata: Metadata = {
 };
 
 export default function PrivacyPage() {
-  return <LegalPage title="Privacy Policy" markdown={privacyPolicy} />;
+  const privacySchema = graph(
+    breadcrumbList([
+      { name: "Home", path: "/" },
+      { name: "Privacy Policy", path: "/privacy" },
+    ]),
+  );
+
+  return (
+    <>
+      <JsonLd data={privacySchema} />
+      <LegalPage title="Privacy Policy" markdown={privacyPolicy} />
+    </>
+  );
 }

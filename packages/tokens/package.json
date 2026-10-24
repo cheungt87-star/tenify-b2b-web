@@ -1,0 +1,12 @@
+{
+  "name": "@tenify/tokens",
+  "version": "0.1.0",
+  "description": "Tenify design tokens (DS v5) as Tailwind v4 CSS. Shared by the iOS app, b2b web and consumer site.",
+  "style": "tokens.css",
+  "files": ["tokens.css", "shadcn.css", "legacy-b2b-web.css"],
+  "exports": {
+    "./tokens.css": "./tokens.css",
+    "./shadcn.css": "./shadcn.css",
+    "./legacy-b2b-web.css": "./legacy-b2b-web.css"
+  }
+}
