@@ -4,6 +4,8 @@ import type { ReactNode } from "react";
 import { DownloadButton } from "@/components/home/download-button";
 import { SampleReportDialog } from "@/components/home/sample-report-dialog";
 import { Reveal } from "@/components/home/reveal";
+import { JsonLd } from "@/components/JsonLd";
+import { aboutPage, breadcrumbList, graph } from "@/lib/schema";
 import { SUPPORT_EMAIL } from "@/lib/site-config";
 import sofaPhoto from "@/public/landing/about-sofa.jpg";
 import yellowPhoto from "@/public/landing/hero-yellow.jpg";
@@ -86,8 +88,17 @@ const STEPS: readonly { title: string; sub: string; icon: ReactNode }[] = [
 ];
 
 export default function AboutPage() {
+  const aboutSchema = graph(
+    aboutPage(),
+    breadcrumbList([
+      { name: "Home", path: "/" },
+      { name: "About", path: "/about" },
+    ]),
+  );
+
   return (
     <main className="flex-1 bg-true-white">
+      <JsonLd data={aboutSchema} />
       {/* Hero */}
       <section className="panel-inset pt-3 md:pt-5">
         <div className="panel-lg relative flex min-h-[520px] items-end bg-navy-900 md:min-h-[580px]">

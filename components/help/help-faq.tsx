@@ -106,10 +106,15 @@ export function HelpFaq() {
                       id={panelId}
                       role="region"
                       aria-labelledby={buttonId}
-                      hidden={!open}
-                      className="px-5 pb-5 text-[15px] leading-[1.6] text-label-2 md:px-6 md:pb-6"
+                      className={`grid transition-[grid-template-rows] duration-200 motion-reduce:transition-none ${
+                        open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                      }`}
                     >
-                      <FaqAnswer answer={item.answer} />
+                      <div className="min-h-0 overflow-hidden">
+                        <div className="px-5 pb-5 text-[15px] leading-[1.6] text-label-2 md:px-6 md:pb-6">
+                          <FaqAnswer answer={item.answer} />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 );

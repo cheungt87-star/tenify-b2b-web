@@ -9,6 +9,15 @@ import { ProblemSection } from "@/components/home/problem-section";
 import { SampleReportDialog } from "@/components/home/sample-report-dialog";
 import { Reveal } from "@/components/home/reveal";
 import { GatedReportPreview } from "@/components/home/gated-report-preview";
+import { JsonLd } from "@/components/JsonLd";
+import { getHomepageFAQs } from "@/lib/faq-data";
+import {
+  faqPage,
+  graph,
+  organization,
+  softwareApplication,
+  webSite,
+} from "@/lib/schema";
 import { HERO_VARIANT } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -64,8 +73,16 @@ function ListIcon({ className = "text-brand" }: { className?: string }) {
 const container = "mx-auto max-w-[1200px] px-5 sm:px-10";
 
 export default function Home() {
+  const homeSchema = graph(
+    organization(),
+    webSite(),
+    softwareApplication(),
+    faqPage(getHomepageFAQs(5)),
+  );
+
   return (
       <main className="flex-1">
+        <JsonLd data={homeSchema} />
         {/* 1. Hero · phone-demo cream layout (split fallback behind HERO_VARIANT) */}
         {HERO_VARIANT === "split" ? <HeroSplit /> : <HeroDemo />}
 
