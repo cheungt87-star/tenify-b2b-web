@@ -1,7 +1,7 @@
 /** Source text for the terms-of-use page. Keep in sync with the project docs. */
 export const termsOfUse = `# Tenify Terms of Use
 
-Last updated: 20 October 2026.
+Last updated: 28 October 2026.
 
 ## 1. Agreement to Terms
 
@@ -12,6 +12,8 @@ Read these Terms with the [Privacy Policy](https://www.tenify.ae/privacy).
 ## 2. What Tenify is
 
 Tenify guides you through a property inspection and produces a property condition report as a PDF.
+
+Tenify builds the report on your phone and does not hold a copy.
 
 Tenify supplies the software only. It is not a party to your tenancy and does not inspect, verify or endorse any report. It is not an agent, surveyor, judge or legal adviser. It is independent and not affiliated with Ejari, RERA or the Dubai Land Department.
 
@@ -24,7 +26,7 @@ Tenify supplies the software only. It is not a party to your tenancy and does no
 
 ## 4. Your reports and content
 
-You own the content you create: ratings, comments, photos and reports. You give Tenify permission to store, handle and show it, so the Service can work and send it to the people you choose.
+You own the content you create: ratings, comments, photos and reports. You give Tenify permission to handle it on your device and send it to the people you choose, so the Service can work.
 
 You are responsible for your content. It must be accurate, honest and legal. You must have the right to enter and photograph the property. Avoid photographing people.
 
@@ -38,13 +40,11 @@ Tenify does not promise any result in a dispute, including over a deposit. The p
 
 ## 6. Sharing
 
-You decide who receives a report. Anyone with a share link can open it without signing in. Links expire after 7 days and cannot be cancelled early. Share only with people you trust, and only personal information you have the right to share.
+You decide who receives a report. Sharing is by PDF through the share sheet. Share only with people you trust, and only personal information you have the right to share.
 
 ## 7. Saving and deletion
 
-Inspections stay on your phone until you save the report. Saved reports are stored in the cloud and deleted automatically 1 year after saving. Download the PDF to keep a report longer. You can delete a report or your account at any time.
-
-Very large reports may fail to save. Keep a copy of your PDF.
+Reports are stored on your phone only. Tenify cannot recover a deleted or lost report. Back up your PDFs to Files or iCloud Drive. Deleting the app deletes the reports on it. A report may fail to save if your phone is low on space. You can delete a report or your account at any time.
 
 ## 8. Price
 
@@ -67,6 +67,7 @@ Tenify aims to keep the Service running but does not guarantee it will always be
 As far as the law allows:
 - Tenify is provided as it is.
 - Tenify is not responsible for the accuracy of reports, disputes between landlords, tenants or agents, or losses from decisions made using a report.
+- Tenify is not responsible for reports that are lost, deleted or cannot be recovered from your device.
 - Tenify is not liable for indirect losses, such as lost deposit, rent or profit.
 - Tenify's total liability to you is limited to what you paid Tenify in the 12 months before the claim, or AED 400 if you paid nothing.
 
@@ -74,7 +75,7 @@ Nothing here limits liability that cannot be limited by law.
 
 ## 12. Ending your use
 
-You can stop using Tenify and delete your account at any time (Profile, then Delete account). Tenify may suspend or close an account that breaks these Terms. Terms that should still apply, such as ownership and liability, continue afterwards.
+You can stop using Tenify and delete your account at any time (Profile, then Delete account). Closing your account does not delete reports on your phone. Tenify may suspend or close an account that breaks these Terms. Terms that should still apply, such as ownership and liability, continue afterwards.
 
 ## 13. Apple
 

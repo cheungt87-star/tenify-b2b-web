@@ -42,7 +42,7 @@ export const FAQ_DATA: FAQSection[] = [
       {
         question: "Do I need an account to use Tenify?",
         answer:
-          "Yes. An account keeps your reports safe and lets you find them again. Sign-up takes a minute.",
+          "Yes. An account lets you sign in and use the app. Sign-up takes a minute. Reports stay on this phone, not in your account.",
       },
       {
         question: "How long does an inspection take?",
@@ -52,7 +52,7 @@ export const FAQ_DATA: FAQSection[] = [
       {
         question: "Do I need an internet connection to inspect a property?",
         answer:
-          "No. You can inspect and take photos offline. You need a connection when you save your report, because that uploads it.",
+          "No. You can inspect, take photos and save your report offline. A connection is only needed to sign in.",
       },
     ],
   },
@@ -103,7 +103,7 @@ export const FAQ_DATA: FAQSection[] = [
       {
         question: "Can I use my account on more than one device?",
         answer:
-          "Yes. Sign in with the same account on each device. Drafts stay on that phone only. Your finished reports appear on every device you sign into.",
+          "Yes. Sign in with the same account on each device. Drafts and finished reports stay on that phone only. They do not sync across devices.",
       },
       {
         question: "How do I sign out?",
@@ -117,7 +117,7 @@ export const FAQ_DATA: FAQSection[] = [
       {
         question: "What happens to my reports if I delete my account?",
         answer:
-          "They're deleted too. Share or save any report you want to keep before you delete your account. Links you shared will stop working.",
+          "Deleting your account removes your login. Reports on this phone stay until you delete them in the app.",
       },
     ],
   },
@@ -189,12 +189,12 @@ export const FAQ_DATA: FAQSection[] = [
       {
         question: "How long are drafts kept?",
         answer:
-          "Drafts stay on your phone and we never delete them. They're yours until you delete them or uninstall the app.",
+          "Drafts and finished reports both live on this phone. They stay until you delete them or uninstall the app.",
       },
       {
         question: "What if I lose signal during an inspection?",
         answer:
-          "Keep going. Everything works offline. Connect to Wi-Fi or mobile data when you save.",
+          "Keep going. Inspecting and saving work offline. Sign-in needs a connection.",
       },
       {
         question: "Can two people work on the same inspection?",
@@ -230,45 +230,46 @@ export const FAQ_DATA: FAQSection[] = [
       {
         question: "How do I save a report?",
         answer:
-          "On the report preview, tap Save report and confirm. Wait for the success screen. Keep the app open until it finishes.",
+          "On the report preview, tap Save report and confirm. The PDF is written to this phone. No upload.",
       },
       {
         question: "Where do I find saved reports?",
-        answer: "On the Reports tab.",
+        answer: "On the Reports tab. Reports are stored on this iPhone only.",
       },
       {
         question: "Can I see reports on a new phone or after reinstalling?",
         answer:
-          "Yes. Sign in with the same account and completed reports appear under Reports. Reports are stored in the cloud so they sync across devices.",
+          "No. Reports are not stored in your account. After a new phone or reinstall, the Reports tab is empty unless you restore from an iPhone backup or from copies you saved to Files.",
       },
       {
         question: "How do I share a report?",
-        answer: "Open the report and tap Share. Pick an app, or copy a link.",
+        answer:
+          "Open the report and tap Share. Pick an app from the share sheet, such as WhatsApp, Mail or AirDrop.",
       },
       {
         question: "How do I share a report on WhatsApp?",
         answer:
-          "Open the report, tap Share, then choose WhatsApp. Pick the contact and send.",
+          "Open the report, tap Share, then choose WhatsApp. Pick the contact and send the PDF.",
       },
       {
-        question: 'What does "Copy link" do, and how long does the link work?',
+        question: "How long are saved reports kept?",
         answer:
-          "It creates a private link to the report. Anyone with the link can open it. The link works for 7 days. Create a new one after that.",
+          "Saved reports stay on this phone until you delete them or uninstall the app. Tenify does not delete them for you.",
       },
       {
         question: "Can I download a report as a PDF?",
         answer:
-          "Yes. Reports are PDFs. Use Share and choose Save to Files.",
+          "Yes. Reports are PDFs. Use Share and choose Save to Files, or use Export all reports in Profile.",
       },
       {
         question: "Why is a report large, and does that affect sharing?",
         answer:
-          "Photos make reports large, especially for big furnished homes. If a file's too big to send, use Copy link instead.",
+          "Photos make reports large, especially for big furnished homes. If a file is too big to send, save it to Files or send it by AirDrop.",
       },
       {
         question: "Can I delete a report?",
         answer:
-          "Yes. Open the report, tap Delete, then confirm. This can't be undone.",
+          "Yes. Open the report, tap Delete, then confirm. This removes the report from this iPhone. This can't be undone.",
       },
       {
         question: "Can other parties add their own comments to a report?",
@@ -398,21 +399,22 @@ export const FAQ_DATA: FAQSection[] = [
       {
         question: "What data does Tenify collect?",
         answer:
-          "- Account details: name, email, account type\n- Property and contact details you enter\n- Inspection answers, comments and photos saved in a report",
+          "- Account details: name, email, account type\n- Sample report emails, if you request one on the website\n- Crash reports and basic technical details\n- Inspection answers, comments and photos stay on your phone. Tenify does not receive them.",
       },
       {
         question: "Where are photos and reports stored?",
         answer:
-          "Photos stay on your phone until you save. When you save, reports are uploaded to secure cloud storage and the copy on your phone is deleted.",
+          "On this phone. Answers, photos and finished reports stay on your iPhone. Tenify does not receive them when you save.",
       },
       {
         question: "Who can see reports?",
         answer:
-          "Only the account holder and anyone they choose to share the report with.",
+          "Only you, plus anyone you choose to share the PDF with. A recipient sees the whole report, including names and photos.",
       },
       {
         question: "Does Tenify share my data with third parties?",
-        answer: "No. We don't share data with third parties.",
+        answer:
+          "Tenify does not sell your data. Sign-in, crash and website providers may handle account or technical data under contract. Reports stay on your phone unless you share them.",
       },
       {
         question: "Why does Tenify need camera access?",
@@ -422,33 +424,27 @@ export const FAQ_DATA: FAQSection[] = [
       {
         question: "Why does Tenify ask for microphone or speech access?",
         answer:
-          "It doesn't. Tenify does not use the microphone or speech access. You type your notes.",
+          "Optional voice dictation for inspection notes. You can always type instead. Dictation runs on the device; Tenify does not keep the audio recording.",
       },
       {
         question: "Can I see or export my data?",
         answer:
-          "Saved reports are PDFs you can download. For other data, email hello@tenify.ae.",
+          "Your reports are on your phone. Use Export all reports in Profile, or Share and Save to Files. For other account data, email hello@tenify.ae.",
       },
       {
         question: "How do I delete my data?",
         answer:
-          "Go to Profile and delete your account. This removes everything—your account and all saved reports.",
+          "Delete reports in the app first if you want them gone. Then go to Profile and delete your account to remove your login. Closing the account does not delete reports on the phone.",
       },
       {
         question: "How long does Tenify keep my data?",
         answer:
-          "Accounts stay until you delete them. Saved reports are kept for 1 year, then deleted unless you download a copy first.",
-      },
-      {
-        question:
-          "Are shared links private? Can anyone with the link open a report?",
-        answer:
-          "Anyone with the link can open it. Only share links with people you trust. Links expire after 7 days.",
+          "Accounts stay until you delete them. Saved reports stay on your phone until you delete them or uninstall the app. Tenify cannot recover a report you delete.",
       },
       {
         question: "Is my data secure?",
         answer:
-          "Reports are stored in secure cloud storage with encryption. Only the account holder can access reports, and they control who sees them through sharing settings. Accounts are protected by sign-in. For full details, see our Privacy Policy.",
+          "Reports stay on your phone and are covered by your iPhone passcode and device encryption. Account data is encrypted in transit and at rest. For full details, see the Privacy Policy.",
       },
     ],
   },
@@ -459,7 +455,7 @@ export const FAQ_DATA: FAQSection[] = [
       {
         question: 'I tap "Save report" and nothing happens.',
         answer:
-          "Update to the latest version from the App Store and try again. Make sure you're online. Still stuck? Email hello@tenify.ae. Don't delete the app, as the inspection is still on your phone.",
+          "Update to the latest version from the App Store and try again. If the phone is low on space, free some up and try again. The inspection stays on your phone. Still stuck? Email hello@tenify.ae. Don't delete the app.",
       },
       {
         question:
@@ -496,7 +492,12 @@ export const FAQ_DATA: FAQSection[] = [
       {
         question: "I cannot share a report on WhatsApp.",
         answer:
-          "The file may be too large. Use Copy link and paste it into WhatsApp.",
+          "The file may be too large. Save it to Files or send it by AirDrop instead.",
+      },
+      {
+        question: "Saved reports are missing on a new phone.",
+        answer:
+          "Reports are stored on the iPhone only, not in your account. Sign-in will not bring them back. Restore from an iPhone backup, or from PDFs you saved to Files.",
       },
       {
         question: "The report shows the wrong name or a placeholder name.",
